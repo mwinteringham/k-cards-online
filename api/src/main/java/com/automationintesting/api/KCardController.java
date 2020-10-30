@@ -1,8 +1,10 @@
 package com.automationintesting.api;
 
 import com.automationintesting.db.service.AttendeeListResult;
+import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
 import com.automationintesting.model.Attendee;
+import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
 import com.automationintesting.service.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,20 @@ public class KCardController {
         AttendeeListResult attendeeListResult = workshopService.getAttendeesInWorkshop(workshopCode);
 
         return ResponseEntity.status(attendeeListResult.getHttpStatus()).body(attendeeListResult.getAttendees());
+    }
+
+    @RequestMapping(value = "/workshop/{workshopcode:.+}/card", method = RequestMethod.POST)
+    public ResponseEntity createCard(@PathVariable(value = "workshopcode") String workshopCode, @RequestBody Card card) throws SQLException {
+        HttpStatus cardCreationResult = workshopService.createCardActivity(card, workshopCode);
+
+        return ResponseEntity.status(cardCreationResult).build();
+    }
+
+    @RequestMapping(value = "/workshop/{workshopcode:.+}/activity", method = RequestMethod.GET)
+    public ResponseEntity getActivity(@PathVariable(value = "workshopcode") String workshopCode) throws SQLException {
+        WorkshopActivityResult workshopActivityResult = workshopService.getWorkshopActivity(workshopCode);
+
+        return ResponseEntity.status(workshopActivityResult.getHttpStatus()).body(workshopActivityResult.getActivity());
     }
 
 }

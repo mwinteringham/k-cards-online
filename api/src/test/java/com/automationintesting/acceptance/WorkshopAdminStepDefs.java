@@ -52,10 +52,7 @@ public class WorkshopAdminStepDefs {
     public void joinWorkshopAsAttendee() {
         Attendee attendee = new Attendee("James Dean");
 
-        given()
-            .contentType(ContentType.JSON)
-            .body(attendee)
-            .post("http://localhost:8080/workshop/" + workshopResponse.getCode() + "/join");
+        workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
     }
 
     @Then("I should be able to see that the attendee has joined")

@@ -3,6 +3,10 @@ package com.automationintesting.unit;
 import com.automationintesting.db.KCardDB;
 import com.automationintesting.model.Attendee;
 import com.automationintesting.model.AttendeeList;
+import com.automationintesting.model.Card;
+import com.automationintesting.model.activity.Activity;
+import com.automationintesting.model.activity.ActivityResponse;
+import org.approvaltests.Approvals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,6 +51,25 @@ public class KCardDBTest {
         AttendeeList attendeeList = kCardDB.getAttendeesInWorkshop("xyzxyz");
 
         assertThat(attendeeList.getAttendees().size(), equalTo(1));
+    }
+
+    @Test
+    public void storeCardActivity() throws SQLException {
+        Card card = new Card("Amy Lee", "red");
+
+        Boolean storeResult = kCardDB.addCardActivity(card, "jsdjsd");
+
+        assertThat(storeResult, equalTo(true));
+    }
+
+    @Test
+    public void returnWorkshopActivity() throws SQLException {
+        Card card = new Card("Amy Lee", "red");
+        kCardDB.addCardActivity(card, "BEWT");
+
+        Activity activity = kCardDB.getWorkshopActivity("BEWT");
+
+        Approvals.verify(activity);
     }
 
 }

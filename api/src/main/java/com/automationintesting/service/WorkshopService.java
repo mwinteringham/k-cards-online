@@ -2,10 +2,14 @@ package com.automationintesting.service;
 
 import com.automationintesting.db.KCardDB;
 import com.automationintesting.db.service.AttendeeListResult;
+import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
 import com.automationintesting.model.Attendee;
 import com.automationintesting.model.AttendeeList;
+import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
+import com.automationintesting.model.activity.Activity;
+import com.automationintesting.model.activity.ActivityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -46,5 +50,20 @@ public class WorkshopService {
     public AttendeeListResult getAttendeesInWorkshop(String workshopCode) throws SQLException {
         AttendeeList attendeeList = kCardDB.getAttendeesInWorkshop(workshopCode);
         return new AttendeeListResult(HttpStatus.OK, attendeeList);
+    }
+
+    public HttpStatus createCardActivity(Card card, String workshopCode) throws SQLException {
+        if(kCardDB.addCardActivity(card, workshopCode)){
+            return HttpStatus.CREATED;
+        } else {
+            return HttpStatus.NOT_ACCEPTABLE;
+        }
+    }
+
+    public WorkshopActivityResult getWorkshopActivity(String workshopCode) throws SQLException {
+        Activity activity = kCardDB.getWorkshopActivity(workshopCode);
+        ActivityResponse activityResponse = new ActivityResponse(activity);
+
+        return new WorkshopActivityResult(HttpStatus.OK, activityResponse);
     }
 }

@@ -1,5 +1,6 @@
 package com.automationintesting.acceptance.requests;
 
+import com.automationintesting.model.Attendee;
 import com.automationintesting.model.Workshop;
 import io.restassured.http.ContentType;
 
@@ -13,5 +14,12 @@ public class WorkshopRequests {
                 .body(workshopRequestPayload)
                 .post("http://localhost:8080/workshop")
                 .as(Workshop.class);
+    }
+
+    public void joinWorkshopAsAttendee(Attendee attendee, String workshopCode){
+        given()
+            .contentType(ContentType.JSON)
+            .body(attendee)
+            .post("http://localhost:8080/workshop/" + workshopCode + "/join");
     }
 }

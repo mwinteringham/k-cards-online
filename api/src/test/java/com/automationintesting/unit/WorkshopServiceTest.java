@@ -2,10 +2,14 @@ package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
 import com.automationintesting.db.service.AttendeeListResult;
+import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
 import com.automationintesting.model.Attendee;
 import com.automationintesting.model.AttendeeList;
+import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
+import com.automationintesting.model.activity.Activity;
+import com.automationintesting.model.activity.ActivityResponse;
 import com.automationintesting.service.WorkshopService;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +77,34 @@ public class WorkshopServiceTest {
 
         assertThat(attendeeListResult.getHttpStatus(), equalTo(HttpStatus.OK));
         assertThat(attendeeListResult.getAttendees(), instanceOf(AttendeeList.class));
+    }
+
+    @Test
+    public void createCardActivityTest() throws SQLException {
+        Card card = new Card("Jenny Sage", "red");
+
+        when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
+
+        HttpStatus cardCreationResult = workshopService.createCardActivity(card, "hgfhgf");
+
+        assertThat(cardCreationResult, equalTo(HttpStatus.CREATED));
+    }
+
+    @Test
+    public void getActivityListTest() throws SQLException {
+        List<String> redList = new ArrayList<>(){{
+            this.add("Jeff Biggs");
+            this.add("Boz Jeans");
+        }};
+
+        Activity activity = new Activity(redList, null);
+
+        when(kCardDB.getWorkshopActivity("FEWT")).thenReturn(activity);
+
+        WorkshopActivityResult workshopActivityResult = workshopService.getWorkshopActivity("FEWT");
+
+        assertThat(workshopActivityResult.getHttpStatus(), equalTo(HttpStatus.OK));
+        assertThat(workshopActivityResult.getActivity(), instanceOf(ActivityResponse.class));
     }
 
 }
