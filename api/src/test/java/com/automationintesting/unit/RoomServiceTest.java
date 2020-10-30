@@ -1,4 +1,4 @@
-package unit;
+package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
 import com.automationintesting.db.service.RoomResult;
@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 public class RoomServiceTest {
@@ -36,7 +37,7 @@ public class RoomServiceTest {
 
     @Test
     public void createRoomTest() throws SQLException {
-        when(kCardDB.addCode(anyString(), "LEWT")).thenReturn(true);
+        when(kCardDB.addCode(anyString(), eq("LEWT"))).thenReturn(true);
 
         RoomResult roomResult = roomService.createRoom("LEWT");
 

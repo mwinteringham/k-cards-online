@@ -1,4 +1,4 @@
-package unit;
+package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
 import org.junit.Test;

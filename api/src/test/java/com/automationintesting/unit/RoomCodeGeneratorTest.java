@@ -1,4 +1,4 @@
-package unit;
+package com.automationintesting.unit;
 
 import com.automationintesting.service.RoomCodeGenerator;
 import org.junit.Test;

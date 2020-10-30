@@ -1,4 +1,4 @@
-package acceptance;
+package com.automationintesting.acceptance;
 
 import com.automationintesting.model.WorkshopRoom;
 import com.automationintesting.model.RoomRequest;
