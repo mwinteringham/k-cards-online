@@ -1,7 +1,10 @@
 package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
+import com.automationintesting.db.service.AttendeeListResult;
 import com.automationintesting.db.service.WorkshopResult;
+import com.automationintesting.model.Attendee;
+import com.automationintesting.model.AttendeeList;
 import com.automationintesting.model.Workshop;
 import com.automationintesting.service.WorkshopService;
 import org.junit.Before;
@@ -13,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -43,6 +48,31 @@ public class WorkshopServiceTest {
 
         assertThat(workshopResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
         assertThat(workshopResult.getCode(), instanceOf(Workshop.class));
+    }
+
+    @Test
+    public void createAttendeeTest() throws SQLException {
+        Attendee attendee = new Attendee("Mary Jane");
+        when(kCardDB.addAttendee(attendee, "abcdef")).thenReturn(true);
+
+        HttpStatus httpStatus = workshopService.createAttendee(attendee, "abcdef");
+
+        assertThat(httpStatus, equalTo(HttpStatus.CREATED));
+    }
+
+    @Test
+    public void getAttendeeListTest() throws SQLException {
+        List<Attendee> listToAdd = new ArrayList<>() {{
+            this.add(new Attendee("Henry Brown"));
+        }};
+        AttendeeList attendeeList = new AttendeeList(listToAdd);
+
+        when(kCardDB.getAttendeesInWorkshop("abcdef")).thenReturn(attendeeList);
+
+        AttendeeListResult attendeeListResult = workshopService.getAttendeesInWorkshop("abcdef");
+
+        assertThat(attendeeListResult.getHttpStatus(), equalTo(HttpStatus.OK));
+        assertThat(attendeeListResult.getAttendees(), instanceOf(AttendeeList.class));
     }
 
 }

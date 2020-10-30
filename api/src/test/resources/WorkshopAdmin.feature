@@ -6,7 +6,7 @@ Feature: Workshop administration
     When I request to host a workshop
     Then a workshop should be created with a code to share with guests
 
-  @wip
+  @auto
   Scenario: Host is alerted of new attendee
     Given I have created a new workshop
     When an attendee joins my workshop

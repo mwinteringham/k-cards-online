@@ -1,18 +1,24 @@
 package com.automationintesting.db;
 
+import com.automationintesting.model.Attendee;
+import com.automationintesting.model.AttendeeList;
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class KCardDB {
 
     private Connection connection;
 
-    private final String CREATE_DB = "CREATE table WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(6), workshopName varchar(255), primary key (id))";
+    private final String CREATE_WORKSHOPS_TABLE = "CREATE table WORKSHOPS ( code varchar(6), workshopName varchar(255), primary key (code))";
+    private final String CREATE_ATTENDEE_TABLE = "CREATE table ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, name varchar(255), workshopcode varchar(6), primary key (attendee_id))";
 
     public KCardDB() throws SQLException {
         JdbcDataSource ds = new JdbcDataSource();
@@ -21,7 +27,8 @@ public class KCardDB {
         ds.setPassword("password");
         connection = ds.getConnection();
 
-        connection.prepareStatement(CREATE_DB).executeUpdate();
+        connection.prepareStatement(CREATE_WORKSHOPS_TABLE).executeUpdate();
+        connection.prepareStatement(CREATE_ATTENDEE_TABLE).executeUpdate();
     }
 
     public Boolean addCode(String code, String workshopName) throws SQLException {
@@ -29,5 +36,26 @@ public class KCardDB {
         PreparedStatement createPs = insertWorkshopSql.getPreparedStatement();
 
         return createPs.executeUpdate() > 0;
+    }
+
+    public Boolean addAttendee(Attendee attendee, String workshopCode) throws SQLException {
+        InsertAttendeeSql insertAttendeeSql = new InsertAttendeeSql(connection, attendee, workshopCode);
+        PreparedStatement createPs = insertAttendeeSql.getPreparedStatement();
+
+        return createPs.executeUpdate() > 0;
+    }
+
+    public AttendeeList getAttendeesInWorkshop(String workshopCode) throws SQLException {
+        List<Attendee> listToReturn = new ArrayList<>();
+        String sql = "SELECT * FROM ATTENDEES WHERE workshopcode = '" + workshopCode + "'";
+//        String sql = "SELECT * FROM BOOKINGS WHERE roomid = " + roomid;
+
+        ResultSet results = connection.prepareStatement(sql).executeQuery();
+
+        while(results.next()){
+            listToReturn.add(new Attendee(results.getString("name")));
+        }
+
+        return new AttendeeList(listToReturn);
     }
 }
