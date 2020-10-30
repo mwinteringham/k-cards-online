@@ -1,9 +1,9 @@
 package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
-import com.automationintesting.db.service.RoomResult;
-import com.automationintesting.model.WorkshopRoom;
-import com.automationintesting.service.RoomService;
+import com.automationintesting.db.service.WorkshopResult;
+import com.automationintesting.model.Workshop;
+import com.automationintesting.service.WorkshopService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,14 +21,14 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
-public class RoomServiceTest {
+public class WorkshopServiceTest {
 
     @Mock
     private KCardDB kCardDB;
 
     @Autowired
     @InjectMocks
-    private RoomService roomService;
+    private WorkshopService workshopService;
 
     @Before
     public void initialiseMocks() {
@@ -36,13 +36,13 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void createRoomTest() throws SQLException {
+    public void createWorkshopTest() throws SQLException {
         when(kCardDB.addCode(anyString(), eq("LEWT"))).thenReturn(true);
 
-        RoomResult roomResult = roomService.createRoom("LEWT");
+        WorkshopResult workshopResult = workshopService.createWorkshop("LEWT");
 
-        assertThat(roomResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
-        assertThat(roomResult.getCode(), instanceOf(WorkshopRoom.class));
+        assertThat(workshopResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
+        assertThat(workshopResult.getCode(), instanceOf(Workshop.class));
     }
 
 }

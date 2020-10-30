@@ -1,6 +1,5 @@
 package com.automationintesting.db;
 
-import com.automationintesting.model.RoomRequest;
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,7 @@ public class KCardDB {
 
     private Connection connection;
 
-    private final String CREATE_DB = "CREATE table CODES ( id int NOT NULL AUTO_INCREMENT, code varchar(6), workshopName varchar(255), primary key (id))";
+    private final String CREATE_DB = "CREATE table WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(6), workshopName varchar(255), primary key (id))";
 
     public KCardDB() throws SQLException {
         JdbcDataSource ds = new JdbcDataSource();
@@ -26,8 +25,8 @@ public class KCardDB {
     }
 
     public Boolean addCode(String code, String workshopName) throws SQLException {
-        InsertCodeSql insertCodeSql = new InsertCodeSql(connection, code, workshopName);
-        PreparedStatement createPs = insertCodeSql.getPreparedStatement();
+        InsertWorkshopSql insertWorkshopSql = new InsertWorkshopSql(connection, code, workshopName);
+        PreparedStatement createPs = insertWorkshopSql.getPreparedStatement();
 
         return createPs.executeUpdate() > 0;
     }

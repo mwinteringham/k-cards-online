@@ -1,8 +1,8 @@
 package com.automationintesting.api;
 
-import com.automationintesting.db.service.RoomResult;
-import com.automationintesting.model.RoomRequest;
-import com.automationintesting.service.RoomService;
+import com.automationintesting.db.service.WorkshopResult;
+import com.automationintesting.model.Workshop;
+import com.automationintesting.service.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +16,13 @@ import java.sql.SQLException;
 public class KCardController {
 
     @Autowired
-    private RoomService roomService;
+    private WorkshopService workshopService;
 
-    @RequestMapping(value = "/room", method = RequestMethod.POST)
-    public ResponseEntity createRoom(@RequestBody RoomRequest roomRequest) throws SQLException {
-        RoomResult roomResult = roomService.createRoom(roomRequest.getWorkshopName());
+    @RequestMapping(value = "/workshop", method = RequestMethod.POST)
+    public ResponseEntity createWorkshop(@RequestBody Workshop workshop) throws SQLException {
+        WorkshopResult workshopResult = workshopService.createWorkshop(workshop.getName());
 
-        return ResponseEntity.status(roomResult.getHttpStatus()).body(roomResult.getCode());
+        return ResponseEntity.status(workshopResult.getHttpStatus()).body(workshopResult.getCode());
     }
 
 }
