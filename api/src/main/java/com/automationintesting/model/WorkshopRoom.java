@@ -2,16 +2,27 @@ package com.automationintesting.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RoomRequest {
+public class WorkshopRoom {
 
+    @JsonProperty
+    private String code;
     @JsonProperty
     private String workshopName;
 
-    public RoomRequest() {
+    public WorkshopRoom() {
     }
 
-    public RoomRequest(String workshopName) {
+    public WorkshopRoom(String code, String workshopName) {
+        this.code = code;
         this.workshopName = workshopName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getWorkshopName() {
@@ -21,5 +32,4 @@ public class RoomRequest {
     public void setWorkshopName(String workshopName) {
         this.workshopName = workshopName;
     }
-
 }

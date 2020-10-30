@@ -1,17 +1,17 @@
 package com.automationintesting.db.service;
 
-import com.automationintesting.model.Code;
+import com.automationintesting.model.WorkshopRoom;
 import org.springframework.http.HttpStatus;
 
 public class RoomResult {
 
     private HttpStatus httpStatus;
 
-    private Code code;
+    private WorkshopRoom workshopRoom;
 
-    public RoomResult(HttpStatus httpStatus, Code code) {
+    public RoomResult(HttpStatus httpStatus, WorkshopRoom workshopRoom) {
         this.httpStatus = httpStatus;
-        this.code = code;
+        this.workshopRoom = workshopRoom;
     }
 
     public RoomResult(HttpStatus httpStatus) {
@@ -22,8 +22,8 @@ public class RoomResult {
         return httpStatus;
     }
 
-    public Code getCode() {
-        return code;
+    public WorkshopRoom getCode() {
+        return workshopRoom;
     }
 
 }

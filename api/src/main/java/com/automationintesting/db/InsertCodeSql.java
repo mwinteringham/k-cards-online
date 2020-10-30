@@ -6,15 +6,14 @@ import java.sql.SQLException;
 
 public class InsertCodeSql {
 
-    private PreparedStatement preparedStatement;
+    private final PreparedStatement preparedStatement;
 
-    private String code;
-
-    public InsertCodeSql(Connection connection, String code) throws SQLException {
-        final String CREATE_ROOM = "INSERT INTO CODES (code) VALUES(?);";
+    public InsertCodeSql(Connection connection, String code, String workshopName) throws SQLException {
+        final String CREATE_ROOM = "INSERT INTO CODES (code, workshopName) VALUES(?, ?);";
 
         preparedStatement = connection.prepareStatement(CREATE_ROOM);
         preparedStatement.setString(1, code);
+        preparedStatement.setString(2, workshopName);
     }
 
     public PreparedStatement getPreparedStatement(){

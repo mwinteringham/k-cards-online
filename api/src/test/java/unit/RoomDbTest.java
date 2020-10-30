@@ -14,9 +14,10 @@ public class RoomDbTest {
     @Test
     public void storeRoomCodeInDb() throws SQLException {
         String roomCode = "abcdef";
+        String workshopName = "LEWT";
         KCardDB KCardDb = new KCardDB();
 
-        Boolean storeResult = KCardDb.addCode(roomCode);
+        Boolean storeResult = KCardDb.addCode(roomCode, workshopName);
         assertThat(storeResult, equalTo(true));
     }
 

@@ -2,7 +2,7 @@ package unit;
 
 import com.automationintesting.db.KCardDB;
 import com.automationintesting.db.service.RoomResult;
-import com.automationintesting.model.Code;
+import com.automationintesting.model.WorkshopRoom;
 import com.automationintesting.service.RoomService;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,12 +36,12 @@ public class RoomServiceTest {
 
     @Test
     public void createRoomTest() throws SQLException {
-        when(kCardDB.addCode(anyString())).thenReturn(true);
+        when(kCardDB.addCode(anyString(), "LEWT")).thenReturn(true);
 
-        RoomResult roomResult = roomService.createRoom();
+        RoomResult roomResult = roomService.createRoom("LEWT");
 
         assertThat(roomResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
-        assertThat(roomResult.getCode(), instanceOf(Code.class));
+        assertThat(roomResult.getCode(), instanceOf(WorkshopRoom.class));
     }
 
 }

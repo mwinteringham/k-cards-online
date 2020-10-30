@@ -20,7 +20,7 @@ public class KCardController {
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     public ResponseEntity createRoom(@RequestBody RoomRequest roomRequest) throws SQLException {
-        RoomResult roomResult = roomService.createRoom();
+        RoomResult roomResult = roomService.createRoom(roomRequest.getWorkshopName());
 
         return ResponseEntity.status(roomResult.getHttpStatus()).body(roomResult.getCode());
     }
