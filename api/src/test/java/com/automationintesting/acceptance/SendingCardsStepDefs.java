@@ -35,7 +35,7 @@ public class SendingCardsStepDefs {
         workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
     }
 
-    @When("I send a red card to the the host")
+    @When("I send a red card to the host")
     public void sendARedCard() {
         Card card = new Card("Amy Lee", "red");
 
