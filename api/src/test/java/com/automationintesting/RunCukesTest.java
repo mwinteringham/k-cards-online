@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = {"src/test/resource"}, tags = "@auto"
+    features = {"src/test/resources"}, tags = "@auto"
 )
 public class RunCukesTest {
 }
