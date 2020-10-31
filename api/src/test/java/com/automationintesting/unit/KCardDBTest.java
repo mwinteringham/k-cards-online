@@ -64,8 +64,13 @@ public class KCardDBTest {
 
     @Test
     public void returnWorkshopActivity() throws SQLException {
-        Card card = new Card("Amy Lee", "red");
-        kCardDB.addCardActivity(card, "BEWT");
+        Card redCard = new Card("Amy Lee", "red");
+        Card greenCard = new Card("Stuart Jones", "green");
+        Card yellowCard = new Card("Sam Jones", "yellow");
+
+        kCardDB.addCardActivity(redCard, "BEWT");
+        kCardDB.addCardActivity(greenCard, "BEWT");
+        kCardDB.addCardActivity(yellowCard, "BEWT");
 
         Activity activity = kCardDB.getWorkshopActivity("BEWT");
 

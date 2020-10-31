@@ -35,24 +35,52 @@ public class SendingCardsStepDefs {
         workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
     }
 
-    @When("I send a red card to the host")
-    public void sendARedCard() {
-        Card card = new Card("Amy Lee", "red");
+    @When("I send a {string} card to the host")
+    public void sendACard(String cardType) {
+        Card card = new Card("Amy Lee", cardType);
 
-        Response response = given()
-                                .contentType(ContentType.JSON)
-                                .body(card)
-                                .post("http://localhost:8080/workshop/" + workshopResponse.getCode() + "/card");
+        Response response = workshopRequests.sendCard(card, workshopResponse.getCode());
 
         assertThat(response.statusCode(), equalTo(201));
     }
 
     @Then("the host should see a red card has been sent by me")
-    public void hostChecksCards() {
-        ActivityResponse activity = given()
-                                .get("http://localhost:8080/workshop/" + workshopResponse.getCode() + "/activity")
-                                .as(ActivityResponse.class);
+    public void hostChecksRedCard() {
+        ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
 
         assertThat(activity.getActivity().getReds(), containsInAnyOrder("Amy Lee"));
     }
+
+    @Then("the host should see a green card has been sent by me")
+    public void hostChecksGreenCard() {
+        ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
+
+        String threadName = activity.getActivity().getThreads().get(0).getName();
+
+        assertThat(threadName, equalTo("Amy Lee"));
+    }
+
+    @Given("I sent a green card to the host")
+    public void sendAGreenCard() {
+        Card card = new Card("Amy Lee", "green");
+
+        workshopRequests.sendCard(card, workshopResponse.getCode());
+    }
+
+    @When("I send a yellow card to the host")
+    public void sendAYellowCard() {
+        Card card = new Card("Amber Catz", "yellow");
+
+        workshopRequests.sendCard(card, workshopResponse.getCode());
+    }
+
+    @Then("the host should see a yellow card has been attached to the latest green card")
+    public void hostChecksYellowCard() {
+        ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
+
+        String threadName = activity.getActivity().getThreads().get(0).getSubThread().get(0);
+
+        assertThat(threadName, equalTo("Amber Catz"));
+    }
+
 }

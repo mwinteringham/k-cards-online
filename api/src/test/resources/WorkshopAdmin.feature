@@ -13,13 +13,6 @@ Feature: Workshop administration
     Then I should be able to see that the attendee has joined
 
   @wip
-  Scenario: Host sets a thread as active
-    Given I have created a new workshop
-    And a green card has been sent
-    When I select the thread to be the current thread
-    Then all yellow cards are added to that thread
-
-  @wip
   Scenario: Host deletes a red card
     Given I have created a new workshop
     And a red card has been sent

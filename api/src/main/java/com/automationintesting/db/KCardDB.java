@@ -4,6 +4,7 @@ import com.automationintesting.model.Attendee;
 import com.automationintesting.model.AttendeeList;
 import com.automationintesting.model.Card;
 import com.automationintesting.model.activity.Activity;
+import com.automationintesting.model.activity.ActivityThread;
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.stereotype.Component;
 
@@ -71,16 +72,25 @@ public class KCardDB {
 
     public Activity getWorkshopActivity(String workshopCode) throws SQLException {
         List<String> redList = new ArrayList<>();
+        List<ActivityThread> activityThreadList = new ArrayList<>();
+
         String sql = "SELECT * FROM ACTIVITIES WHERE workshopcode = '" + workshopCode + "'";
 
         ResultSet results = connection.prepareStatement(sql).executeQuery();
 
         while(results.next()){
-            if(results.getString("cardtype").contentEquals("red")){
-                redList.add(results.getString("name"));
+            switch(results.getString("cardtype")){
+                case "red":
+                    redList.add(results.getString("name"));
+                    break;
+                case "green":
+                    activityThreadList.add(new ActivityThread(results.getString("name")));
+                    break;
+                case "yellow":
+                    activityThreadList.get(0).addToSubThread(results.getString("name"));
             }
         }
 
-        return new Activity(redList, null);
+        return new Activity(redList, activityThreadList);
     }
 }

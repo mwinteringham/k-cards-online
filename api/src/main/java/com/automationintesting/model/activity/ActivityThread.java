@@ -2,6 +2,9 @@ package com.automationintesting.model.activity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivityThread {
 
 //    "threads": [{
@@ -17,6 +20,8 @@ public class ActivityThread {
 
     @JsonProperty
     private String name;
+    @JsonProperty
+    private List<String> subthread = new ArrayList<>();
 
     public ActivityThread() {
     }
@@ -33,10 +38,19 @@ public class ActivityThread {
         this.name = name;
     }
 
+    public List<String> getSubThread() {
+        return subthread;
+    }
+
+    public void addToSubThread(String name){
+        subthread.add(name);
+    }
+
     @Override
     public String toString() {
         return "ActivityThread{" +
                 "name='" + name + '\'' +
+                ", subthreads=" + subthread +
                 '}';
     }
 }
