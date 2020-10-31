@@ -69,9 +69,9 @@ public class AttendeeConnectionStepDefs {
     @And("I've sent cards")
     public void iVeSentCards() {
         List<Card> cards = new ArrayList<>(){{
-            this.add(new Card(attendee.getName(), attendee.getCode(), "red"));
-            this.add(new Card(attendee.getName(), attendee.getCode(), "green"));
-            this.add(new Card(attendee.getName(), attendee.getCode(), "yellow"));
+            this.add(new Card(attendee.getCode(), "red"));
+            this.add(new Card(attendee.getCode(), "green"));
+            this.add(new Card(attendee.getCode(), "yellow"));
         }};
 
         for(Card card : cards){

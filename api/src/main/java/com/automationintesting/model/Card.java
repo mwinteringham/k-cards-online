@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Card {
 
     @JsonProperty
-    private String name;
-    @JsonProperty
     private String attendeeCode;
     @JsonProperty
     private String cardType;
@@ -14,18 +12,9 @@ public class Card {
     public Card() {
     }
 
-    public Card(String name, String attendeeCode, String cardType) {
-        this.name = name;
+    public Card(String attendeeCode, String cardType) {
         this.attendeeCode = attendeeCode;
         this.cardType = cardType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCardType() {

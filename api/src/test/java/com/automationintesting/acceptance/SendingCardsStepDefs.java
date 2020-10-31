@@ -38,7 +38,7 @@ public class SendingCardsStepDefs {
 
     @When("I send a {string} card to the host")
     public void sendACard(String cardType) {
-        Card card = new Card(attendee.getName(), attendee.getCode(), cardType);
+        Card card = new Card(attendee.getCode(), cardType);
 
         Response response = workshopRequests.sendCard(card, workshopResponse.getCode());
 
@@ -63,14 +63,14 @@ public class SendingCardsStepDefs {
 
     @Given("I sent a green card to the host")
     public void sendAGreenCard() {
-        Card card = new Card(attendee.getName(), attendee.getCode(), "green");
+        Card card = new Card(attendee.getCode(), "green");
 
         workshopRequests.sendCard(card, workshopResponse.getCode());
     }
 
     @When("I send a yellow card to the host")
     public void sendAYellowCard() {
-        Card card = new Card(attendee.getName(), attendee.getCode(), "yellow");
+        Card card = new Card(attendee.getCode(), "yellow");
 
         workshopRequests.sendCard(card, workshopResponse.getCode());
     }

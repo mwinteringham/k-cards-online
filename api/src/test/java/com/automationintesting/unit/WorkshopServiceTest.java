@@ -95,7 +95,7 @@ public class WorkshopServiceTest {
     @Test
     public void createCardActivityTest() throws SQLException {
         Attendee attendee = new Attendee("Jenny Sage");
-        Card card = new Card(attendee.getName(), attendee.getCode(), "red");
+        Card card = new Card(attendee.getCode(), "red");
 
         when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
 

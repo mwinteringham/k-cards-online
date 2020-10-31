@@ -10,6 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -55,7 +57,9 @@ public class KCardDBTest {
     @Test
     public void storeCardActivity() throws SQLException {
         Attendee attendee = new Attendee("Amy Lee");
-        Card card = new Card(attendee.getName(), attendee.getCode(), "red");
+        Card card = new Card(attendee.getCode(), "red");
+
+        kCardDB.addAttendee(attendee, "jsdjsd");
 
         Boolean storeResult = kCardDB.addCardActivity(card, "jsdjsd");
 
@@ -64,13 +68,19 @@ public class KCardDBTest {
 
     @Test
     public void returnWorkshopActivity() throws SQLException {
-        Attendee attendee1 = new Attendee("Amy Lee");
-        Attendee attendee2 = new Attendee("Stuart Jones");
-        Attendee attendee3 = new Attendee("Sam Jones");
+        List<Attendee> attendees = new ArrayList<Attendee>(){{
+            this.add(new Attendee("Amy Lee"));
+            this.add(new Attendee("Stuart Jones"));
+            this.add(new Attendee("Sam Jones"));
+        }};
 
-        Card redCard = new Card(attendee1.getName(), attendee1.getCode(), "red");
-        Card greenCard = new Card(attendee2.getName(), attendee2.getCode(), "green");
-        Card yellowCard = new Card(attendee3.getName(), attendee3.getCode(), "yellow");
+        for(Attendee attendee : attendees){
+            kCardDB.addAttendee(attendee, "jsdjsd");
+        }
+
+        Card redCard = new Card(attendees.get(0).getCode(), "red");
+        Card greenCard = new Card(attendees.get(1).getCode(), "green");
+        Card yellowCard = new Card(attendees.get(2).getCode(), "yellow");
 
         kCardDB.addCardActivity(redCard, "BEWT");
         kCardDB.addCardActivity(greenCard, "BEWT");
@@ -111,9 +121,11 @@ public class KCardDBTest {
     public void removeAttendeesCards() throws SQLException {
         Attendee attendee = new Attendee("Boz Badger");
 
-        Card redCard = new Card("Boz Badger", attendee.getCode(), "red");
-        Card greenCard = new Card("Boz Badger", attendee.getCode(), "green");
-        Card yellowCard = new Card("Boz Badger", attendee.getCode(), "yellow");
+        kCardDB.addAttendee(attendee, "poiuyt");
+
+        Card redCard = new Card(attendee.getCode(), "red");
+        Card greenCard = new Card(attendee.getCode(), "green");
+        Card yellowCard = new Card(attendee.getCode(), "yellow");
 
         kCardDB.addCardActivity(redCard, "poiuyt");
         kCardDB.addCardActivity(greenCard, "poiuyt");

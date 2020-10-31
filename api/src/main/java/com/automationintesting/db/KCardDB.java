@@ -25,6 +25,7 @@ public class KCardDB {
     private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(6), name varchar(255), workshopcode varchar(6), primary key (attendee_id))";
     private final String CREATE_ACTIVITY_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardtype varchar(6), attendeecode varchar(6), name varchar(255), workshopcode varchar(6), primary key (id))";
 
+    private final String SELECT_ATTENDEE = "SELECT name FROM ATTENDEES WHERE attendeecode = ?";
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";
     private final String SELECT_CARDS = "SELECT * FROM CARDS WHERE workshopcode = ?";
     private final String SELECT_CARDS_FROM_ATTENDEE = "SELECT COUNT(*) AS total FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
@@ -77,7 +78,13 @@ public class KCardDB {
     }
 
     public Boolean addCardActivity(Card card, String workshopCode) throws SQLException {
-        InsertCardSql insertCardSql = new InsertCardSql(connection, card, workshopCode);
+        PreparedStatement ps = connection.prepareStatement(SELECT_ATTENDEE);
+        ps.setString(1, card.getAttendeeCode());
+
+        ResultSet resultSet = ps.executeQuery();
+        resultSet.next();
+
+        InsertCardSql insertCardSql = new InsertCardSql(connection, card, resultSet.getString("name"), workshopCode);
         PreparedStatement createPs = insertCardSql.getPreparedStatement();
 
         return createPs.executeUpdate() > 0;
