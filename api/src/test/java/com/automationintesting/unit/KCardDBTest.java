@@ -5,7 +5,6 @@ import com.automationintesting.model.Attendee;
 import com.automationintesting.model.AttendeeList;
 import com.automationintesting.model.Card;
 import com.automationintesting.model.activity.Activity;
-import com.automationintesting.model.activity.ActivityResponse;
 import org.approvaltests.Approvals;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +28,7 @@ public class KCardDBTest {
         String workshopCode = "abcdef";
         String workshopName = "LEWT";
 
-        Boolean storeResult = kCardDB.addCode(workshopCode, workshopName);
+        Boolean storeResult = kCardDB.addWorkshop(workshopCode, workshopName);
 
         assertThat(storeResult, equalTo(true));
     }
@@ -55,7 +54,8 @@ public class KCardDBTest {
 
     @Test
     public void storeCardActivity() throws SQLException {
-        Card card = new Card("Amy Lee", "red");
+        Attendee attendee = new Attendee("Amy Lee");
+        Card card = new Card(attendee.getName(), attendee.getCode(), "red");
 
         Boolean storeResult = kCardDB.addCardActivity(card, "jsdjsd");
 
@@ -64,9 +64,13 @@ public class KCardDBTest {
 
     @Test
     public void returnWorkshopActivity() throws SQLException {
-        Card redCard = new Card("Amy Lee", "red");
-        Card greenCard = new Card("Stuart Jones", "green");
-        Card yellowCard = new Card("Sam Jones", "yellow");
+        Attendee attendee1 = new Attendee("Amy Lee");
+        Attendee attendee2 = new Attendee("Stuart Jones");
+        Attendee attendee3 = new Attendee("Sam Jones");
+
+        Card redCard = new Card(attendee1.getName(), attendee1.getCode(), "red");
+        Card greenCard = new Card(attendee2.getName(), attendee2.getCode(), "green");
+        Card yellowCard = new Card(attendee3.getName(), attendee3.getCode(), "yellow");
 
         kCardDB.addCardActivity(redCard, "BEWT");
         kCardDB.addCardActivity(greenCard, "BEWT");
@@ -77,4 +81,46 @@ public class KCardDBTest {
         Approvals.verify(activity);
     }
 
+    @Test
+    public void checkWorkshopExists() throws SQLException {
+        kCardDB.addWorkshop("abcdef", "FEWT");
+
+        Boolean workshopExists = kCardDB.doesWorkshopExist("abcdef");
+
+        assertThat(workshopExists, equalTo(true));
+    }
+
+    @Test
+    public void checkWorkshopDoesNotExist() throws SQLException {
+        Boolean workshopExists = kCardDB.doesWorkshopExist("nowtef");
+
+        assertThat(workshopExists, equalTo(false));
+    }
+
+    @Test
+    public void removeAttendeeFromWorkshop() throws SQLException {
+        Attendee attendee = new Attendee("James Salmon");
+        kCardDB.addAttendee(attendee, "qwerty");
+
+        Boolean attendeeRemoved = kCardDB.removeAttendee(attendee.getCode(),"qwerty");
+
+        assertThat(attendeeRemoved, equalTo(true));
+    }
+
+    @Test
+    public void removeAttendeesCards() throws SQLException {
+        Attendee attendee = new Attendee("Boz Badger");
+
+        Card redCard = new Card("Boz Badger", attendee.getCode(), "red");
+        Card greenCard = new Card("Boz Badger", attendee.getCode(), "green");
+        Card yellowCard = new Card("Boz Badger", attendee.getCode(), "yellow");
+
+        kCardDB.addCardActivity(redCard, "poiuyt");
+        kCardDB.addCardActivity(greenCard, "poiuyt");
+        kCardDB.addCardActivity(yellowCard, "poiuyt");
+
+        Boolean cardsRemoved = kCardDB.removeAttendeesCards(attendee.getCode(), "poiuyt");
+
+        assertThat(cardsRemoved, equalTo(true));
+    }
 }

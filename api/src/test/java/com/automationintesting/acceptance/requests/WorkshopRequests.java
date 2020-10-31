@@ -19,8 +19,8 @@ public class WorkshopRequests {
                 .as(Workshop.class);
     }
 
-    public void joinWorkshopAsAttendee(Attendee attendee, String workshopCode){
-        given()
+    public Response joinWorkshopAsAttendee(Attendee attendee, String workshopCode){
+        return given()
             .contentType(ContentType.JSON)
             .body(attendee)
             .post("http://localhost:8080/workshop/" + workshopCode + "/join");

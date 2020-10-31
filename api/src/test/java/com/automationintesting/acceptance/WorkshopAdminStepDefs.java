@@ -7,7 +7,6 @@ import com.automationintesting.model.Workshop;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -21,7 +20,6 @@ public class WorkshopAdminStepDefs {
 
     private Workshop workshopRequestPayload;
     private Workshop workshopResponse;
-    private Response attendeeJoinedResponse;
 
     @Given("I have picked a name for a workshop")
     public void setAHostName() {

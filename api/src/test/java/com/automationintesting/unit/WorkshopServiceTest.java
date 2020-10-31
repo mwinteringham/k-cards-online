@@ -1,6 +1,7 @@
 package com.automationintesting.unit;
 
 import com.automationintesting.db.KCardDB;
+import com.automationintesting.db.service.AttendeeJoinResult;
 import com.automationintesting.db.service.AttendeeListResult;
 import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
@@ -46,7 +47,7 @@ public class WorkshopServiceTest {
 
     @Test
     public void createWorkshopTest() throws SQLException {
-        when(kCardDB.addCode(anyString(), eq("LEWT"))).thenReturn(true);
+        when(kCardDB.addWorkshop(anyString(), eq("LEWT"))).thenReturn(true);
 
         WorkshopResult workshopResult = workshopService.createWorkshop("LEWT");
 
@@ -57,11 +58,23 @@ public class WorkshopServiceTest {
     @Test
     public void createAttendeeTest() throws SQLException {
         Attendee attendee = new Attendee("Mary Jane");
+        when(kCardDB.doesWorkshopExist("abcdef")).thenReturn(true);
         when(kCardDB.addAttendee(attendee, "abcdef")).thenReturn(true);
 
-        HttpStatus httpStatus = workshopService.createAttendee(attendee, "abcdef");
+        AttendeeJoinResult attendeeJoinResult = workshopService.createAttendee(attendee, "abcdef");
 
-        assertThat(httpStatus, equalTo(HttpStatus.CREATED));
+        assertThat(attendeeJoinResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
+        assertThat(attendeeJoinResult.getAttendee(), instanceOf(Attendee.class));
+    }
+
+    @Test
+    public void noWorkshopToJoinTest() throws SQLException {
+        Attendee attendee = new Attendee("Mary Jane");
+        when(kCardDB.doesWorkshopExist("fedcba")).thenReturn(false);
+
+        AttendeeJoinResult attendeeJoinResult = workshopService.createAttendee(attendee, "fedcba");
+
+        assertThat(attendeeJoinResult.getHttpStatus(), equalTo(HttpStatus.NOT_FOUND));
     }
 
     @Test
@@ -81,7 +94,8 @@ public class WorkshopServiceTest {
 
     @Test
     public void createCardActivityTest() throws SQLException {
-        Card card = new Card("Jenny Sage", "red");
+        Attendee attendee = new Attendee("Jenny Sage");
+        Card card = new Card(attendee.getName(), attendee.getCode(), "red");
 
         when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
 
@@ -105,6 +119,29 @@ public class WorkshopServiceTest {
 
         assertThat(workshopActivityResult.getHttpStatus(), equalTo(HttpStatus.OK));
         assertThat(workshopActivityResult.getActivity(), instanceOf(ActivityResponse.class));
+    }
+
+    @Test
+    public void deleteAttendeeTest() throws SQLException {
+        Attendee attendee = new Attendee("Bill James");
+
+        when(kCardDB.removeAttendee(attendee.getCode(), "asdfgh")).thenReturn(true);
+        when(kCardDB.removeAttendeesCards(attendee.getCode(), "asdfgh")).thenReturn(true);
+
+        HttpStatus httpStatus = workshopService.removeAttendee(attendee.getCode(), "asdfgh");
+
+        assertThat(httpStatus, equalTo(HttpStatus.ACCEPTED));
+    }
+
+    @Test
+    public void deleteAttendeeWhoDoesNotExistTest() throws SQLException {
+        Attendee attendee = new Attendee("Bill James");
+
+        when(kCardDB.removeAttendee(attendee.getCode(), "asdfgh")).thenReturn(false);
+
+        HttpStatus httpStatus = workshopService.removeAttendee(attendee.getCode(), "asdfgh");
+
+        assertThat(httpStatus, equalTo(HttpStatus.NOT_FOUND));
     }
 
 }

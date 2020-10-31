@@ -2,7 +2,7 @@ package com.automationintesting.service;
 
 import java.util.Random;
 
-public class WorkshopCodeGenerator {
+public class CodeGenerator {
 
     public String createCode() {
         int leftLimit = 97; // letter 'a'

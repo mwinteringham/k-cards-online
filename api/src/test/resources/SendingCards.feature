@@ -18,3 +18,9 @@ Feature: Sending cards
     And I sent a green card to the host
     When I send a yellow card to the host
     Then the host should see a yellow card has been attached to the latest green card
+
+  Scenario: Attendee attempts to send a card when not joined
+    Given a workshop has been created by a host
+    But I am not part of the workshop
+    When I send a "red" card to the host
+    Then the host should not receive the card

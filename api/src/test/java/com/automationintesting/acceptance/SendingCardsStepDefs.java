@@ -22,6 +22,7 @@ public class SendingCardsStepDefs {
 
     private WorkshopRequests workshopRequests = new WorkshopRequests();
     private Workshop workshopResponse;
+    private Attendee attendee;
 
     @Before
     public void createWorkshop(){
@@ -31,13 +32,13 @@ public class SendingCardsStepDefs {
 
     @Given("I am in a workshop created by a host")
     public void joinAWorkshop() {
-        Attendee attendee = new Attendee("Amy Lee");
+        attendee = new Attendee("Amy Lee");
         workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
     }
 
     @When("I send a {string} card to the host")
     public void sendACard(String cardType) {
-        Card card = new Card("Amy Lee", cardType);
+        Card card = new Card(attendee.getName(), attendee.getCode(), cardType);
 
         Response response = workshopRequests.sendCard(card, workshopResponse.getCode());
 
@@ -62,14 +63,14 @@ public class SendingCardsStepDefs {
 
     @Given("I sent a green card to the host")
     public void sendAGreenCard() {
-        Card card = new Card("Amy Lee", "green");
+        Card card = new Card(attendee.getName(), attendee.getCode(), "green");
 
         workshopRequests.sendCard(card, workshopResponse.getCode());
     }
 
     @When("I send a yellow card to the host")
     public void sendAYellowCard() {
-        Card card = new Card("Amber Catz", "yellow");
+        Card card = new Card(attendee.getName(), attendee.getCode(), "yellow");
 
         workshopRequests.sendCard(card, workshopResponse.getCode());
     }
@@ -80,7 +81,7 @@ public class SendingCardsStepDefs {
 
         String threadName = activity.getActivity().getThreads().get(0).getSubThread().get(0);
 
-        assertThat(threadName, equalTo("Amber Catz"));
+        assertThat(threadName, equalTo("Amy Lee"));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.automationintesting.api;
 
+import com.automationintesting.db.service.AttendeeJoinResult;
 import com.automationintesting.db.service.AttendeeListResult;
 import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
@@ -29,9 +30,9 @@ public class KCardController {
 
     @RequestMapping(value = "/workshop/{workshopcode:.+}/join", method = RequestMethod.POST)
     public ResponseEntity createAttendee(@PathVariable(value = "workshopcode") String workshopCode, @RequestBody Attendee attendee) throws SQLException {
-        HttpStatus attendeeResult = workshopService.createAttendee(attendee, workshopCode);
+        AttendeeJoinResult attendeeResult = workshopService.createAttendee(attendee, workshopCode);
 
-        return ResponseEntity.status(attendeeResult).build();
+        return ResponseEntity.status(attendeeResult.getHttpStatus()).body(attendeeResult.getAttendee());
     }
 
     @RequestMapping(value = "/workshop/{workshopcode:.+}/attendees", method = RequestMethod.GET)
@@ -53,6 +54,13 @@ public class KCardController {
         WorkshopActivityResult workshopActivityResult = workshopService.getWorkshopActivity(workshopCode);
 
         return ResponseEntity.status(workshopActivityResult.getHttpStatus()).body(workshopActivityResult.getActivity());
+    }
+
+    @RequestMapping(value = "/workshop/{workshopcode:.+}/leave", method = RequestMethod.DELETE)
+    public ResponseEntity removeAttendee(@PathVariable(value = "workshopcode") String workshopcode, @RequestBody Attendee attendee) throws SQLException {
+        HttpStatus removalResult = workshopService.removeAttendee(attendee.getCode(), workshopcode);
+
+        return ResponseEntity.status(removalResult).build();
     }
 
 }

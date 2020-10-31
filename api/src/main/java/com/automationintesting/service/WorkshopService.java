@@ -1,6 +1,7 @@
 package com.automationintesting.service;
 
 import com.automationintesting.db.KCardDB;
+import com.automationintesting.db.service.AttendeeJoinResult;
 import com.automationintesting.db.service.AttendeeListResult;
 import com.automationintesting.db.service.WorkshopActivityResult;
 import com.automationintesting.db.service.WorkshopResult;
@@ -22,28 +23,32 @@ public class WorkshopService {
     @Autowired
     private KCardDB kCardDB;
 
-    private WorkshopCodeGenerator workshopCodeGenerator;
+    private CodeGenerator codeGenerator;
 
     @Autowired
     public WorkshopService() {
-        workshopCodeGenerator = new WorkshopCodeGenerator();
+        codeGenerator = new CodeGenerator();
     }
 
     public WorkshopResult createWorkshop(String workshopName) throws SQLException {
-        String code = workshopCodeGenerator.createCode();
+        String code = codeGenerator.createCode();
 
-        if(kCardDB.addCode(code, workshopName)){
+        if(kCardDB.addWorkshop(code, workshopName)){
             return new WorkshopResult(HttpStatus.CREATED, new Workshop(code, workshopName));
         } else {
             return new WorkshopResult(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
-    public HttpStatus createAttendee(Attendee attendee, String workshopCode) throws SQLException {
-        if(kCardDB.addAttendee(attendee, workshopCode)){
-            return HttpStatus.CREATED;
+    public AttendeeJoinResult createAttendee(Attendee attendee, String workshopCode) throws SQLException {
+        if(kCardDB.doesWorkshopExist(workshopCode)){
+            if(kCardDB.addAttendee(attendee, workshopCode)){
+                return new AttendeeJoinResult(HttpStatus.CREATED, attendee);
+            } else {
+                return new AttendeeJoinResult(HttpStatus.NOT_ACCEPTABLE);
+            }
         } else {
-            return HttpStatus.NOT_ACCEPTABLE;
+            return new AttendeeJoinResult(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -65,5 +70,17 @@ public class WorkshopService {
         ActivityResponse activityResponse = new ActivityResponse(activity);
 
         return new WorkshopActivityResult(HttpStatus.OK, activityResponse);
+    }
+
+    public HttpStatus removeAttendee(String attendeeCode, String workshopCode) throws SQLException {
+        if(kCardDB.removeAttendee(attendeeCode, workshopCode)){
+            if(kCardDB.removeAttendeesCards(attendeeCode, workshopCode)){
+                return HttpStatus.ACCEPTED;
+            } else {
+                return HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
     }
 }
