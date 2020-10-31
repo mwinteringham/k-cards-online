@@ -58,10 +58,14 @@ public class WorkshopService {
     }
 
     public HttpStatus createCardActivity(Card card, String workshopCode) throws SQLException {
-        if(kCardDB.addCardActivity(card, workshopCode)){
-            return HttpStatus.CREATED;
+        if(kCardDB.isAttendeeInWorkshop(card.getAttendeeCode(), workshopCode)){
+            if(kCardDB.addCardActivity(card, workshopCode)){
+                return HttpStatus.CREATED;
+            } else {
+                return HttpStatus.INTERNAL_SERVER_ERROR;
+            }
         } else {
-            return HttpStatus.NOT_ACCEPTABLE;
+            return HttpStatus.NOT_FOUND;
         }
     }
 

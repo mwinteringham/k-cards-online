@@ -41,8 +41,6 @@ public class KCardDB {
         ds.setPassword("password");
         connection = ds.getConnection();
 
-        Server.createTcpServer("-tcpPort", "9093", "-tcpAllowOthers").start();
-
         connection.prepareStatement(CREATE_WORKSHOPS_TABLE).executeUpdate();
         connection.prepareStatement(CREATE_ATTENDEE_TABLE).executeUpdate();
         connection.prepareStatement(CREATE_ACTIVITY_TABLE).executeUpdate();
@@ -148,5 +146,17 @@ public class KCardDB {
         results.next();
 
         return results.getInt("total") == 0;
+    }
+
+    public Boolean isAttendeeInWorkshop(String attendeecode, String workshopcode) throws SQLException {
+        final String SELECT_WORKSHOP_ATTENDEE = "SELECT COUNT(*) AS total FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
+        PreparedStatement ps = connection.prepareStatement(SELECT_WORKSHOP_ATTENDEE);
+        ps.setString(1, attendeecode);
+        ps.setString(2, workshopcode);
+
+        ResultSet resultSet = ps.executeQuery();
+        resultSet.next();
+
+        return resultSet.getInt("total") == 1;
     }
 }

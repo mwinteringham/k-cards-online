@@ -9,11 +9,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.approvaltests.Approvals;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -23,6 +20,7 @@ public class SendingCardsStepDefs {
     private WorkshopRequests workshopRequests = new WorkshopRequests();
     private Workshop workshopResponse;
     private Attendee attendee;
+    private Response errorResponse;
 
     @Before
     public void createWorkshop(){
@@ -84,4 +82,20 @@ public class SendingCardsStepDefs {
         assertThat(threadName, equalTo("Amy Lee"));
     }
 
+    @Given("a workshop exists that I haven't joined yet")
+    public void createWorkshopToNotJoin() {
+        // Nothing to do here as before hook handles this work for us
+    }
+
+
+    @When("I send a card before joining the workshop")
+    public void sendACardBeforeJoining() {
+        Card card = new Card("abcdef", "red");
+        errorResponse = workshopRequests.sendCard(card, workshopResponse.getCode());
+    }
+
+    @Then("I should get an error informing me I can't add a card")
+    public void checkForError() {
+        assertThat(errorResponse.statusCode(), equalTo(404));
+    }
 }

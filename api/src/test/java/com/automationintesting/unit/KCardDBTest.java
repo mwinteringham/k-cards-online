@@ -135,4 +135,15 @@ public class KCardDBTest {
 
         assertThat(cardsRemoved, equalTo(true));
     }
+
+    @Test
+    public void confirmAttendeeIsInWorkshop() throws SQLException {
+        Attendee attendee = new Attendee("Devin Pumpkin");
+
+        kCardDB.addAttendee(attendee, "zxcvbn");
+
+        Boolean attendingWorkshop = kCardDB.isAttendeeInWorkshop(attendee.getCode(), "zxcvbn");
+
+        assertThat(attendingWorkshop, equalTo(true));
+    }
 }

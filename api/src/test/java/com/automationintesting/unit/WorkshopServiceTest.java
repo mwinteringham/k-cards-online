@@ -98,6 +98,7 @@ public class WorkshopServiceTest {
         Card card = new Card(attendee.getCode(), "red");
 
         when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
+        when(kCardDB.isAttendeeInWorkshop(attendee.getCode(), "hgfhgf")).thenReturn(true);
 
         HttpStatus cardCreationResult = workshopService.createCardActivity(card, "hgfhgf");
 

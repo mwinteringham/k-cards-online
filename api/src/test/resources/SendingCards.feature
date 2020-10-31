@@ -19,8 +19,8 @@ Feature: Sending cards
     When I send a yellow card to the host
     Then the host should see a yellow card has been attached to the latest green card
 
+  @auto
   Scenario: Attendee attempts to send a card when not joined
-    Given a workshop has been created by a host
-    But I am not part of the workshop
-    When I send a "red" card to the host
-    Then the host should not receive the card
+    Given a workshop exists that I haven't joined yet
+    When I send a card before joining the workshop
+    Then I should get an error informing me I can't add a card
