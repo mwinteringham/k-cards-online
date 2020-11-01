@@ -22,9 +22,9 @@ public class KCardDB {
 
     private Connection connection;
 
-    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(6), workshopName varchar(255), primary key (id))";
-    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(6), name varchar(255), workshopcode varchar(6), primary key (attendee_id))";
-    private final String CREATE_ACTIVITY_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(6), cardtype varchar(6), attendeecode varchar(6), name varchar(255), workshopcode varchar(6), primary key (id))";
+    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), primary key (id))";
+    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), primary key (attendee_id))";
+    private final String CREATE_ACTIVITY_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(36), cardtype varchar(6), attendeecode varchar(36), name varchar(255), workshopcode varchar(36), primary key (id))";
 
     private final String SELECT_ATTENDEE = "SELECT name FROM ATTENDEES WHERE attendeecode = ?";
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";

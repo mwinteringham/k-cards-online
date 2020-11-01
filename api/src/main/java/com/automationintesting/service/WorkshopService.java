@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class WorkshopService {
@@ -24,18 +25,15 @@ public class WorkshopService {
     @Autowired
     private KCardDB kCardDB;
 
-    private CodeGenerator codeGenerator;
-
     @Autowired
     public WorkshopService() {
-        codeGenerator = new CodeGenerator();
     }
 
     public WorkshopResult createWorkshop(String workshopName) throws SQLException {
-        String code = codeGenerator.createCode();
+        UUID uuid = UUID.randomUUID();
 
-        if(kCardDB.addWorkshop(code, workshopName)){
-            return new WorkshopResult(HttpStatus.CREATED, new Workshop(code, workshopName));
+        if(kCardDB.addWorkshop(uuid.toString(), workshopName)){
+            return new WorkshopResult(HttpStatus.CREATED, new Workshop(uuid.toString(), workshopName));
         } else {
             return new WorkshopResult(HttpStatus.NOT_ACCEPTABLE);
         }
@@ -43,7 +41,9 @@ public class WorkshopService {
 
     public AttendeeJoinResult createAttendee(Attendee attendee, String workshopCode) throws SQLException {
         if(kCardDB.doesWorkshopExist(workshopCode)){
-            attendee.setCode(codeGenerator.createCode());
+            UUID uuid = UUID.randomUUID();
+            attendee.setCode(uuid.toString());
+
             if(kCardDB.addAttendee(attendee, workshopCode)){
                 return new AttendeeJoinResult(HttpStatus.CREATED, attendee);
             } else {
@@ -61,7 +61,9 @@ public class WorkshopService {
 
     public HttpStatus createCard(Card card, String workshopCode) throws SQLException {
         if(kCardDB.isAttendeeInWorkshop(card.getAttendeeCode(), workshopCode)){
-            card.setCardCode(codeGenerator.createCode());
+            UUID uuid = UUID.randomUUID();
+            card.setCardCode(uuid.toString());
+
             if(kCardDB.addCardActivity(card, workshopCode)){
                 return HttpStatus.CREATED;
             } else {

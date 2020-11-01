@@ -1,6 +1,5 @@
 package com.automationintesting.model;
 
-import com.automationintesting.service.CodeGenerator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Attendee {
