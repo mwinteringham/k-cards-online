@@ -7,6 +7,8 @@ import com.automationintesting.model.activity.ActivityResponse;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 public class WorkshopRequests {
@@ -37,5 +39,12 @@ public class WorkshopRequests {
         return given()
                 .get("http://localhost:8080/workshop/" + workshopCode + "/activity")
                 .as(ActivityResponse.class);
+    }
+
+    public void deleteCard(String workshopCode, List<String> cardIds) {
+        given()
+            .contentType(ContentType.JSON)
+            .body(cardIds)
+            .delete("http://localhost:8080/workshop/" + workshopCode + "/card");
     }
 }

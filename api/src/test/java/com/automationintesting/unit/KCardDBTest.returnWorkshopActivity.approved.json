@@ -1,0 +1,22 @@
+{
+  "reds": [
+    {
+      "code": "abcd",
+      "name": "Amy Lee"
+    }
+  ],
+  "threads": [
+    {
+      "cardDetail": {
+        "code": "efgh",
+        "name": "Stuart Jones"
+      },
+      "subthread": [
+        {
+          "code": "hijkl",
+          "name": "Sam Jones"
+        }
+      ]
+    }
+  ]
+}

@@ -78,9 +78,9 @@ public class KCardDBTest {
             kCardDB.addAttendee(attendee, "jsdjsd");
         }
 
-        Card redCard = new Card(attendees.get(0).getCode(), "red");
-        Card greenCard = new Card(attendees.get(1).getCode(), "green");
-        Card yellowCard = new Card(attendees.get(2).getCode(), "yellow");
+        Card redCard = new Card(attendees.get(0).getCode(), "red", "abcd");
+        Card greenCard = new Card(attendees.get(1).getCode(), "green", "efgh");
+        Card yellowCard = new Card(attendees.get(2).getCode(), "yellow", "hijkl");
 
         kCardDB.addCardActivity(redCard, "BEWT");
         kCardDB.addCardActivity(greenCard, "BEWT");
@@ -88,7 +88,7 @@ public class KCardDBTest {
 
         Activity activity = kCardDB.getWorkshopActivity("BEWT");
 
-        Approvals.verify(activity);
+        Approvals.verifyAsJson(activity);
     }
 
     @Test
@@ -145,5 +145,19 @@ public class KCardDBTest {
         Boolean attendingWorkshop = kCardDB.isAttendeeInWorkshop(attendee.getCode(), "zxcvbn");
 
         assertThat(attendingWorkshop, equalTo(true));
+    }
+
+    @Test
+    public void removeCardInWorkshop() throws SQLException {
+        Attendee attendee = new Attendee("Boz Badger");
+        kCardDB.addAttendee(attendee, "mnbvcx");
+
+        Card redCard = new Card(attendee.getCode(), "red");
+
+        kCardDB.addCardActivity(redCard, "mnbvc");
+
+        Boolean cardRemoved = kCardDB.removeCard(redCard.getCardCode());
+
+        assertThat(cardRemoved, equalTo(true));
     }
 }

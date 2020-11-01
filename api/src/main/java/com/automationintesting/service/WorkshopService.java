@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class WorkshopService {
@@ -57,7 +58,7 @@ public class WorkshopService {
         return new AttendeeListResult(HttpStatus.OK, attendeeList);
     }
 
-    public HttpStatus createCardActivity(Card card, String workshopCode) throws SQLException {
+    public HttpStatus createCard(Card card, String workshopCode) throws SQLException {
         if(kCardDB.isAttendeeInWorkshop(card.getAttendeeCode(), workshopCode)){
             if(kCardDB.addCardActivity(card, workshopCode)){
                 return HttpStatus.CREATED;
@@ -86,5 +87,15 @@ public class WorkshopService {
         } else {
             return HttpStatus.NOT_FOUND;
         }
+    }
+
+    public HttpStatus removeCard(List<String> cardCodes) throws SQLException {
+        for(String cardCode : cardCodes){
+            if(!kCardDB.removeCard(cardCode)){
+                return HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        }
+
+        return HttpStatus.ACCEPTED;
     }
 }

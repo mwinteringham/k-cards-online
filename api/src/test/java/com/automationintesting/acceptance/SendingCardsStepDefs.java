@@ -47,14 +47,14 @@ public class SendingCardsStepDefs {
     public void hostChecksRedCard() {
         ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
 
-        assertThat(activity.getActivity().getReds(), containsInAnyOrder("Amy Lee"));
+        assertThat(activity.getActivity().getReds().get(0).getName(), equalTo("Amy Lee"));
     }
 
     @Then("the host should see a green card has been sent by me")
     public void hostChecksGreenCard() {
         ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
 
-        String threadName = activity.getActivity().getThreads().get(0).getName();
+        String threadName = activity.getActivity().getThreads().get(0).getCardDetail().getName();
 
         assertThat(threadName, equalTo("Amy Lee"));
     }
@@ -77,7 +77,7 @@ public class SendingCardsStepDefs {
     public void hostChecksYellowCard() {
         ActivityResponse activity = workshopRequests.getActivity(workshopResponse.getCode());
 
-        String threadName = activity.getActivity().getThreads().get(0).getSubThread().get(0);
+        String threadName = activity.getActivity().getThreads().get(0).getSubThread().get(0).getName();
 
         assertThat(threadName, equalTo("Amy Lee"));
     }

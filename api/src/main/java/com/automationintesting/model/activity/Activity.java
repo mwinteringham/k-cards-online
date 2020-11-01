@@ -6,42 +6,24 @@ import java.util.List;
 
 public class Activity {
 
-//    "activity": {
-//        "reds": [
-//          "Amy Lee",
-//          "Barry White",
-//          "Jerry Jones"
-//        ],
-//        "threads": [{
-//            "name": "Amy Lee"
-//        }, {
-//            "name": "Barry White",
-//            "subthreads": [{
-//                "name": "Stevie"
-//            }, {
-//                "name": "David"
-//            }]
-//        }]
-//    }
-
     @JsonProperty
-    private List<String> reds;
+    private List<CardDetail> reds;
     @JsonProperty
     private List<ActivityThread> threads;
 
     public Activity() {
     }
 
-    public Activity(List<String> reds, List<ActivityThread> threads) {
+    public Activity(List<CardDetail> reds, List<ActivityThread> threads) {
         this.reds = reds;
         this.threads = threads;
     }
 
-    public List<String> getReds() {
+    public List<CardDetail> getReds() {
         return reds;
     }
 
-    public void setReds(List<String> reds) {
+    public void setReds(List<CardDetail> reds) {
         this.reds = reds;
     }
 

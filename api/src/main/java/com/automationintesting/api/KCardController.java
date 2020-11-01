@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 public class KCardController {
@@ -44,7 +45,7 @@ public class KCardController {
 
     @RequestMapping(value = "/workshop/{workshopcode:.+}/card", method = RequestMethod.POST)
     public ResponseEntity createCard(@PathVariable(value = "workshopcode") String workshopCode, @RequestBody Card card) throws SQLException {
-        HttpStatus cardCreationResult = workshopService.createCardActivity(card, workshopCode);
+        HttpStatus cardCreationResult = workshopService.createCard(card, workshopCode);
 
         return ResponseEntity.status(cardCreationResult).build();
     }
@@ -59,6 +60,13 @@ public class KCardController {
     @RequestMapping(value = "/workshop/{workshopcode:.+}/leave", method = RequestMethod.DELETE)
     public ResponseEntity removeAttendee(@PathVariable(value = "workshopcode") String workshopcode, @RequestBody Attendee attendee) throws SQLException {
         HttpStatus removalResult = workshopService.removeAttendee(attendee.getCode(), workshopcode);
+
+        return ResponseEntity.status(removalResult).build();
+    }
+
+    @RequestMapping(value = "/workshop/{workshopcode:.+}/card", method = RequestMethod.DELETE)
+    public ResponseEntity removeCard(@RequestBody List<String> cardcodes) throws SQLException {
+        HttpStatus removalResult = workshopService.removeCard(cardcodes);
 
         return ResponseEntity.status(removalResult).build();
     }

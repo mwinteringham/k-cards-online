@@ -7,50 +7,39 @@ import java.util.List;
 
 public class ActivityThread {
 
-//    "threads": [{
-//        "name": "Amy Lee"
-//    }, {
-//        "name": "Barry White",
-//        "subthreads": [{
-//            "name": "Stevie"
-//        }, {
-//            "name": "David"
-//        }]
-//    }]
-
     @JsonProperty
-    private String name;
+    private CardDetail cardDetail;
     @JsonProperty
-    private List<String> subthread = new ArrayList<>();
+    private List<CardDetail> subthread = new ArrayList<>();
 
     public ActivityThread() {
     }
 
-    public ActivityThread(String name) {
-        this.name = name;
+    public ActivityThread(CardDetail cardDetail) {
+        this.cardDetail = cardDetail;
     }
 
-    public String getName() {
-        return name;
+    public CardDetail getCardDetail() {
+        return cardDetail;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCardDetail(CardDetail cardDetail) {
+        this.cardDetail = cardDetail;
     }
 
-    public List<String> getSubThread() {
+    public List<CardDetail> getSubThread() {
         return subthread;
     }
 
-    public void addToSubThread(String name){
+    public void addToSubThread(CardDetail name){
         subthread.add(name);
     }
 
     @Override
     public String toString() {
         return "ActivityThread{" +
-                "name='" + name + '\'' +
-                ", subthreads=" + subthread +
+                "cardDetail=" + cardDetail +
+                ", subthread=" + subthread +
                 '}';
     }
 }

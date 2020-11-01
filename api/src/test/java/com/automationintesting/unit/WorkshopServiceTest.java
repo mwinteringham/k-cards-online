@@ -11,6 +11,7 @@ import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
 import com.automationintesting.model.activity.Activity;
 import com.automationintesting.model.activity.ActivityResponse;
+import com.automationintesting.model.activity.CardDetail;
 import com.automationintesting.service.WorkshopService;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,16 +101,16 @@ public class WorkshopServiceTest {
         when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
         when(kCardDB.isAttendeeInWorkshop(attendee.getCode(), "hgfhgf")).thenReturn(true);
 
-        HttpStatus cardCreationResult = workshopService.createCardActivity(card, "hgfhgf");
+        HttpStatus cardCreationResult = workshopService.createCard(card, "hgfhgf");
 
         assertThat(cardCreationResult, equalTo(HttpStatus.CREATED));
     }
 
     @Test
     public void getActivityListTest() throws SQLException {
-        List<String> redList = new ArrayList<>(){{
-            this.add("Jeff Biggs");
-            this.add("Boz Jeans");
+        List<CardDetail> redList = new ArrayList<>(){{
+            this.add(new CardDetail("abc123","Jeff Biggs"));
+            this.add(new CardDetail("123abc", "Boz Jeans"));
         }};
 
         Activity activity = new Activity(redList, null);
@@ -143,6 +144,21 @@ public class WorkshopServiceTest {
         HttpStatus httpStatus = workshopService.removeAttendee(attendee.getCode(), "asdfgh");
 
         assertThat(httpStatus, equalTo(HttpStatus.NOT_FOUND));
+    }
+
+    @Test
+    public void deleteCards() throws SQLException {
+        when(kCardDB.removeCard("abcdef")).thenReturn(true);
+        when(kCardDB.removeCard("poiuyt")).thenReturn(true);
+
+        List<String> cards = new ArrayList<>(){{
+           this.add("abcdef");
+           this.add("poiuyt");
+        }};
+
+        HttpStatus httpStatus = workshopService.removeCard(cards);
+
+        assertThat(httpStatus, equalTo(HttpStatus.ACCEPTED));
     }
 
 }

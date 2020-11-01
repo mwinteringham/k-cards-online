@@ -12,21 +12,21 @@ Feature: Workshop administration
     When an attendee joins my workshop
     Then I should be able to see that the attendee has joined
 
-  @wip
+  @auto
   Scenario: Host deletes a red card
     Given I have created a new workshop
     And a red card has been sent
     When I delete the red card
     Then the red card should be removed from the activity
 
-  @wip
+  @auto
   Scenario: Host deletes a green card
     Given I have created a new workshop
     And a green card with a yellow card has been sent
     When I delete the green card
     Then the green card and related yellow cards should be removed from the activity
 
-  @wip
+  @auto
   Scenario: Host deletes a yellow card
     Given I have created a new workshop
     And a green card with a yellow card has been sent

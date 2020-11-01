@@ -14,6 +14,11 @@ public class Attendee {
 
     public Attendee() {}
 
+    public Attendee(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
     public Attendee(String name) {
         this.name = name;
         code = codeGenerator.createCode();
@@ -33,5 +38,13 @@ public class Attendee {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendee{" +
+                "name='" + name + '\'' +
+                ", code='" + code +
+                '}';
     }
 }

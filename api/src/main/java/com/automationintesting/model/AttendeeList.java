@@ -23,4 +23,11 @@ public class AttendeeList {
     public void setAttendees(List<Attendee> attendees) {
         this.attendees = attendees;
     }
+
+    @Override
+    public String toString() {
+        return "AttendeeList{" +
+                "attendees=" + attendees +
+                '}';
+    }
 }
