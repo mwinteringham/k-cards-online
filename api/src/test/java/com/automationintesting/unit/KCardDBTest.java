@@ -56,7 +56,7 @@ public class KCardDBTest {
 
     @Test
     public void storeCardActivity() throws SQLException {
-        Attendee attendee = new Attendee("Amy Lee");
+        Attendee attendee = new Attendee("Amy Lee", "fedcba");
         Card card = new Card(attendee.getCode(), "red");
 
         kCardDB.addAttendee(attendee, "jsdjsd");
@@ -69,9 +69,9 @@ public class KCardDBTest {
     @Test
     public void returnWorkshopActivity() throws SQLException {
         List<Attendee> attendees = new ArrayList<Attendee>(){{
-            this.add(new Attendee("Amy Lee"));
-            this.add(new Attendee("Stuart Jones"));
-            this.add(new Attendee("Sam Jones"));
+            this.add(new Attendee("Amy Lee","zxcvbn"));
+            this.add(new Attendee("Stuart Jones","nbvcxz"));
+            this.add(new Attendee("Sam Jones","qwerty"));
         }};
 
         for(Attendee attendee : attendees){
@@ -109,7 +109,7 @@ public class KCardDBTest {
 
     @Test
     public void removeAttendeeFromWorkshop() throws SQLException {
-        Attendee attendee = new Attendee("James Salmon");
+        Attendee attendee = new Attendee("James Salmon","tyuiop");
         kCardDB.addAttendee(attendee, "qwerty");
 
         Boolean attendeeRemoved = kCardDB.removeAttendee(attendee.getCode(),"qwerty");
@@ -119,7 +119,7 @@ public class KCardDBTest {
 
     @Test
     public void removeAttendeesCards() throws SQLException {
-        Attendee attendee = new Attendee("Boz Badger");
+        Attendee attendee = new Attendee("Boz Badger", "abcdef");
 
         kCardDB.addAttendee(attendee, "poiuyt");
 
@@ -138,7 +138,7 @@ public class KCardDBTest {
 
     @Test
     public void confirmAttendeeIsInWorkshop() throws SQLException {
-        Attendee attendee = new Attendee("Devin Pumpkin");
+        Attendee attendee = new Attendee("Devin Pumpkin","dfgiuy");
 
         kCardDB.addAttendee(attendee, "zxcvbn");
 
@@ -149,10 +149,10 @@ public class KCardDBTest {
 
     @Test
     public void removeCardInWorkshop() throws SQLException {
-        Attendee attendee = new Attendee("Boz Badger");
+        Attendee attendee = new Attendee("Boz Badger","poiuyt");
         kCardDB.addAttendee(attendee, "mnbvcx");
 
-        Card redCard = new Card(attendee.getCode(), "red");
+        Card redCard = new Card(attendee.getCode(), "red", "abc");
 
         kCardDB.addCardActivity(redCard, "mnbvc");
 
@@ -165,7 +165,7 @@ public class KCardDBTest {
     public void removeWorkshopAndRelatedCard() throws SQLException {
         kCardDB.addWorkshop("zxcvbn", "HEWT");
 
-        Attendee attendee = new Attendee("Boz Badger");
+        Attendee attendee = new Attendee("Boz Badger","lkjhgf");
         kCardDB.addAttendee(attendee, "zxcvbn");
 
         Card redCard = new Card(attendee.getCode(), "red");

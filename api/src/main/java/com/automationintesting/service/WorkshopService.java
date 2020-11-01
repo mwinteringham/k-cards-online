@@ -43,6 +43,7 @@ public class WorkshopService {
 
     public AttendeeJoinResult createAttendee(Attendee attendee, String workshopCode) throws SQLException {
         if(kCardDB.doesWorkshopExist(workshopCode)){
+            attendee.setCode(codeGenerator.createCode());
             if(kCardDB.addAttendee(attendee, workshopCode)){
                 return new AttendeeJoinResult(HttpStatus.CREATED, attendee);
             } else {
@@ -60,6 +61,7 @@ public class WorkshopService {
 
     public HttpStatus createCard(Card card, String workshopCode) throws SQLException {
         if(kCardDB.isAttendeeInWorkshop(card.getAttendeeCode(), workshopCode)){
+            card.setCardCode(codeGenerator.createCode());
             if(kCardDB.addCardActivity(card, workshopCode)){
                 return HttpStatus.CREATED;
             } else {

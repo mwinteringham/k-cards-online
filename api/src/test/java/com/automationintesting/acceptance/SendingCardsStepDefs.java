@@ -30,8 +30,8 @@ public class SendingCardsStepDefs {
 
     @Given("I am in a workshop created by a host")
     public void joinAWorkshop() {
-        attendee = new Attendee("Amy Lee");
-        workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
+        Attendee attendeeToCreate = new Attendee("Amy Lee");
+        attendee = workshopRequests.joinWorkshopAsAttendee(attendeeToCreate, workshopResponse.getCode()).as(Attendee.class);
     }
 
     @When("I send a {string} card to the host")

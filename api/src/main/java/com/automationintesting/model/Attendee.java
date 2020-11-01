@@ -10,8 +10,6 @@ public class Attendee {
     @JsonProperty
     private String code;
 
-    private CodeGenerator codeGenerator = new CodeGenerator();
-
     public Attendee() {}
 
     public Attendee(String name, String code) {
@@ -21,7 +19,6 @@ public class Attendee {
 
     public Attendee(String name) {
         this.name = name;
-        code = codeGenerator.createCode();
     }
 
     public String getName() {

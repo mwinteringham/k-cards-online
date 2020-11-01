@@ -1,11 +1,8 @@
 package com.automationintesting.model;
 
-import com.automationintesting.service.CodeGenerator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Card {
-
-    CodeGenerator codeGenerator = new CodeGenerator();
 
     @JsonProperty
     private String attendeeCode;
@@ -26,7 +23,6 @@ public class Card {
     public Card(String attendeeCode, String cardType) {
         this.attendeeCode = attendeeCode;
         this.cardType = cardType;
-        this.cardCode = codeGenerator.createCode();
     }
 
     public String getCardType() {
@@ -47,6 +43,10 @@ public class Card {
 
     public String getCardCode() {
         return cardCode;
+    }
+
+    public void setCardCode(String cardCode) {
+        this.cardCode = cardCode;
     }
 
     @Override

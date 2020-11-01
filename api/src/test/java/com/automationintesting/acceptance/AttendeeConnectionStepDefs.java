@@ -62,8 +62,8 @@ public class AttendeeConnectionStepDefs {
     public void joinAWorkshop() {
         workshopResponse = workshopRequests.createWorkshop(new Workshop("BREWT"));
 
-        attendee = new Attendee("Greg White");
-        workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
+        Attendee attendeeToCreate = new Attendee("Greg White");
+        attendee = workshopRequests.joinWorkshopAsAttendee(attendeeToCreate, workshopResponse.getCode()).as(Attendee.class);
     }
 
     @And("I've sent cards")
