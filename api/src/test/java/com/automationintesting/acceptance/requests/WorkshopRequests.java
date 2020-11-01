@@ -1,6 +1,7 @@
 package com.automationintesting.acceptance.requests;
 
 import com.automationintesting.model.Attendee;
+import com.automationintesting.model.AttendeeList;
 import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
 import com.automationintesting.model.activity.ActivityResponse;
@@ -46,5 +47,11 @@ public class WorkshopRequests {
             .contentType(ContentType.JSON)
             .body(cardIds)
             .delete("http://localhost:8080/workshop/" + workshopCode + "/card");
+    }
+
+    public AttendeeList getAttendeeList(String workshopCode){
+        return given()
+                .get("http://localhost:8080/workshop/" + workshopCode + "/attendees")
+                .as(AttendeeList.class);
     }
 }

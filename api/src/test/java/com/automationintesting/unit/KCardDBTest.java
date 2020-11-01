@@ -160,4 +160,22 @@ public class KCardDBTest {
 
         assertThat(cardRemoved, equalTo(true));
     }
+
+    @Test
+    public void removeWorkshopAndRelatedCard() throws SQLException {
+        kCardDB.addWorkshop("zxcvbn", "HEWT");
+
+        Attendee attendee = new Attendee("Boz Badger");
+        kCardDB.addAttendee(attendee, "zxcvbn");
+
+        Card redCard = new Card(attendee.getCode(), "red");
+        Card greenCard = new Card(attendee.getCode(), "green");
+
+        kCardDB.addCardActivity(redCard,"zxcvbn");
+        kCardDB.addCardActivity(greenCard,"zxcvbn");
+
+        Boolean workshopRemoved = kCardDB.removeWorkshop("zxcvgn");
+
+        assertThat(workshopRemoved, equalTo(true));
+    }
 }

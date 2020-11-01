@@ -6,7 +6,6 @@ import com.automationintesting.model.AttendeeList;
 import com.automationintesting.model.Card;
 import com.automationintesting.model.Workshop;
 import com.automationintesting.model.activity.ActivityResponse;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -62,9 +61,7 @@ public class WorkshopAdminStepDefs {
 
     @Then("I should be able to see that the attendee has joined")
     public void pollCurrentAttendees() {
-        AttendeeList attendeeList = given()
-                                        .get("http://localhost:8080/workshop/" + workshopResponse.getCode() + "/attendees")
-                                        .as(AttendeeList.class);
+        AttendeeList attendeeList = workshopRequests.getAttendeeList(workshopResponse.getCode());
 
         String attendeeName = attendeeList.getAttendees().get(0).getName();
 
@@ -148,5 +145,42 @@ public class WorkshopAdminStepDefs {
         ActivityResponse activityResponse = workshopRequests.getActivity(workshopResponse.getCode());
 
         assertThat(activityResponse.getActivity().getThreads().get(0).getSubThread().size(), equalTo(0));
+    }
+
+    @And("a series of cards have been added to the workshop")
+    public void addSomeCardsToAWorkshop() {
+        Attendee attendee = new Attendee("Gene Eggs");
+        Attendee createdAttendee = workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode()).as(Attendee.class);
+
+        Card redCard = new Card(createdAttendee.getCode(), "red");
+        Card greenCard = new Card(createdAttendee.getCode(), "green");
+        Card yellowCard = new Card(createdAttendee.getCode(), "yellow");
+        workshopRequests.sendCard(redCard, workshopResponse.getCode());
+        workshopRequests.sendCard(greenCard, workshopResponse.getCode());
+        workshopRequests.sendCard(yellowCard, workshopResponse.getCode());
+    }
+
+
+    @When("I delete the workshop")
+    public void deleteTheWorkshop() {
+        given()
+            .delete("http://localhost:8080/workshop/" + workshopResponse.getCode());
+    }
+
+
+    @Then("the workshop should be removed as well as all related cards")
+    public void confirmEmptyActivityAndCannotRejoin() {
+        ActivityResponse activityResponse = workshopRequests.getActivity(workshopResponse.getCode());
+
+        assertThat(activityResponse.getActivity().getReds().size(), equalTo(0));
+        assertThat(activityResponse.getActivity().getThreads().size(), equalTo(0));
+
+        AttendeeList attendeeList = workshopRequests.getAttendeeList(workshopResponse.getCode());
+        assertThat(attendeeList.getAttendees().size(), equalTo(0));
+
+        Attendee attendee = new Attendee("Perez Wins");
+        Response response = workshopRequests.joinWorkshopAsAttendee(attendee, workshopResponse.getCode());
+
+        assertThat(response.statusCode(), equalTo(404));
     }
 }

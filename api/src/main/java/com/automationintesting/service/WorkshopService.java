@@ -98,4 +98,12 @@ public class WorkshopService {
 
         return HttpStatus.ACCEPTED;
     }
+
+    public HttpStatus removeWorkshop(String workshopCode) throws SQLException {
+        if(kCardDB.removeWorkshop(workshopCode)){
+            return HttpStatus.ACCEPTED;
+        } else {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+    }
 }

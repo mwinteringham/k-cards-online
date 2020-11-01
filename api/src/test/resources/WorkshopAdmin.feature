@@ -33,7 +33,7 @@ Feature: Workshop administration
     When I delete the yellow card
     Then the yellow card should be removed from the activity
 
-  @wip
+  @auto
   Scenario: Host closes a workshop
     Given I have created a new workshop
     And a series of cards have been added to the workshop

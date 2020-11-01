@@ -7,6 +7,7 @@ import com.automationintesting.model.activity.Activity;
 import com.automationintesting.model.activity.ActivityThread;
 import com.automationintesting.model.activity.CardDetail;
 import org.h2.jdbcx.JdbcDataSource;
+import org.h2.tools.Server;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -29,12 +30,17 @@ public class KCardDB {
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";
     private final String SELECT_CARDS = "SELECT * FROM CARDS WHERE workshopcode = ?";
     private final String SELECT_CARDS_FROM_ATTENDEE = "SELECT COUNT(*) AS total FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
+    private final String SELECT_CARD_COUNT_BY_WORKSHOP = "SELECT COUNT(*) AS total FROM CARDS WHERE workshopcode = ?";
     private final String SELECT_WORKSHOP_COUNTS = "SELECT COUNT(*) AS total FROM WORKSHOPS WHERE code = ?";
     private final String SELECT_WORKSHOP_ATTENDEE = "SELECT COUNT(*) AS total FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
+    private final String SELECT_ATTENDEE_COUNT_BY_WORKSHOP = "SELECT COUNT(*) AS total FROM ATTENDEES WHERE workshopcode = ?";
 
     private final String DELETE_ATTENDEE = "DELETE FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
     private final String DELETE_ATTENDEE_CARDS = "DELETE FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
-    private final String DELETE_CARD = "DELETE FROM CARDS WHERE cardcode = ?";
+    private final String DELETE_CARD_BY_CARD_CODE = "DELETE FROM CARDS WHERE cardcode = ?";
+    private final String DELETE_CARD_BY_WORKSHOP = "DELETE FROM CARDS WHERE workshopcode = ?";
+    private final String DELETE_WORKSHOP = "DELETE FROM WORKSHOPS WHERE code = ?";
+    private final String DELETE_ATTENDEES_BY_WORKSHOP = "DELETE FROM ATTENDEES WHERE workshopcode = ?";
 
     public KCardDB() throws SQLException {
         JdbcDataSource ds = new JdbcDataSource();
@@ -42,6 +48,8 @@ public class KCardDB {
         ds.setUser("user");
         ds.setPassword("password");
         connection = ds.getConnection();
+
+//        Server.createTcpServer("-tcpPort", "9091", "-tcpAllowOthers").start();
 
         connection.prepareStatement(CREATE_WORKSHOPS_TABLE).executeUpdate();
         connection.prepareStatement(CREATE_ATTENDEE_TABLE).executeUpdate();
@@ -100,15 +108,10 @@ public class KCardDB {
         ResultSet results = ps.executeQuery();
 
         while(results.next()){
-            switch(results.getString("cardtype")){
-                case "red":
-                    redList.add(new CardDetail(results.getString("cardcode"), results.getString("name")));
-                    break;
-                case "green":
-                    activityThreadList.add(new ActivityThread(new CardDetail(results.getString("cardcode"), results.getString("name"))));
-                    break;
-                case "yellow":
-                    activityThreadList.get(0).addToSubThread(new CardDetail(results.getString("cardcode"), results.getString("name")));
+            switch (results.getString("cardtype")) {
+                case "red" -> redList.add(new CardDetail(results.getString("cardcode"), results.getString("name")));
+                case "green" -> activityThreadList.add(new ActivityThread(new CardDetail(results.getString("cardcode"), results.getString("name"))));
+                case "yellow" -> activityThreadList.get(0).addToSubThread(new CardDetail(results.getString("cardcode"), results.getString("name")));
             }
         }
 
@@ -116,13 +119,9 @@ public class KCardDB {
     }
 
     public Boolean doesWorkshopExist(String workshopCode) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(SELECT_WORKSHOP_COUNTS);
-        ps.setString(1, workshopCode);
+       int count = getCount(SELECT_WORKSHOP_COUNTS, workshopCode);
 
-        ResultSet results = ps.executeQuery();
-        results.next();
-
-        return results.getInt("total") > 0;
+        return count > 0;
     }
 
     public Boolean removeAttendee(String attendeeCode, String workshopCode) throws SQLException {
@@ -162,10 +161,41 @@ public class KCardDB {
     }
 
     public Boolean removeCard(String cardCode) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(DELETE_CARD);
+        PreparedStatement ps = connection.prepareStatement(DELETE_CARD_BY_CARD_CODE);
         ps.setString(1, cardCode);
 
         int resultSet = ps.executeUpdate();
         return resultSet == 1;
     }
+
+    public Boolean removeWorkshop(String workshopCode) throws SQLException {
+        PreparedStatement attendeeDeletePs = connection.prepareStatement(DELETE_ATTENDEES_BY_WORKSHOP);
+        attendeeDeletePs.setString(1, workshopCode);
+        attendeeDeletePs.execute();
+
+        PreparedStatement cardsDeletePs = connection.prepareStatement(DELETE_CARD_BY_WORKSHOP);
+        cardsDeletePs.setString(1, workshopCode);
+        cardsDeletePs.execute();
+
+        PreparedStatement workshopDeletePs = connection.prepareStatement(DELETE_WORKSHOP);
+        workshopDeletePs.setString(1, workshopCode);
+        workshopDeletePs.executeUpdate();
+
+        int attendeeCount = getCount(SELECT_ATTENDEE_COUNT_BY_WORKSHOP, workshopCode);
+        int cardCount = getCount(SELECT_CARD_COUNT_BY_WORKSHOP, workshopCode);
+        int workshopCount = getCount(SELECT_WORKSHOP_COUNTS, workshopCode);
+
+        return (attendeeCount + cardCount + workshopCount) == 0;
+    }
+
+    private int getCount(String sql, String workshopCode) throws SQLException {
+        PreparedStatement cardCountPs = connection.prepareStatement(sql);
+        cardCountPs.setString(1, workshopCode);
+
+        ResultSet cardCountResultSet = cardCountPs.executeQuery();
+        cardCountResultSet.next();
+
+        return cardCountResultSet.getInt("total");
+    }
+
 }

@@ -161,4 +161,13 @@ public class WorkshopServiceTest {
         assertThat(httpStatus, equalTo(HttpStatus.ACCEPTED));
     }
 
+    @Test
+    public void deleteWorkshop() throws SQLException {
+        when(kCardDB.removeWorkshop("abcdef")).thenReturn(true);
+
+        HttpStatus httpStatus = workshopService.removeWorkshop("abcdef");
+
+        assertThat(httpStatus, equalTo(HttpStatus.ACCEPTED));
+    }
+
 }
