@@ -33,6 +33,11 @@ function Welcome() {
             </Col>
             <Col />
             </Row>
+            <Row>
+                <Col>
+                
+                </Col>
+            </Row>
         </div>
     )
 
