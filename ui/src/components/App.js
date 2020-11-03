@@ -1,19 +1,12 @@
+import Container from 'react-bootstrap/Container';
+import Welcome from './Welcome';
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          k-cards UI will appear here
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container className="text-center mt-5">
+        <Welcome />
+      </Container>
     </div>
   );
 }

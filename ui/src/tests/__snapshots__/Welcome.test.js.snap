@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="mb-5 row"
+      >
+        <div
+          class="col"
+        >
+          <h1>
+            Welcome to K-Cards online
+          </h1>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        />
+        <div
+          class="col"
+        >
+          <h2>
+            Join a Workshop
+          </h2>
+          <p>
+            Enter your name and the workshop code to Join Workshop
+          </p>
+          <form
+            class=""
+          >
+            <input
+              class="mb-3 form-control"
+              placeholder="Your name"
+            />
+            <input
+              class="mb-3 form-control"
+              placeholder="Workshop code"
+            />
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Join Workshop
+            </button>
+          </form>
+        </div>
+        <div
+          class="col"
+        >
+          <h2>
+            Host a Workshop
+          </h2>
+          <p>
+            Enter the name of the workshop and click Start Workshop
+          </p>
+          <form
+            class=""
+          >
+            <input
+              class="mb-3 form-control"
+              placeholder="Workshop name"
+            />
+            <button
+              class="mt-5 btn btn-primary"
+              type="button"
+            >
+              Start Workshop
+            </button>
+          </form>
+        </div>
+        <div
+          class="col"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;
