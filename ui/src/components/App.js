@@ -1,5 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Welcome from './Welcome';
+import Host from './Host';
+import Attendee from './Attendee';
 import { HashRouter, Route } from 'react-router-dom'
 
 function App() {
@@ -8,6 +10,8 @@ function App() {
       <Container className="text-center mt-5">
         <HashRouter>
           <Route exact path='/' component={Welcome} />
+          <Route exact path='/host' component={Host} />
+          <Route exact path='/attendee' component={Attendee} />
         </HashRouter>
       </Container>
     </div>
