@@ -1,29 +1,28 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import Welcome from '../components/Welcome';
-import { HashRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from "history";
 
-test('renders learn react link', () => {
+const history = createMemoryHistory();
+
+test('renders learn react link', async () => {
   const welcomeComponent = render(<Welcome />);
   
   expect(welcomeComponent.baseElement).toMatchSnapshot();
 });
 
-test('creating a new workshop takes you to a new page', () => {
-  const {container} = render(<HashRouter><Welcome /></HashRouter>)
+test('creating a new workshop takes you to a new page', async () => {
+  render(<Router history={history}><Welcome /></Router>)
 
   fireEvent.click(screen.getByTestId(/startWorkshop/i));
 
-  setTimeout(() => {
-    expect(container).toHaveTextContent(/Host page/);
-  }, 500);
+  await waitFor(() => expect(history.location.pathname).toBe("/host"));
 });
 
-test('joining a new workshop takes you to a new page', () => {
-  const {container} = render(<HashRouter><Welcome /></HashRouter>)
+test('joining a new workshop takes you to a new page', async () => {
+  render(<Router history={history}><Welcome /></Router>)
 
   fireEvent.click(screen.getByTestId(/joinWorkshop/i));
 
-  setTimeout(() => {
-    expect(container).toHaveTextContent(/Attendee Page/);
-  }, 500);
-})
+  await waitFor(() => expect(history.location.pathname).toBe("/attendee"));
+});
