@@ -35,10 +35,12 @@ exports[`renders learn react link 1`] = `
           >
             <input
               class="mb-3 form-control"
+              data-testid="attendeeName"
               placeholder="Your name"
             />
             <input
               class="mb-3 form-control"
+              data-testid="workshopCode"
               placeholder="Workshop code"
             />
             <button
@@ -64,6 +66,7 @@ exports[`renders learn react link 1`] = `
           >
             <input
               class="mb-3 form-control"
+              data-testid="workshopName"
               placeholder="Workshop name"
             />
             <button

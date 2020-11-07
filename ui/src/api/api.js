@@ -1,25 +1,23 @@
-// const axios = require('axios');
+const axios = require('axios');
 
 const API = {
 
     createWorkshop : async (payload) => {
-        // const res = await axios({
-        //     method: 'post',
-        //     url: '/workshop',
-        //     data: payload
-        // });
-
-        const res = {
-            status : 201
-        }
+        const res = await axios({
+            method: 'post',
+            url: '/workshop',
+            data: payload
+        });
         
         return res;
     },
 
-    joinWorkshop : () => {
-        const res = {
-            status : 200
-        }
+    joinWorkshop : async (workshopCode, payload) => {
+        const res = await axios({
+            method: 'post',
+            url: '/workshop/' + workshopCode + '/join',
+            data: payload
+        });
 
         return res;
     }

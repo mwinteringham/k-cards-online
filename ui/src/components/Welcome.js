@@ -26,12 +26,11 @@ function Welcome() {
     }
 
     async function joinWorkshop(){
-        const res = await API.joinWorkshop({
-            name : attendeeName,
-            code : workshopCode
+        const res = await API.joinWorkshop(workshopCode, {
+            name : attendeeName
         });
 
-        if(res.status === 200){
+        if(res.status === 201){
             history.push("attendee")
         }
     }
@@ -49,8 +48,8 @@ function Welcome() {
                 <h2>Join a Workshop</h2>
                 <p>Enter your name and the workshop code to Join Workshop</p>
                 <Form>
-                <Form.Control className="mb-3" placeholder="Your name" onChange={e => setAttendeeName(e.target.value) } />
-                <Form.Control className="mb-3" placeholder="Workshop code" onChange={e => setWorkshopCode(e.target.value) }/>
+                <Form.Control data-testid="attendeeName" className="mb-3" placeholder="Your name" onChange={e => setAttendeeName(e.target.value) } />
+                <Form.Control data-testid="workshopCode" className="mb-3" placeholder="Workshop code" onChange={e => setWorkshopCode(e.target.value) }/>
                 <Button data-testid="joinWorkshop" onClick={joinWorkshop}>Join Workshop</Button>
                 </Form>
             </Col>
@@ -58,7 +57,7 @@ function Welcome() {
                 <h2>Host a Workshop</h2>
                 <p>Enter the name of the workshop and click Start Workshop</p>
                 <Form>
-                <Form.Control placeholder="Workshop name" className="mb-3" onChange={e => setWorkshopName(e.target.value)}/>
+                <Form.Control data-testid="workshopName" placeholder="Workshop name" className="mb-3" onChange={e => setWorkshopName(e.target.value)}/>
                 <Button data-testid="startWorkshop" className="mt-5" onClick={createWorkshop}>Start Workshop</Button>
                 </Form>
             </Col>
