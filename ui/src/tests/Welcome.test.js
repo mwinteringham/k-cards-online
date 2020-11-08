@@ -9,7 +9,7 @@ var MockAdapter = require('axios-mock-adapter');
 const mock = new MockAdapter(axios);
 const history = createMemoryHistory();
 
-test('renders learn react link', async () => {
+test('renders the Welcome component', () => {
   const welcomeComponent = render(<Welcome />);
   
   expect(welcomeComponent.baseElement).toMatchSnapshot();

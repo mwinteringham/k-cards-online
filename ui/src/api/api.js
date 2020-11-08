@@ -20,6 +20,12 @@ const API = {
         });
 
         return res;
+    },
+    
+    sendCard : async () => {
+        return {
+            statusCode : 201
+        }
     }
 
 }

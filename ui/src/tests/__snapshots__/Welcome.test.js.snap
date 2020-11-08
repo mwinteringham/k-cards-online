@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`renders the Welcome component 1`] = `
 <body>
   <div>
     <div>
@@ -78,13 +78,6 @@ exports[`renders learn react link 1`] = `
             </button>
           </form>
         </div>
-        <div
-          class="col"
-        />
-      </div>
-      <div
-        class="row"
-      >
         <div
           class="col"
         />
