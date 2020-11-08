@@ -4,12 +4,15 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import API from '../api/api';
 import { useState } from 'react';
+import { useGlobalState } from './state';
 
 function Attendee(){
 
     const [showConfirm, setConfirm] = useState(false);
+    const [workshopCode] = useGlobalState('workshopCode');
 
     async function sendCard(cardType){
+        console.log(workshopCode);
         const res = await API.sendCard(cardType);
 
         if(res.statusCode === 201){

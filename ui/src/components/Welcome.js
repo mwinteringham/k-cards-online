@@ -6,12 +6,14 @@ import API from '../api/api';
 import { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
+import { useGlobalState } from './state';
 
 function Welcome() {
 
     const [workshop, setWorkshopName] = useState('');
     const [attendeeName, setAttendeeName] = useState('');
     const [workshopCode, setWorkshopCode] = useState('');
+    const [value, updateWorkshop] = useGlobalState('workshopCode');
 
     const history = useHistory();
 
@@ -31,6 +33,7 @@ function Welcome() {
         });
 
         if(res.status === 201){
+            updateWorkshop(res.data.code);
             history.push('attendee')
         }
     }
