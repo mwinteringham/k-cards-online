@@ -4,25 +4,32 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import API from '../api/api';
 import { useState } from 'react';
-import { useGlobalState } from './state';
+import { useGlobalState } from '../state/state';
 
 function Attendee(){
 
     const [showConfirm, setConfirm] = useState(false);
     const [workshopCode] = useGlobalState('workshopCode');
+    const [attendee] = useGlobalState('attendeeCode');
+    const [cardType, setCardType] = useState('');
 
-    async function sendCard(cardType){
-        console.log(workshopCode);
-        const res = await API.sendCard(cardType);
+    async function sendCard(card){
+        const payload = {
+            cardType : card,
+            attendeeCode : attendee
+        };
 
-        if(res.statusCode === 201){
+        const res = await API.sendCard(workshopCode, payload);
+
+        if(res.status === 201){
+            setCardType(card);
             setConfirm(true);
         }
     } 
 
     return(
         <div>
-            {(showConfirm && <Alert variant="success" onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your card has been received by the Host</Alert.Heading></Alert>)}
+            {(showConfirm && <Alert variant="success" onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your {cardType} card has been received by the Host</Alert.Heading></Alert>)}
             <Row>
                 <Col>
                     <Button data-testid='greenCard' className='btn-success' onClick={() => sendCard('green')} style={{ width: '100%', height: '8rem'}}>Send Green Card</Button>

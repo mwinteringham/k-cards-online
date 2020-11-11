@@ -10,7 +10,7 @@ public class ActivityThread {
     @JsonProperty
     private CardDetail cardDetail;
     @JsonProperty
-    private List<CardDetail> subthread = new ArrayList<>();
+    private List<CardDetail> subThread = new ArrayList<>();
 
     public ActivityThread() {
     }
@@ -28,18 +28,18 @@ public class ActivityThread {
     }
 
     public List<CardDetail> getSubThread() {
-        return subthread;
+        return subThread;
     }
 
     public void addToSubThread(CardDetail name){
-        subthread.add(name);
+        subThread.add(name);
     }
 
     @Override
     public String toString() {
         return "ActivityThread{" +
                 "cardDetail=" + cardDetail +
-                ", subthread=" + subthread +
+                ", subThread=" + subThread +
                 '}';
     }
 }

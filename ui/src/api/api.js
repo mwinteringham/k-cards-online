@@ -22,10 +22,14 @@ const API = {
         return res;
     },
     
-    sendCard : async () => {
-        return {
-            statusCode : 201
-        }
+    sendCard : async (workshopCode, payload) => {
+        const res = await axios({
+            method: 'post',
+            url: '/workshop/' + workshopCode + '/card',
+            data: payload
+        });
+
+        return res;
     }
 
 }

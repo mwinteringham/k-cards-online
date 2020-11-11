@@ -26,7 +26,9 @@ exports[`confirm message appears when sending a card 1`] = `
         <div
           class="alert-heading h4"
         >
-          Your card has been received by the Host
+          Your 
+          green
+           card has been received by the Host
         </div>
       </div>
       <div

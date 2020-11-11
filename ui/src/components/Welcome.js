@@ -6,14 +6,15 @@ import API from '../api/api';
 import { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useGlobalState } from './state';
+import { useGlobalState } from '../state/state';
 
 function Welcome() {
 
     const [workshop, setWorkshopName] = useState('');
     const [attendeeName, setAttendeeName] = useState('');
     const [workshopCode, setWorkshopCode] = useState('');
-    const [value, updateWorkshop] = useGlobalState('workshopCode');
+    const [workshopValue, updateWorkshop] = useGlobalState('workshopCode');
+    const [attendeeValue, updateAttendeeCode] = useGlobalState('attendeeCode');
 
     const history = useHistory();
 
@@ -33,8 +34,9 @@ function Welcome() {
         });
 
         if(res.status === 201){
-            updateWorkshop(res.data.code);
-            history.push('attendee')
+            updateWorkshop(workshopCode);
+            updateAttendeeCode(res.data.code);
+            history.push('attendee');
         }
     }
 
