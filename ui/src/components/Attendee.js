@@ -5,15 +5,18 @@ import Alert from 'react-bootstrap/Alert';
 import API from '../api/api';
 import { useState } from 'react';
 import { useGlobalState } from '../state/state';
+import { useHistory } from 'react-router-dom';
 
 function Attendee(){
 
     const [showConfirm, setConfirm] = useState(false);
-    const [workshopCode] = useGlobalState('workshopCode');
-    const [attendee] = useGlobalState('attendeeCode');
+    const [workshopCode, updateWorkshopCode] = useGlobalState('workshopCode');
+    const [attendee, updateAttendeeCode] = useGlobalState('attendeeCode');
     const [cardType, setCardType] = useState('');
 
-    async function sendCard(card){
+    const history = useHistory();
+
+    const sendCard = async (card) => {
         const payload = {
             cardType : card,
             attendeeCode : attendee
@@ -25,7 +28,21 @@ function Attendee(){
             setCardType(card);
             setConfirm(true);
         }
-    } 
+    }
+
+    const leaveWorkshop = async () => {
+        const payload = {
+            code : attendee
+        }
+
+        const res = await API.leaveWorkshopAsAttendee(workshopCode, payload);
+
+        if(res.status === 202){
+            updateWorkshopCode('');
+            updateAttendeeCode('');
+            history.push('/');
+        }
+    }
 
     return(
         <div>
@@ -43,7 +60,7 @@ function Attendee(){
             </Row>
             <Row className='mt-4'>
                 <Col>
-                    <Button className='btn-secondary' style={{ width: '100%', height: '4rem'}}>Leave Workshop</Button>
+                    <Button className='btn-secondary' onClick={() => leaveWorkshop()} style={{ width: '100%', height: '4rem'}}>Leave Workshop</Button>
                 </Col>
             </Row>
         </div>

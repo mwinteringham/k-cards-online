@@ -1,10 +1,13 @@
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import Attendee from '../components/Attendee';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import axios from 'axios';
 
 let MockAdapter = require('axios-mock-adapter');
 
 const mock = new MockAdapter(axios);
+const history = createMemoryHistory();
 
 test('renders the Attendee component', () => {
     const attendeeComponent = render(<Attendee />);
@@ -23,3 +26,14 @@ test('confirm message appears when sending a card', async () => {
     expect(attendeeComponent.baseElement).toMatchSnapshot();
 });
 
+test('joining a new workshop takes you to a new page', async () => {
+    mock.onDelete('/workshop/empty-workshop-code/leave', { code : 'empty-attendee-code' }).reply(202);
+  
+    history.push('/attendee')
+    render(<Router history={history}><Attendee /></Router>)
+   
+    fireEvent.click(screen.getByText(/Leave Workshop/i));
+  
+    await waitFor(() => expect(history.location.pathname).toBe('/'));
+  });
+  

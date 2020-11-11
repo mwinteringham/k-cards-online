@@ -30,6 +30,16 @@ const API = {
         });
 
         return res;
+    },
+
+    leaveWorkshopAsAttendee : async (workshopCode, payload) => {
+        const res = await axios({
+            method: 'delete',
+            url: '/workshop/' + workshopCode + '/leave',
+            data: payload
+        });
+
+        return res;
     }
 
 }
