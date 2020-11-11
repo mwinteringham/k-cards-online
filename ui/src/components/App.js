@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <Container className="text-center mt-5">
+      <Container fluid className="text-center mt-5">
         <HashRouter>
           <Switch>
             <Route exact path='/' component={Welcome} />

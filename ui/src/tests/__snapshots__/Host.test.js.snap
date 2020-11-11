@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the Host component 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h1>
+            Your workshop code is: 
+            empty-workshop-code
+          </h1>
+        </div>
+        <div
+          class="col"
+        >
+          <button
+            class="btn btn-primary"
+            type="button"
+          >
+            Close Workshop
+          </button>
+        </div>
+      </div>
+      <div
+        class="mt-5 row"
+      >
+        <div
+          class="col"
+        >
+          <div
+            style="background-color: red; height: 150px; width: 100%;"
+          >
+            <h3>
+              Card
+            </h3>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            style="background-color: red; height: 150px; width: 100%;"
+          >
+            <h3>
+              Card
+            </h3>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            style="background-color: red; height: 150px; width: 100%;"
+          >
+            <h3>
+              Card
+            </h3>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            style="background-color: red; height: 150px; width: 100%;"
+          >
+            <h3>
+              Card
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

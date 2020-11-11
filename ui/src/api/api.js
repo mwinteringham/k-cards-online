@@ -40,6 +40,15 @@ const API = {
         });
 
         return res;
+    },
+
+    getActivity : async (workshopCode) => {
+        const res = await axios({
+            method: 'get',
+            url: '/workshop/' + workshopCode + '/activity'
+        });
+
+        return res;
     }
 
 }
