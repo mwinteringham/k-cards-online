@@ -45,18 +45,52 @@ test('renders green cards', async () => {
     mock.onGet('/workshop/empty-workshop-code/activity').reply(200, {
         activity : {
             reds : [],
-            threads : [
-                'one',
-                'two',
-                'three',
-                'four'
-            ]
+            threads : [{
+                cardDetail : {
+                    name : "Mark"
+                },
+                subThread : [{
+                    "name": "Mark"
+                }]
+            },{
+                cardDetail : {
+                    name : "Mark"
+                }
+            }]
         }
     });
 
     const hostComponent = render(<Host />);
     
     await waitFor(() => screen.getAllByText(/Green card/)); 
+
+    expect(hostComponent.baseElement).toMatchSnapshot();
+});
+
+test('renders yellow cards', async () => {
+    mock.onGet('/workshop/empty-workshop-code/activity').reply(200, {
+        activity : {
+            reds : [],
+            threads : [{
+                cardDetail : {
+                    name : "Mark"
+                },
+                subThread : [{
+                    "name": "Mark"
+                },{
+                    "name": "Mark"
+                }]
+            },{
+                cardDetail : {
+                    name : "Mark"
+                }
+            }]
+        }
+    });
+
+    const hostComponent = render(<Host />);
+    
+    await waitFor(() => screen.getAllByText(/Yellow card/)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
 });

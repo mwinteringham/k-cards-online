@@ -57,28 +57,17 @@ exports[`renders green cards 1`] = `
           <p>
             Green card
           </p>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <p>
-            Green card
-          </p>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <p>
-            Green card
-          </p>
+          <div>
+            <div
+              class="row"
+            >
+              <div
+                class="col"
+              >
+                Yellow card
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -255,6 +244,101 @@ exports[`renders the Host component 1`] = `
           <h2>
             No green cards found
           </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`renders yellow cards 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h1>
+            Your workshop code is: 
+            empty-workshop-code
+          </h1>
+        </div>
+        <div
+          class="col"
+        >
+          <button
+            class="btn btn-primary"
+            type="button"
+          >
+            Close Workshop
+          </button>
+        </div>
+      </div>
+      <div
+        class="mt-5 row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            No red cards found
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            Activity:
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
+          <div>
+            <div
+              class="row"
+            >
+              <div
+                class="col"
+              >
+                Yellow card
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col"
+              >
+                Yellow card
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
         </div>
       </div>
     </div>

@@ -29,6 +29,7 @@ function Host(){
     const [workshopCode] = useGlobalState('workshopCode');
     const [redCards, setRedCards] = useState([]);
     const [greenCards, setGreenCards] = useState([]);
+    const [yellowCards, setYellowCards] = useState([]);
 
     const pollForActivities = async () => {
         const res = await API.getActivity(workshopCode);
@@ -40,6 +41,10 @@ function Host(){
 
             if(res.data.activity.threads.length > 0){
                 setGreenCards(res.data.activity.threads);
+
+                if(res.data.activity.threads[0].subThread.length > 0){
+                    setYellowCards(res.data.activity.threads[0].subThread);
+                }
             }
         }
     }
@@ -55,6 +60,7 @@ function Host(){
 
     let redCardRender;
     let greenCardRender;
+    let yellowCardRender;
 
     if(redCards.length === 0){
         redCardRender = <Col>
@@ -77,9 +83,22 @@ function Host(){
         </Row>
     } else {
         greenCardRender = greenCards.map((item, i) => {
+            if(yellowCards.length > 0){
+                yellowCardRender = yellowCards.map((item, i) => {
+                    return <Row key={i}>
+                        <Col>Yellow card</Col>
+                    </Row>
+                })
+            }
+
             return <Row key={i}>
                 <Col>
                     <p>Green card</p>
+                    {i === 0 &&
+                        <div>
+                            {yellowCardRender}
+                        </div>
+                    }
                 </Col>
             </Row>
         });
