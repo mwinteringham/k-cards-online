@@ -28,12 +28,19 @@ function Host(){
 
     const [workshopCode] = useGlobalState('workshopCode');
     const [redCards, setRedCards] = useState([]);
+    const [greenCards, setGreenCards] = useState([]);
 
     const pollForActivities = async () => {
         const res = await API.getActivity(workshopCode);
 
         if(res.status === 200){
-            setRedCards(res.data.activity.reds)
+            if(res.data.activity.reds.length > 0){
+                setRedCards(res.data.activity.reds);
+            }
+
+            if(res.data.activity.threads.length > 0){
+                setGreenCards(res.data.activity.threads);
+            }
         }
     }
 
@@ -47,6 +54,7 @@ function Host(){
 
 
     let redCardRender;
+    let greenCardRender;
 
     if(redCards.length === 0){
         redCardRender = <Col>
@@ -57,7 +65,24 @@ function Host(){
             return <Col key={i}>
                 <Card />
             </Col>
-        })
+        });
+    }
+
+    if(greenCards.length === 0){
+        greenCardRender = 
+        <Row>
+            <Col>
+                <h2>No green cards found</h2>
+            </Col>
+        </Row>
+    } else {
+        greenCardRender = greenCards.map((item, i) => {
+            return <Row key={i}>
+                <Col>
+                    <p>Green card</p>
+                </Col>
+            </Row>
+        });
     }
 
     return (
@@ -73,6 +98,12 @@ function Host(){
             <Row className="mt-5">
                 {redCardRender}
             </Row>
+            <Row>
+                <Col>
+                    <h2>Activity:</h2>
+                </Col>
+            </Row>
+            {greenCardRender}
         </div>
     )
 

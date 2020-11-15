@@ -1,6 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the Host component 1`] = `
+exports[`renders green cards 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h1>
+            Your workshop code is: 
+            empty-workshop-code
+          </h1>
+        </div>
+        <div
+          class="col"
+        >
+          <button
+            class="btn btn-primary"
+            type="button"
+          >
+            Close Workshop
+          </button>
+        </div>
+      </div>
+      <div
+        class="mt-5 row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            No red cards found
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            Activity:
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <p>
+            Green card
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`renders red cards 1`] = `
 <body>
   <div>
     <div>
@@ -72,6 +169,92 @@ exports[`renders the Host component 1`] = `
               Card
             </h3>
           </div>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            Activity:
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            No green cards found
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`renders the Host component 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h1>
+            Your workshop code is: 
+            empty-workshop-code
+          </h1>
+        </div>
+        <div
+          class="col"
+        >
+          <button
+            class="btn btn-primary"
+            type="button"
+          >
+            Close Workshop
+          </button>
+        </div>
+      </div>
+      <div
+        class="mt-5 row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            No red cards found
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            Activity:
+          </h2>
+        </div>
+      </div>
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <h2>
+            No green cards found
+          </h2>
         </div>
       </div>
     </div>
