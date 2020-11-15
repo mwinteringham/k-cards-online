@@ -19,16 +19,9 @@ function Welcome() {
     const history = useHistory();
 
     async function createWorkshop(){
-        // const res = await API.createWorkshop({
-        //     name : workshop
-        // });
-        
-        const res = {
-            status : 201,
-            data : {
-                code : 'acb'
-            }
-        }
+        const res = await API.createWorkshop({
+            name : workshop
+        });
 
         if(res.status === 201){
             updateWorkshop(res.data.code);

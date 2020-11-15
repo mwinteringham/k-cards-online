@@ -3,25 +3,62 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from './Card';
 import { useGlobalState } from '../state/state';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import API from '../api/api';
+
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 function Host(){
 
     const [workshopCode] = useGlobalState('workshopCode');
     const [redCards, setRedCards] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await API.getActivity(workshopCode);
-    
-            if(res.status === 200){
-                setRedCards(res.data.reds)
-            }
-        }
+    const pollForActivities = async () => {
+        const res = await API.getActivity(workshopCode);
 
-        fetchData();
-    }, []);
+        if(res.status === 200){
+            setRedCards(res.data.activity.reds)
+        }
+    }
+
+    useEffect(() => {
+        pollForActivities();
+    }, [])
+
+    useInterval(async () => {
+        await pollForActivities();
+    }, 2000);
+
+
+    let redCardRender;
+
+    if(redCards.length === 0){
+        redCardRender = <Col>
+            <h2>No red cards found</h2>
+        </Col>
+    } else {
+        redCardRender = redCards.map((item, i) => {
+            return <Col key={i}>
+                <Card />
+            </Col>
+        })
+    }
 
     return (
         <div>
@@ -34,11 +71,7 @@ function Host(){
                 </Col>
             </Row>
             <Row className="mt-5">
-                {redCards.map((item, i) => {
-                    return <Col key={i}>
-                        <Card />
-                    </Col>
-                })}
+                {redCardRender}
             </Row>
         </div>
     )

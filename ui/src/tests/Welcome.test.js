@@ -16,7 +16,7 @@ test('renders the Welcome component', () => {
 });
 
 test('creating a new workshop takes you to a new page', async () => {
-  mock.onPost('/workshop', { name: 'BREWT' }).reply(201);
+  mock.onPost('/workshop', { name: 'BREWT' }).reply(201, { code : 'abc'});
 
   render(<Router history={history}><Welcome /></Router>)
 
