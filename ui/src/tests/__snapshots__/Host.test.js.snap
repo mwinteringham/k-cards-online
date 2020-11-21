@@ -54,9 +54,23 @@ exports[`renders green cards 1`] = `
         <div
           class="col"
         >
-          <p>
-            Green card
-          </p>
+          <div>
+            <div
+              class="card bg-success"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <div
               class="row"
@@ -64,7 +78,23 @@ exports[`renders green cards 1`] = `
               <div
                 class="col"
               >
-                Yellow card
+                <div>
+                  <div
+                    class="card bg-warning"
+                  >
+                    <div
+                      class="card-body"
+                    >
+                      <div
+                        class="card-body"
+                      >
+                        <h3>
+                          Card details
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -76,9 +106,23 @@ exports[`renders green cards 1`] = `
         <div
           class="col"
         >
-          <p>
-            Green card
-          </p>
+          <div>
+            <div
+              class="card bg-success"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -118,45 +162,85 @@ exports[`renders red cards 1`] = `
         <div
           class="col"
         >
-          <div
-            style="background-color: red; height: 150px; width: 100%;"
-          >
-            <h3>
-              Card
-            </h3>
+          <div>
+            <div
+              class="card bg-danger"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
           class="col"
         >
-          <div
-            style="background-color: red; height: 150px; width: 100%;"
-          >
-            <h3>
-              Card
-            </h3>
+          <div>
+            <div
+              class="card bg-danger"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
           class="col"
         >
-          <div
-            style="background-color: red; height: 150px; width: 100%;"
-          >
-            <h3>
-              Card
-            </h3>
+          <div>
+            <div
+              class="card bg-danger"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
           class="col"
         >
-          <div
-            style="background-color: red; height: 150px; width: 100%;"
-          >
-            <h3>
-              Card
-            </h3>
+          <div>
+            <div
+              class="card bg-danger"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -305,9 +389,23 @@ exports[`renders yellow cards 1`] = `
         <div
           class="col"
         >
-          <p>
-            Green card
-          </p>
+          <div>
+            <div
+              class="card bg-success"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <div
               class="row"
@@ -315,7 +413,23 @@ exports[`renders yellow cards 1`] = `
               <div
                 class="col"
               >
-                Yellow card
+                <div>
+                  <div
+                    class="card bg-warning"
+                  >
+                    <div
+                      class="card-body"
+                    >
+                      <div
+                        class="card-body"
+                      >
+                        <h3>
+                          Card details
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div
@@ -324,7 +438,23 @@ exports[`renders yellow cards 1`] = `
               <div
                 class="col"
               >
-                Yellow card
+                <div>
+                  <div
+                    class="card bg-warning"
+                  >
+                    <div
+                      class="card-body"
+                    >
+                      <div
+                        class="card-body"
+                      >
+                        <h3>
+                          Card details
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -336,9 +466,23 @@ exports[`renders yellow cards 1`] = `
         <div
           class="col"
         >
-          <p>
-            Green card
-          </p>
+          <div>
+            <div
+              class="card bg-success"
+            >
+              <div
+                class="card-body"
+              >
+                <div
+                  class="card-body"
+                >
+                  <h3>
+                    Card details
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

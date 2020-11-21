@@ -1,8 +1,14 @@
-const Card = () => {
+import BoostrapCard from 'react-bootstrap/Card';
+
+const Card = ({type}) => {
 
     return(
-        <div style={{backgroundColor : 'red', height : '150px', width : '100%'}}>
-            <h3>Card</h3>
+        <div>
+            <BoostrapCard body bg={type}>
+                <BoostrapCard.Body>
+                    <h3>Card details</h3>
+                </BoostrapCard.Body>
+            </BoostrapCard>
         </div>
     )
 
