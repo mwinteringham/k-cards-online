@@ -64,6 +64,9 @@ exports[`renders green cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Green Mark
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -88,6 +91,9 @@ exports[`renders green cards 1`] = `
                       <div
                         class="card-body"
                       >
+                        <p>
+                          Yellow Mark
+                        </p>
                         <h3>
                           Card details
                         </h3>
@@ -116,6 +122,9 @@ exports[`renders green cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Green Jeff
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -172,6 +181,9 @@ exports[`renders red cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Mark
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -193,6 +205,9 @@ exports[`renders red cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Mary
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -214,6 +229,9 @@ exports[`renders red cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Sam
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -235,6 +253,9 @@ exports[`renders red cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Jane
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -399,6 +420,9 @@ exports[`renders yellow cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Green Mark
+                  </p>
                   <h3>
                     Card details
                   </h3>
@@ -423,6 +447,9 @@ exports[`renders yellow cards 1`] = `
                       <div
                         class="card-body"
                       >
+                        <p>
+                          Yellow Mark
+                        </p>
                         <h3>
                           Card details
                         </h3>
@@ -448,6 +475,9 @@ exports[`renders yellow cards 1`] = `
                       <div
                         class="card-body"
                       >
+                        <p>
+                          Yello Jeff
+                        </p>
                         <h3>
                           Card details
                         </h3>
@@ -476,6 +506,9 @@ exports[`renders yellow cards 1`] = `
                 <div
                   class="card-body"
                 >
+                  <p>
+                    Green Jeff
+                  </p>
                   <h3>
                     Card details
                   </h3>

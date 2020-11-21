@@ -69,7 +69,7 @@ function Host(){
     } else {
         redCardRender = redCards.map((item, i) => {
             return <Col key={i}>
-                <Card type={'danger'} />
+                <Card type={'danger'} name={item.name} code={item.code}/>
             </Col>
         });
     }
@@ -86,14 +86,14 @@ function Host(){
             if(yellowCards.length > 0){
                 yellowCardRender = yellowCards.map((item, i) => {
                     return <Row key={i}>
-                        <Col><Card type={'warning'} /></Col>
+                        <Col><Card type={'warning'} name={item.name} code={item.code}/></Col>
                     </Row>
                 })
             }
 
             return <Row key={i}>
                 <Col>
-                    <Card type={'success'} />
+                    <Card type={'success'} name={item.cardDetail.name} code={item.cardDetail.code}/>
                     {i === 0 &&
                         <div>
                             {yellowCardRender}

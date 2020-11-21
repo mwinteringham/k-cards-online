@@ -24,12 +24,19 @@ test('renders the Host component', async () => {
 test('renders red cards', async () => {
     mock.onGet('/workshop/empty-workshop-code/activity').reply(200, {
         activity : {
-            reds : [
-                'one',
-                'two',
-                'three',
-                'four'
-            ],
+            reds : [{
+                code : 'abc',
+                name : 'Mark'
+            },{
+                code : 'def',
+                name : 'Mary'
+            },{
+                code : 'ghi',
+                name : 'Sam'
+            },{
+                code : 'jkl',
+                name : 'Jane'
+            }],
             threads : []
         }
     });
@@ -47,14 +54,17 @@ test('renders green cards', async () => {
             reds : [],
             threads : [{
                 cardDetail : {
-                    name : "Mark"
+                    code : 'abc',
+                    name : 'Green Mark'
                 },
                 subThread : [{
-                    "name": "Mark"
+                    code : 'def',
+                    name: 'Yellow Mark'
                 }]
             },{
                 cardDetail : {
-                    name : "Mark"
+                    code : 'ghi',
+                    name : 'Green Jeff'
                 }
             }]
         }
@@ -73,16 +83,20 @@ test('renders yellow cards', async () => {
             reds : [],
             threads : [{
                 cardDetail : {
-                    name : "Mark"
+                    code : 'abc',
+                    name : 'Green Mark'
                 },
                 subThread : [{
-                    "name": "Mark"
+                    code : 'def',
+                    name : 'Yellow Mark'
                 },{
-                    "name": "Mark"
+                    code : 'ghi',
+                    name : 'Yello Jeff'
                 }]
             },{
                 cardDetail : {
-                    name : "Mark"
+                    code : 'klm',
+                    name : 'Green Jeff'
                 }
             }]
         }
