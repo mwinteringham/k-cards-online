@@ -35,16 +35,12 @@ function Host(){
         const res = await API.getActivity(workshopCode);
 
         if(res.status === 200){
-            if(res.data.activity.reds.length > 0){
-                setRedCards(res.data.activity.reds);
-            }
+            setRedCards(res.data.activity.reds);
+
+            setGreenCards(res.data.activity.threads);
 
             if(res.data.activity.threads.length > 0){
-                setGreenCards(res.data.activity.threads);
-
-                if(res.data.activity.threads[0].subThread.length > 0){
-                    setYellowCards(res.data.activity.threads[0].subThread);
-                }
+                setYellowCards(res.data.activity.threads[0].subThread);
             }
         }
     }
@@ -69,7 +65,7 @@ function Host(){
     } else {
         redCardRender = redCards.map((item, i) => {
             return <Col key={i}>
-                <Card type={'danger'} name={item.name} code={item.code}/>
+                <Card type={'danger'} name={item.name} code={item.code} refresh={pollForActivities}/>
             </Col>
         });
     }
@@ -86,14 +82,14 @@ function Host(){
             if(yellowCards.length > 0){
                 yellowCardRender = yellowCards.map((item, i) => {
                     return <Row key={i}>
-                        <Col><Card type={'warning'} name={item.name} code={item.code}/></Col>
+                        <Col><Card type={'warning'} name={item.name} code={item.code} refresh={pollForActivities}/></Col>
                     </Row>
                 })
             }
 
             return <Row key={i}>
                 <Col>
-                    <Card type={'success'} name={item.cardDetail.name} code={item.cardDetail.code}/>
+                    <Card type={'success'} name={item.cardDetail.name} code={item.cardDetail.code} refresh={pollForActivities}/>
                     {i === 0 &&
                         <div>
                             {yellowCardRender}

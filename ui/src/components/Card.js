@@ -1,13 +1,19 @@
 import BoostrapCard from 'react-bootstrap/Card';
-import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import { useGlobalState } from '../state/state';
+import API from '../api/api';
 
-const Card = ({type, name, code}) => {
+const Card = ({type, name, code, refresh}) => {
 
-    const [cardCode, setCode] = useState('');
+    const [workshopCode] = useGlobalState('workshopCode');
 
-    useEffect(() => {
-        setCode(code);
-    }, []);
+    const deleteCard = async () => {
+        const res = await API.deleteCard(workshopCode, [code]);
+
+        if(res.status === 202){
+            {refresh()}
+        }
+    }
 
     return(
         <div>
@@ -15,6 +21,7 @@ const Card = ({type, name, code}) => {
                 <BoostrapCard.Body>
                     <p>{name}</p>
                     <h3>Card details</h3>
+                    <Button onClick={deleteCard}>Delete</Button>
                 </BoostrapCard.Body>
             </BoostrapCard>
         </div>

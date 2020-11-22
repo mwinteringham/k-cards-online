@@ -49,6 +49,16 @@ const API = {
         });
 
         return res;
+    },
+
+    deleteCard : async (workshopCode, payload) => {
+        const res = await axios({
+            method: 'delete',
+            url: '/workshop/' + workshopCode + '/card',
+            data: payload
+        });
+
+        return res;
     }
 
 }

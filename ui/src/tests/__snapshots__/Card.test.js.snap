@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the Card component 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="card bg-red"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="card-body"
+          >
+            <p>
+              Mark
+            </p>
+            <h3>
+              Card details
+            </h3>
+            <button
+              class="btn btn-primary"
+              type="button"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

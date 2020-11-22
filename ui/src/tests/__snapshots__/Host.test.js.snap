@@ -70,6 +70,12 @@ exports[`renders green cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -97,6 +103,12 @@ exports[`renders green cards 1`] = `
                         <h3>
                           Card details
                         </h3>
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -128,6 +140,12 @@ exports[`renders green cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -187,6 +205,12 @@ exports[`renders red cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -211,6 +235,12 @@ exports[`renders red cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -235,6 +265,12 @@ exports[`renders red cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -259,6 +295,12 @@ exports[`renders red cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -426,6 +468,12 @@ exports[`renders yellow cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -453,6 +501,12 @@ exports[`renders yellow cards 1`] = `
                         <h3>
                           Card details
                         </h3>
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -481,6 +535,12 @@ exports[`renders yellow cards 1`] = `
                         <h3>
                           Card details
                         </h3>
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -512,6 +572,12 @@ exports[`renders yellow cards 1`] = `
                   <h3>
                     Card details
                   </h3>
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
