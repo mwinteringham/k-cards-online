@@ -157,17 +157,6 @@ public class KCardDB {
         return results.getInt("total") == 0;
     }
 
-    public Boolean isAttendeeInWorkshop(String attendeecode, String workshopcode) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(SELECT_WORKSHOP_ATTENDEE);
-        ps.setString(1, attendeecode);
-        ps.setString(2, workshopcode);
-
-        ResultSet resultSet = ps.executeQuery();
-        resultSet.next();
-
-        return resultSet.getInt("total") == 1;
-    }
-
     public Boolean removeCard(String cardCode) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_CARD_BY_CARD_CODE);
         ps.setString(1, cardCode);
@@ -197,17 +186,23 @@ public class KCardDB {
     }
 
     public Boolean validateCardCreation(Card card, String workshopCode) throws SQLException {
-        if(card.getCardType().endsWith("yellow")){
+        PreparedStatement ps = connection.prepareStatement(SELECT_WORKSHOP_ATTENDEE);
+        ps.setString(1, card.getAttendeeCode());
+        ps.setString(2, workshopCode);
 
-            int greenCardCount = getCount(SELECT_GREEN_CARDS, workshopCode);
+        ResultSet resultSet = ps.executeQuery();
+        resultSet.next();
 
-            if(greenCardCount > 0){
-                return true;
+        if(resultSet.getInt("total") == 1){
+            if(card.getCardType().endsWith("yellow")){
+                int greenCardCount = getCount(SELECT_GREEN_CARDS, workshopCode);
+
+                return greenCardCount > 0;
             } else {
-                return false;
+                return true;
             }
         } else {
-            return true;
+            return false;
         }
     }
 

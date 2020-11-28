@@ -60,8 +60,7 @@ public class WorkshopService {
     }
 
     public HttpStatus createCard(Card card, String workshopCode) throws SQLException {
-        // Refactor this all into one method
-        if(kCardDB.isAttendeeInWorkshop(card.getAttendeeCode(), workshopCode) && kCardDB.validateCardCreation(card, workshopCode)){
+        if(kCardDB.validateCardCreation(card, workshopCode)){
             UUID uuid = UUID.randomUUID();
             card.setCardCode(uuid.toString());
 
