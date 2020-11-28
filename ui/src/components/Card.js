@@ -8,7 +8,7 @@ const Card = ({type, name, code, refresh}) => {
     const [workshopCode] = useGlobalState('workshopCode');
 
     const deleteCard = async () => {
-        const res = await API.deleteCard(workshopCode, [code]);
+        const res = await API.deleteCard(workshopCode, code);
 
         if(res.status === 202){
             {refresh()}

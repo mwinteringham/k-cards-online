@@ -64,7 +64,7 @@ public class WorkshopService {
             UUID uuid = UUID.randomUUID();
             card.setCardCode(uuid.toString());
 
-            if(kCardDB.addCardActivity(card, workshopCode)){
+            if(kCardDB.addCard(card, workshopCode)){
                 return HttpStatus.CREATED;
             } else {
                 return HttpStatus.INTERNAL_SERVER_ERROR;
@@ -93,14 +93,13 @@ public class WorkshopService {
         }
     }
 
-    public HttpStatus removeCard(List<String> cardCodes) throws SQLException {
-        for(String cardCode : cardCodes){
-            if(!kCardDB.removeCard(cardCode)){
-                return HttpStatus.INTERNAL_SERVER_ERROR;
-            }
+    public HttpStatus removeCard(String cardCode) throws SQLException {
+        if(kCardDB.removeCard(cardCode)){
+            return HttpStatus.NO_CONTENT;
+        } else {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
-        return HttpStatus.ACCEPTED;
     }
 
     public HttpStatus removeWorkshop(String workshopCode) throws SQLException {

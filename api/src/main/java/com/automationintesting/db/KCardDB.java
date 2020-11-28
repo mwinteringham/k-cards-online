@@ -21,9 +21,9 @@ public class KCardDB {
 
     private final Connection connection;
 
-    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), primary key (id))";
-    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), primary key (attendee_id))";
-    private final String CREATE_ACTIVITY_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(36), cardtype varchar(6), attendeecode varchar(36), name varchar(255), workshopcode varchar(36), primary key (id))";
+    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (id))";
+    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (attendee_id))";
+    private final String CREATE_CARD_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(36), relatedcardcode varchar(36), cardtype varchar(6), attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (id))";
 
     private final String SELECT_ATTENDEE = "SELECT name FROM ATTENDEES WHERE attendeecode = ?";
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";
@@ -37,7 +37,7 @@ public class KCardDB {
 
     private final String DELETE_ATTENDEE = "DELETE FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
     private final String DELETE_ATTENDEE_CARDS = "DELETE FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
-    private final String DELETE_CARD_BY_CARD_CODE = "DELETE FROM CARDS WHERE cardcode = ?";
+    private final String DELETE_CARD_BY_CARD_CODE = "DELETE FROM CARDS WHERE cardcode = ? OR relatedcardcode = ?";
     private final String DELETE_CARD_BY_WORKSHOP = "DELETE FROM CARDS WHERE workshopcode = ?";
     private final String DELETE_WORKSHOP = "DELETE FROM WORKSHOPS WHERE code = ?";
     private final String DELETE_ATTENDEES_BY_WORKSHOP = "DELETE FROM ATTENDEES WHERE workshopcode = ?";
@@ -53,7 +53,7 @@ public class KCardDB {
 
         connection.prepareStatement(CREATE_WORKSHOPS_TABLE).executeUpdate();
         connection.prepareStatement(CREATE_ATTENDEE_TABLE).executeUpdate();
-        connection.prepareStatement(CREATE_ACTIVITY_TABLE).executeUpdate();
+        connection.prepareStatement(CREATE_CARD_TABLE).executeUpdate();
     }
 
     public Boolean addWorkshop(String code, String workshopName) throws SQLException {
@@ -85,15 +85,27 @@ public class KCardDB {
         return new AttendeeList(listToReturn);
     }
 
-    public Boolean addCardActivity(Card card, String workshopCode) throws SQLException {
+    public Boolean addCard(Card card, String workshopCode) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(SELECT_ATTENDEE);
         ps.setString(1, card.getAttendeeCode());
 
         ResultSet resultSet = ps.executeQuery();
         resultSet.next();
 
-        InsertCardSql insertCardSql = new InsertCardSql(connection, card, resultSet.getString("name"), workshopCode);
-        PreparedStatement createPs = insertCardSql.getPreparedStatement();
+        PreparedStatement createPs;
+
+        if(card.getCardType().contains("yellow")){
+            PreparedStatement latestPs = connection.prepareStatement("SELECT * FROM CARDS WHERE cardtype = 'green' ORDER BY created");
+
+            ResultSet latestResultSet = latestPs.executeQuery();
+            latestResultSet.next();
+
+            InsertCardSql insertCardSql = new InsertCardSql(connection, card, resultSet.getString("name"), workshopCode);
+            createPs = insertCardSql.getPreparedStatementForYellowCard(latestResultSet.getString("cardcode"));
+        } else {
+            InsertCardSql insertCardSql = new InsertCardSql(connection, card, resultSet.getString("name"), workshopCode);
+            createPs = insertCardSql.getPreparedStatementForStandardCard();
+        }
 
         return createPs.executeUpdate() > 0;
     }
@@ -129,7 +141,7 @@ public class KCardDB {
     public Boolean doesWorkshopExist(String workshopCode) throws SQLException {
        int count = getCount(SELECT_WORKSHOP_COUNTS, workshopCode);
 
-        return count > 0;
+       return count > 0;
     }
 
     public Boolean removeAttendee(String attendeeCode, String workshopCode) throws SQLException {
@@ -160,6 +172,7 @@ public class KCardDB {
     public Boolean removeCard(String cardCode) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(DELETE_CARD_BY_CARD_CODE);
         ps.setString(1, cardCode);
+        ps.setString(2, cardCode);
 
         int resultSet = ps.executeUpdate();
         return resultSet == 1;

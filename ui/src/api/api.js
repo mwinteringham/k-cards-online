@@ -51,11 +51,10 @@ const API = {
         return res;
     },
 
-    deleteCard : async (workshopCode, payload) => {
+    deleteCard : async (workshopCode, cardCode) => {
         const res = await axios({
             method: 'delete',
-            url: '/workshop/' + workshopCode + '/card',
-            data: payload
+            url: '/workshop/' + workshopCode + '/card/' + cardCode
         });
 
         return res;

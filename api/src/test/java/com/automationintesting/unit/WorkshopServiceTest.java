@@ -98,7 +98,7 @@ public class WorkshopServiceTest {
         Attendee attendee = new Attendee("Jenny Sage");
         Card card = new Card(attendee.getCode(), "red");
 
-        when(kCardDB.addCardActivity(card, "hgfhgf")).thenReturn(true);
+        when(kCardDB.addCard(card, "hgfhgf")).thenReturn(true);
         when(kCardDB.validateCardCreation(card, "hgfhgf")).thenReturn(true);
 
         HttpStatus cardCreationResult = workshopService.createCard(card, "hgfhgf");
@@ -149,16 +149,10 @@ public class WorkshopServiceTest {
     @Test
     public void deleteCards() throws SQLException {
         when(kCardDB.removeCard("abcdef")).thenReturn(true);
-        when(kCardDB.removeCard("poiuyt")).thenReturn(true);
 
-        List<String> cards = new ArrayList<>(){{
-           this.add("abcdef");
-           this.add("poiuyt");
-        }};
+        HttpStatus httpStatus = workshopService.removeCard("abcdef");
 
-        HttpStatus httpStatus = workshopService.removeCard(cards);
-
-        assertThat(httpStatus, equalTo(HttpStatus.ACCEPTED));
+        assertThat(httpStatus, equalTo(HttpStatus.NO_CONTENT));
     }
 
     @Test

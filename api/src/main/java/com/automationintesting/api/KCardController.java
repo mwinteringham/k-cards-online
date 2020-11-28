@@ -64,9 +64,9 @@ public class KCardController {
         return ResponseEntity.status(removalResult).build();
     }
 
-    @RequestMapping(value = "/workshop/{workshopcode:.+}/card", method = RequestMethod.DELETE)
-    public ResponseEntity removeCard(@RequestBody List<String> cardcodes) throws SQLException {
-        HttpStatus removalResult = workshopService.removeCard(cardcodes);
+    @RequestMapping(value = "/workshop/{workshopcode:.+}/card/{cardcode:.+}", method = RequestMethod.DELETE)
+    public ResponseEntity removeCard(@PathVariable(value = "cardcode") String cardcode) throws SQLException {
+        HttpStatus removalResult = workshopService.removeCard(cardcode);
 
         return ResponseEntity.status(removalResult).build();
     }

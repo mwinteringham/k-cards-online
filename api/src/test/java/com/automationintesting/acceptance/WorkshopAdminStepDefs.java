@@ -82,11 +82,7 @@ public class WorkshopAdminStepDefs {
         ActivityResponse activityResponse = workshopRequests.getActivity(workshopResponse.getCode());
         String cardId = activityResponse.getActivity().getReds().get(0).getCode();
 
-        List<String> cardsToDelete = new ArrayList<String>(){{
-           this.add(cardId);
-        }};
-
-        workshopRequests.deleteCard(workshopResponse.getCode(), cardsToDelete);
+        workshopRequests.deleteCard(workshopResponse.getCode(), cardId);
     }
 
     @Then("the red card should be removed from the activity")
@@ -99,15 +95,9 @@ public class WorkshopAdminStepDefs {
     @When("I delete the green card")
     public void deleteGreenCard() {
         ActivityResponse activityResponse = workshopRequests.getActivity(workshopResponse.getCode());
-        String cardId1 = activityResponse.getActivity().getThreads().get(0).getCardDetail().getCode();
-        String cardId2 = activityResponse.getActivity().getThreads().get(0).getSubThread().get(0).getCode();
+        String cardId = activityResponse.getActivity().getThreads().get(0).getCardDetail().getCode();
 
-        List<String> cardIds = new ArrayList<>(){{
-            this.add(cardId1);
-            this.add(cardId2);
-        }};
-
-        workshopRequests.deleteCard(workshopResponse.getCode(), cardIds);
+        workshopRequests.deleteCard(workshopResponse.getCode(), cardId);
     }
 
     @Then("the green card and related yellow cards should be removed from the activity")
@@ -133,11 +123,7 @@ public class WorkshopAdminStepDefs {
         ActivityResponse activityResponse = workshopRequests.getActivity(workshopResponse.getCode());
         String cardId = activityResponse.getActivity().getThreads().get(0).getSubThread().get(0).getCode();
 
-        List<String> cardIds = new ArrayList<>(){{
-            this.add(cardId);
-        }};
-
-        workshopRequests.deleteCard(workshopResponse.getCode(), cardIds);
+        workshopRequests.deleteCard(workshopResponse.getCode(), cardId);
     }
 
     @Then("the yellow card should be removed from the activity")

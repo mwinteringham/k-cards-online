@@ -42,11 +42,10 @@ public class WorkshopRequests {
                 .as(ActivityResponse.class);
     }
 
-    public void deleteCard(String workshopCode, List<String> cardIds) {
+    public void deleteCard(String workshopCode, String cardId) {
         given()
             .contentType(ContentType.JSON)
-            .body(cardIds)
-            .delete("http://localhost:8080/workshop/" + workshopCode + "/card");
+            .delete("http://localhost:8080/workshop/" + workshopCode + "/card/" + cardId);
     }
 
     public AttendeeList getAttendeeList(String workshopCode){

@@ -61,7 +61,7 @@ public class KCardDBTest {
 
         kCardDB.addAttendee(attendee, "jsdjsd");
 
-        Boolean storeResult = kCardDB.addCardActivity(card, "jsdjsd");
+        Boolean storeResult = kCardDB.addCard(card, "jsdjsd");
 
         assertThat(storeResult, equalTo(true));
     }
@@ -82,9 +82,9 @@ public class KCardDBTest {
         Card greenCard = new Card(attendees.get(1).getCode(), "green", "efgh");
         Card yellowCard = new Card(attendees.get(2).getCode(), "yellow", "hijkl");
 
-        kCardDB.addCardActivity(redCard, "BEWT");
-        kCardDB.addCardActivity(greenCard, "BEWT");
-        kCardDB.addCardActivity(yellowCard, "BEWT");
+        kCardDB.addCard(redCard, "BEWT");
+        kCardDB.addCard(greenCard, "BEWT");
+        kCardDB.addCard(yellowCard, "BEWT");
 
         Activity activity = kCardDB.getWorkshopActivity("BEWT");
 
@@ -127,9 +127,9 @@ public class KCardDBTest {
         Card greenCard = new Card(attendee.getCode(), "green");
         Card yellowCard = new Card(attendee.getCode(), "yellow");
 
-        kCardDB.addCardActivity(redCard, "poiuyt");
-        kCardDB.addCardActivity(greenCard, "poiuyt");
-        kCardDB.addCardActivity(yellowCard, "poiuyt");
+        kCardDB.addCard(redCard, "poiuyt");
+        kCardDB.addCard(greenCard, "poiuyt");
+        kCardDB.addCard(yellowCard, "poiuyt");
 
         Boolean cardsRemoved = kCardDB.removeAttendeesCards(attendee.getCode(), "poiuyt");
 
@@ -143,7 +143,7 @@ public class KCardDBTest {
 
         Card redCard = new Card(attendee.getCode(), "red", "abc");
 
-        kCardDB.addCardActivity(redCard, "mnbvc");
+        kCardDB.addCard(redCard, "mnbvc");
 
         Boolean cardRemoved = kCardDB.removeCard(redCard.getCardCode());
 
@@ -160,8 +160,8 @@ public class KCardDBTest {
         Card redCard = new Card(attendee.getCode(), "red");
         Card greenCard = new Card(attendee.getCode(), "green");
 
-        kCardDB.addCardActivity(redCard,"zxcvbn");
-        kCardDB.addCardActivity(greenCard,"zxcvbn");
+        kCardDB.addCard(redCard,"zxcvbn");
+        kCardDB.addCard(greenCard,"zxcvbn");
 
         Boolean workshopRemoved = kCardDB.removeWorkshop("zxcvgn");
 
@@ -192,7 +192,7 @@ public class KCardDBTest {
         Card greenCard = new Card(attendee.getCode(), "green");
         Card yellowCard = new Card(attendee.getCode(), "yellow");
 
-        kCardDB.addCardActivity(greenCard, "lapqmx");
+        kCardDB.addCard(greenCard, "lapqmx");
 
         Boolean canCreateCard = kCardDB.validateCardCreation(yellowCard, "lapqmx");
 
