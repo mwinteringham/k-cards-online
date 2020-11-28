@@ -7,7 +7,6 @@ import com.automationintesting.model.activity.Activity;
 import com.automationintesting.model.activity.ActivityThread;
 import com.automationintesting.model.activity.CardDetail;
 import org.h2.jdbcx.JdbcDataSource;
-import org.h2.tools.Server;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -20,7 +19,7 @@ import java.util.List;
 @Component
 public class KCardDB {
 
-    private Connection connection;
+    private final Connection connection;
 
     private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), primary key (id))";
     private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), primary key (attendee_id))";
@@ -29,6 +28,7 @@ public class KCardDB {
     private final String SELECT_ATTENDEE = "SELECT name FROM ATTENDEES WHERE attendeecode = ?";
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";
     private final String SELECT_CARDS = "SELECT * FROM CARDS WHERE workshopcode = ?";
+    private final String SELECT_GREEN_CARDS = "SELECT COUNT(*) AS total FROM CARDS WHERE workshopcode = ? AND cardtype = 'green'";
     private final String SELECT_CARDS_FROM_ATTENDEE = "SELECT COUNT(*) AS total FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
     private final String SELECT_CARD_COUNT_BY_WORKSHOP = "SELECT COUNT(*) AS total FROM CARDS WHERE workshopcode = ?";
     private final String SELECT_WORKSHOP_COUNTS = "SELECT COUNT(*) AS total FROM WORKSHOPS WHERE code = ?";
@@ -109,9 +109,17 @@ public class KCardDB {
 
         while(results.next()){
             switch (results.getString("cardtype")) {
-                case "red" -> redList.add(new CardDetail(results.getString("cardcode"), results.getString("name")));
-                case "green" -> activityThreadList.add(new ActivityThread(new CardDetail(results.getString("cardcode"), results.getString("name"))));
-                case "yellow" -> activityThreadList.get(0).addToSubThread(new CardDetail(results.getString("cardcode"), results.getString("name")));
+                case "red":
+                    redList.add(new CardDetail(results.getString("cardcode"), results.getString("name")));
+                    break;
+                case "green":
+                    activityThreadList.add(new ActivityThread(new CardDetail(results.getString("cardcode"), results.getString("name"))));
+                    break;
+                case "yellow":
+                    if(!activityThreadList.isEmpty()){
+                        activityThreadList.get(0).addToSubThread(new CardDetail(results.getString("cardcode"), results.getString("name")));
+                    }
+                    break;
             }
         }
 
@@ -186,6 +194,21 @@ public class KCardDB {
         int workshopCount = getCount(SELECT_WORKSHOP_COUNTS, workshopCode);
 
         return (attendeeCount + cardCount + workshopCount) == 0;
+    }
+
+    public Boolean validateCardCreation(Card card, String workshopCode) throws SQLException {
+        if(card.getCardType().endsWith("yellow")){
+
+            int greenCardCount = getCount(SELECT_GREEN_CARDS, workshopCode);
+
+            if(greenCardCount > 0){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     private int getCount(String sql, String workshopCode) throws SQLException {

@@ -178,4 +178,35 @@ public class KCardDBTest {
 
         assertThat(workshopRemoved, equalTo(true));
     }
+
+    @Test
+    public void validateNegativeCardCreationTest() throws SQLException {
+        kCardDB.addWorkshop("ijsdfh", "SEWT");
+
+        Attendee attendee = new Attendee("Jim Sainz","qidksm");
+        kCardDB.addAttendee(attendee, "ijsdfh");
+
+        Card yellowCard = new Card(attendee.getCode(), "yellow");
+
+        Boolean canCreateCard = kCardDB.validateCardCreation(yellowCard, "ijsdfh");
+
+        assertThat(canCreateCard, equalTo(false));
+    }
+
+    @Test
+    public void validatePositiveCardCreationTest() throws SQLException {
+        kCardDB.addWorkshop("ijsdfh", "SEWT");
+
+        Attendee attendee = new Attendee("Jim Sainz","qidksm");
+        kCardDB.addAttendee(attendee, "ijsdfh");
+
+        Card greenCard = new Card(attendee.getCode(), "green");
+        Card yellowCard = new Card(attendee.getCode(), "yellow");
+
+        kCardDB.addCardActivity(greenCard, "ijsdfh");
+
+        Boolean canCreateCard = kCardDB.validateCardCreation(yellowCard, "ijsdfh");
+
+        assertThat(canCreateCard, equalTo(true));
+    }
 }

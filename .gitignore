@@ -3,3 +3,4 @@
 api/target/
 ui/build/
 ui/node_modules
+.DS_Store
