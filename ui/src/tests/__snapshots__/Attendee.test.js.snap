@@ -5,85 +5,89 @@ exports[`confirm message appears when sending a card 1`] = `
   <div>
     <div>
       <div
-        class="fade alert alert-success alert-dismissible show"
-        role="alert"
-      >
-        <button
-          class="close"
-          type="button"
-        >
-          <span
-            aria-hidden="true"
-          >
-            ×
-          </span>
-          <span
-            class="sr-only"
-          >
-            Close alert
-          </span>
-        </button>
-        <div
-          class="alert-heading h4"
-        >
-          Your 
-          green
-           card has been received by the Host
-        </div>
-      </div>
-      <div
-        class="row"
+        class="mt-5 container-fluid"
       >
         <div
-          class="col"
+          class="fade alert alert-success alert-dismissible show"
+          role="alert"
         >
           <button
-            class="btn-success btn btn-primary"
-            data-testid="greenCard"
-            style="width: 100%; height: 8rem;"
+            class="close"
             type="button"
           >
-            Send Green Card
+            <span
+              aria-hidden="true"
+            >
+              ×
+            </span>
+            <span
+              class="sr-only"
+            >
+              Close alert
+            </span>
           </button>
+          <div
+            class="alert-heading h4"
+          >
+            Your 
+            green
+             card has been received by the Host
+          </div>
         </div>
         <div
-          class="col"
+          class="row"
         >
-          <button
-            class="btn-warning btn btn-primary"
-            data-testid="yellowCard"
-            style="width: 100%; height: 8rem;"
-            type="button"
+          <div
+            class="col"
           >
-            Send Yellow Card
-          </button>
+            <button
+              class="btn-success btn btn-primary"
+              data-testid="greenCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Green Card
+            </button>
+          </div>
+          <div
+            class="col"
+          >
+            <button
+              class="btn-warning btn btn-primary"
+              data-testid="yellowCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Yellow Card
+            </button>
+          </div>
+          <div
+            class="col"
+          >
+            <button
+              class="btn-danger btn btn-primary"
+              data-testid="redCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Red Card
+            </button>
+          </div>
         </div>
         <div
-          class="col"
+          class="mt-4 row"
         >
-          <button
-            class="btn-danger btn btn-primary"
-            data-testid="redCard"
-            style="width: 100%; height: 8rem;"
-            type="button"
+          <div
+            class="col"
           >
-            Send Red Card
-          </button>
-        </div>
-      </div>
-      <div
-        class="mt-4 row"
-      >
-        <div
-          class="col"
-        >
-          <button
-            class="btn-secondary btn btn-primary"
-            style="width: 100%; height: 4rem;"
-            type="button"
-          >
-            Leave Workshop
-          </button>
+            <button
+              class="btn-secondary btn btn-primary"
+              style="width: 100%; height: 4rem;"
+              type="button"
+            >
+              Leave Workshop
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -96,58 +100,62 @@ exports[`renders the Attendee component 1`] = `
   <div>
     <div>
       <div
-        class="row"
+        class="mt-5 container-fluid"
       >
         <div
-          class="col"
+          class="row"
         >
-          <button
-            class="btn-success btn btn-primary"
-            data-testid="greenCard"
-            style="width: 100%; height: 8rem;"
-            type="button"
+          <div
+            class="col"
           >
-            Send Green Card
-          </button>
+            <button
+              class="btn-success btn btn-primary"
+              data-testid="greenCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Green Card
+            </button>
+          </div>
+          <div
+            class="col"
+          >
+            <button
+              class="btn-warning btn btn-primary"
+              data-testid="yellowCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Yellow Card
+            </button>
+          </div>
+          <div
+            class="col"
+          >
+            <button
+              class="btn-danger btn btn-primary"
+              data-testid="redCard"
+              style="width: 100%; height: 8rem;"
+              type="button"
+            >
+              Send Red Card
+            </button>
+          </div>
         </div>
         <div
-          class="col"
+          class="mt-4 row"
         >
-          <button
-            class="btn-warning btn btn-primary"
-            data-testid="yellowCard"
-            style="width: 100%; height: 8rem;"
-            type="button"
+          <div
+            class="col"
           >
-            Send Yellow Card
-          </button>
-        </div>
-        <div
-          class="col"
-        >
-          <button
-            class="btn-danger btn btn-primary"
-            data-testid="redCard"
-            style="width: 100%; height: 8rem;"
-            type="button"
-          >
-            Send Red Card
-          </button>
-        </div>
-      </div>
-      <div
-        class="mt-4 row"
-      >
-        <div
-          class="col"
-        >
-          <button
-            class="btn-secondary btn btn-primary"
-            style="width: 100%; height: 4rem;"
-            type="button"
-          >
-            Leave Workshop
-          </button>
+            <button
+              class="btn-secondary btn btn-primary"
+              style="width: 100%; height: 4rem;"
+              type="button"
+            >
+              Leave Workshop
+            </button>
+          </div>
         </div>
       </div>
     </div>

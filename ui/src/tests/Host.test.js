@@ -43,7 +43,7 @@ test('renders red cards', async () => {
 
     const hostComponent = render(<Host />);
     
-    await waitFor(() => screen.getAllByText(/Card/)); 
+    await waitFor(() => screen.getAllByText(/Jane/)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
 });
@@ -72,7 +72,7 @@ test('renders green cards', async () => {
 
     const hostComponent = render(<Host />);
     
-    await waitFor(() => screen.getAllByText(/Card/)); 
+    await waitFor(() => screen.getAllByText(/Green Jeff/)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
 });
@@ -104,7 +104,7 @@ test('renders yellow cards', async () => {
 
     const hostComponent = render(<Host />);
     
-    await waitFor(() => screen.getAllByText(/Card/)); 
+    await waitFor(() => screen.getAllByText(/Green Jeff/)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
 });

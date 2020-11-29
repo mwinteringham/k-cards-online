@@ -11,18 +11,17 @@ const Card = ({type, name, code, refresh}) => {
         const res = await API.deleteCard(workshopCode, code);
 
         if(res.status === 202){
-            {refresh()}
+            refresh()
         }
     }
 
     return(
         <div>
-            <BoostrapCard body bg={type}>
-                <BoostrapCard.Body>
-                    <p>{name}</p>
-                    <h3>Card details</h3>
-                    <Button onClick={deleteCard}>Delete</Button>
-                </BoostrapCard.Body>
+            <BoostrapCard className="mt-2" body bg={type}>
+                <BoostrapCard.Title style={{marginTop : '.75rem'}}>
+                    <Button className='float-right btn-light' onClick={deleteCard}>Delete</Button>
+                    <h2>{name}</h2>
+                </BoostrapCard.Title>
             </BoostrapCard>
         </div>
     )

@@ -1,5 +1,7 @@
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Card from './Card';
 import { useGlobalState } from '../state/state';
@@ -102,23 +104,22 @@ function Host(){
 
     return (
         <div>
-            <Row>
-                <Col>
-                    <h1>Your workshop code is: {workshopCode}</h1>
-                </Col>
-                <Col>
-                    <Button>Close Workshop</Button>
-                </Col>
-            </Row>
-            <Row className="mt-5">
-                {redCardRender}
-            </Row>
-            <Row>
-                <Col>
-                    <h2>Activity:</h2>
-                </Col>
-            </Row>
-            {greenCardRender}
+            <Navbar bg='light'>
+                <Navbar.Brand>Welcome! Your workshop code is: <span style={{color: 'blue'}}>{workshopCode}</span></Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className='justify-content-end'>
+                    <Navbar.Text>
+                        <Button>Close Workshop</Button>
+                    </Navbar.Text>
+                </Navbar.Collapse>
+            </Navbar>
+            <Container fluid>
+                <Row>
+                    {redCardRender}
+                </Row>
+                <Row className='mt-2 border'></Row>
+                {greenCardRender}
+            </Container>
         </div>
     )
 

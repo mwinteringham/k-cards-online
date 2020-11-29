@@ -4,111 +4,118 @@ exports[`renders green cards 1`] = `
 <body>
   <div>
     <div>
-      <div
-        class="row"
+      <nav
+        class="navbar navbar-expand navbar-light bg-light"
       >
-        <div
-          class="col"
+        <span
+          class="navbar-brand"
         >
-          <h1>
-            Your workshop code is: 
-            empty-workshop-code
-          </h1>
-        </div>
-        <div
-          class="col"
-        >
-          <button
-            class="btn btn-primary"
-            type="button"
+          Welcome! Your workshop code is: 
+          <span
+            style="color: blue;"
           >
-            Close Workshop
-          </button>
-        </div>
-      </div>
-      <div
-        class="mt-5 row"
-      >
-        <div
-          class="col"
+            empty-workshop-code
+          </span>
+        </span>
+        <button
+          aria-label="Toggle navigation"
+          class="navbar-toggler collapsed"
+          type="button"
         >
-          <h2>
-            No red cards found
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
+          <span
+            class="navbar-toggler-icon"
+          />
+        </button>
         <div
-          class="col"
+          class="justify-content-end navbar-collapse collapse"
         >
-          <h2>
-            Activity:
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <div>
-            <div
-              class="card bg-success"
+          <span
+            class="navbar-text"
+          >
+            <button
+              class="btn btn-primary"
+              type="button"
             >
+              Close Workshop
+            </button>
+          </span>
+        </div>
+      </nav>
+      <div
+        class="container-fluid"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="col"
+          >
+            <h2>
+              No red cards found
+            </h2>
+          </div>
+        </div>
+        <div
+          class="mt-2 border row"
+        />
+        <div
+          class="row"
+        >
+          <div
+            class="col"
+          >
+            <div>
               <div
-                class="card-body"
+                class="mt-2 card bg-success"
               >
                 <div
                   class="card-body"
                 >
-                  <p>
-                    Green Mark
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
                   >
-                    Delete
-                  </button>
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Green Mark
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div>
-            <div
-              class="row"
-            >
+            <div>
               <div
-                class="col"
+                class="row"
               >
-                <div>
-                  <div
-                    class="card bg-warning"
-                  >
+                <div
+                  class="col"
+                >
+                  <div>
                     <div
-                      class="card-body"
+                      class="mt-2 card bg-warning"
                     >
                       <div
                         class="card-body"
                       >
-                        <p>
-                          Yellow Mark
-                        </p>
-                        <h3>
-                          Card details
-                        </h3>
-                        <button
-                          class="btn btn-primary"
-                          type="button"
+                        <div
+                          class="card-title h5"
+                          style="margin-top: .75rem;"
                         >
-                          Delete
-                        </button>
+                          <button
+                            class="float-right btn-light btn btn-primary"
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                          <h2>
+                            Yellow Mark
+                          </h2>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -117,35 +124,33 @@ exports[`renders green cards 1`] = `
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="row"
-      >
         <div
-          class="col"
+          class="row"
         >
-          <div>
-            <div
-              class="card bg-success"
-            >
+          <div
+            class="col"
+          >
+            <div>
               <div
-                class="card-body"
+                class="mt-2 card bg-success"
               >
                 <div
                   class="card-body"
                 >
-                  <p>
-                    Green Jeff
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
                   >
-                    Delete
-                  </button>
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Green Jeff
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,172 +166,175 @@ exports[`renders red cards 1`] = `
 <body>
   <div>
     <div>
-      <div
-        class="row"
+      <nav
+        class="navbar navbar-expand navbar-light bg-light"
       >
-        <div
-          class="col"
+        <span
+          class="navbar-brand"
         >
-          <h1>
-            Your workshop code is: 
-            empty-workshop-code
-          </h1>
-        </div>
-        <div
-          class="col"
-        >
-          <button
-            class="btn btn-primary"
-            type="button"
+          Welcome! Your workshop code is: 
+          <span
+            style="color: blue;"
           >
-            Close Workshop
-          </button>
+            empty-workshop-code
+          </span>
+        </span>
+        <button
+          aria-label="Toggle navigation"
+          class="navbar-toggler collapsed"
+          type="button"
+        >
+          <span
+            class="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          class="justify-content-end navbar-collapse collapse"
+        >
+          <span
+            class="navbar-text"
+          >
+            <button
+              class="btn btn-primary"
+              type="button"
+            >
+              Close Workshop
+            </button>
+          </span>
         </div>
-      </div>
+      </nav>
       <div
-        class="mt-5 row"
+        class="container-fluid"
       >
         <div
-          class="col"
+          class="row"
         >
-          <div>
-            <div
-              class="card bg-danger"
-            >
+          <div
+            class="col"
+          >
+            <div>
               <div
-                class="card-body"
+                class="mt-2 card bg-danger"
               >
                 <div
                   class="card-body"
                 >
-                  <p>
-                    Mark
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
                   >
-                    Delete
-                  </button>
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Mark
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col"
+          >
+            <div>
+              <div
+                class="mt-2 card bg-danger"
+              >
+                <div
+                  class="card-body"
+                >
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
+                  >
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Mary
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col"
+          >
+            <div>
+              <div
+                class="mt-2 card bg-danger"
+              >
+                <div
+                  class="card-body"
+                >
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
+                  >
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Sam
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col"
+          >
+            <div>
+              <div
+                class="mt-2 card bg-danger"
+              >
+                <div
+                  class="card-body"
+                >
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
+                  >
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Jane
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="col"
+          class="mt-2 border row"
+        />
+        <div
+          class="row"
         >
-          <div>
-            <div
-              class="card bg-danger"
-            >
-              <div
-                class="card-body"
-              >
-                <div
-                  class="card-body"
-                >
-                  <p>
-                    Mary
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div
+            class="col"
+          >
+            <h2>
+              No green cards found
+            </h2>
           </div>
-        </div>
-        <div
-          class="col"
-        >
-          <div>
-            <div
-              class="card bg-danger"
-            >
-              <div
-                class="card-body"
-              >
-                <div
-                  class="card-body"
-                >
-                  <p>
-                    Sam
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col"
-        >
-          <div>
-            <div
-              class="card bg-danger"
-            >
-              <div
-                class="card-body"
-              >
-                <div
-                  class="card-body"
-                >
-                  <p>
-                    Jane
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <h2>
-            Activity:
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <h2>
-            No green cards found
-          </h2>
         </div>
       </div>
     </div>
@@ -338,59 +346,70 @@ exports[`renders the Host component 1`] = `
 <body>
   <div>
     <div>
-      <div
-        class="row"
+      <nav
+        class="navbar navbar-expand navbar-light bg-light"
       >
-        <div
-          class="col"
+        <span
+          class="navbar-brand"
         >
-          <h1>
-            Your workshop code is: 
-            empty-workshop-code
-          </h1>
-        </div>
-        <div
-          class="col"
-        >
-          <button
-            class="btn btn-primary"
-            type="button"
+          Welcome! Your workshop code is: 
+          <span
+            style="color: blue;"
           >
-            Close Workshop
-          </button>
+            empty-workshop-code
+          </span>
+        </span>
+        <button
+          aria-label="Toggle navigation"
+          class="navbar-toggler collapsed"
+          type="button"
+        >
+          <span
+            class="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          class="justify-content-end navbar-collapse collapse"
+        >
+          <span
+            class="navbar-text"
+          >
+            <button
+              class="btn btn-primary"
+              type="button"
+            >
+              Close Workshop
+            </button>
+          </span>
         </div>
-      </div>
+      </nav>
       <div
-        class="mt-5 row"
+        class="container-fluid"
       >
         <div
-          class="col"
+          class="row"
         >
-          <h2>
-            No red cards found
-          </h2>
+          <div
+            class="col"
+          >
+            <h2>
+              No red cards found
+            </h2>
+          </div>
         </div>
-      </div>
-      <div
-        class="row"
-      >
         <div
-          class="col"
-        >
-          <h2>
-            Activity:
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
+          class="mt-2 border row"
+        />
         <div
-          class="col"
+          class="row"
         >
-          <h2>
-            No green cards found
-          </h2>
+          <div
+            class="col"
+          >
+            <h2>
+              No green cards found
+            </h2>
+          </div>
         </div>
       </div>
     </div>
@@ -402,182 +421,185 @@ exports[`renders yellow cards 1`] = `
 <body>
   <div>
     <div>
-      <div
-        class="row"
+      <nav
+        class="navbar navbar-expand navbar-light bg-light"
       >
-        <div
-          class="col"
+        <span
+          class="navbar-brand"
         >
-          <h1>
-            Your workshop code is: 
-            empty-workshop-code
-          </h1>
-        </div>
-        <div
-          class="col"
-        >
-          <button
-            class="btn btn-primary"
-            type="button"
+          Welcome! Your workshop code is: 
+          <span
+            style="color: blue;"
           >
-            Close Workshop
-          </button>
-        </div>
-      </div>
-      <div
-        class="mt-5 row"
-      >
-        <div
-          class="col"
+            empty-workshop-code
+          </span>
+        </span>
+        <button
+          aria-label="Toggle navigation"
+          class="navbar-toggler collapsed"
+          type="button"
         >
-          <h2>
-            No red cards found
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
+          <span
+            class="navbar-toggler-icon"
+          />
+        </button>
         <div
-          class="col"
+          class="justify-content-end navbar-collapse collapse"
         >
-          <h2>
-            Activity:
-          </h2>
-        </div>
-      </div>
-      <div
-        class="row"
-      >
-        <div
-          class="col"
-        >
-          <div>
-            <div
-              class="card bg-success"
+          <span
+            class="navbar-text"
+          >
+            <button
+              class="btn btn-primary"
+              type="button"
             >
+              Close Workshop
+            </button>
+          </span>
+        </div>
+      </nav>
+      <div
+        class="container-fluid"
+      >
+        <div
+          class="row"
+        >
+          <div
+            class="col"
+          >
+            <h2>
+              No red cards found
+            </h2>
+          </div>
+        </div>
+        <div
+          class="mt-2 border row"
+        />
+        <div
+          class="row"
+        >
+          <div
+            class="col"
+          >
+            <div>
               <div
-                class="card-body"
+                class="mt-2 card bg-success"
               >
                 <div
                   class="card-body"
                 >
-                  <p>
-                    Green Mark
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
                   >
-                    Delete
-                  </button>
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Green Mark
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div>
-            <div
-              class="row"
-            >
+            <div>
               <div
-                class="col"
+                class="row"
               >
-                <div>
-                  <div
-                    class="card bg-warning"
-                  >
+                <div
+                  class="col"
+                >
+                  <div>
                     <div
-                      class="card-body"
+                      class="mt-2 card bg-warning"
                     >
                       <div
                         class="card-body"
                       >
-                        <p>
-                          Yellow Mark
-                        </p>
-                        <h3>
-                          Card details
-                        </h3>
-                        <button
-                          class="btn btn-primary"
-                          type="button"
+                        <div
+                          class="card-title h5"
+                          style="margin-top: .75rem;"
                         >
-                          Delete
-                        </button>
+                          <button
+                            class="float-right btn-light btn btn-primary"
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                          <h2>
+                            Yellow Mark
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row"
+              >
+                <div
+                  class="col"
+                >
+                  <div>
+                    <div
+                      class="mt-2 card bg-warning"
+                    >
+                      <div
+                        class="card-body"
+                      >
+                        <div
+                          class="card-title h5"
+                          style="margin-top: .75rem;"
+                        >
+                          <button
+                            class="float-right btn-light btn btn-primary"
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                          <h2>
+                            Yello Jeff
+                          </h2>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div
-              class="row"
-            >
-              <div
-                class="col"
-              >
-                <div>
-                  <div
-                    class="card bg-warning"
-                  >
-                    <div
-                      class="card-body"
-                    >
-                      <div
-                        class="card-body"
-                      >
-                        <p>
-                          Yello Jeff
-                        </p>
-                        <h3>
-                          Card details
-                        </h3>
-                        <button
-                          class="btn btn-primary"
-                          type="button"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="row"
-      >
         <div
-          class="col"
+          class="row"
         >
-          <div>
-            <div
-              class="card bg-success"
-            >
+          <div
+            class="col"
+          >
+            <div>
               <div
-                class="card-body"
+                class="mt-2 card bg-success"
               >
                 <div
                   class="card-body"
                 >
-                  <p>
-                    Green Jeff
-                  </p>
-                  <h3>
-                    Card details
-                  </h3>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
+                  <div
+                    class="card-title h5"
+                    style="margin-top: .75rem;"
                   >
-                    Delete
-                  </button>
+                    <button
+                      class="float-right btn-light btn btn-primary"
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                    <h2>
+                      Green Jeff
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import API from '../api/api';
 import { useState } from 'react';
 import { useGlobalState } from '../state/state';
 import { useHistory } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 function Attendee(){
 
@@ -46,23 +47,25 @@ function Attendee(){
 
     return(
         <div>
-            {(showConfirm && <Alert variant="success" onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your {cardType} card has been received by the Host</Alert.Heading></Alert>)}
-            <Row>
-                <Col>
-                    <Button data-testid='greenCard' className='btn-success' onClick={() => sendCard('green')} style={{ width: '100%', height: '8rem'}}>Send Green Card</Button>
-                </Col>
-                <Col>
-                    <Button data-testid='yellowCard' className='btn-warning' onClick={() => sendCard('yellow')} style={{ width: '100%', height: '8rem' }}>Send Yellow Card</Button>
-                </Col>
-                <Col>
-                    <Button data-testid='redCard' className='btn-danger' onClick={() => sendCard('red')} style={{ width: '100%', height: '8rem' }}>Send Red Card</Button>
-                </Col>
-            </Row>
-            <Row className='mt-4'>
-                <Col>
-                    <Button className='btn-secondary' onClick={() => leaveWorkshop()} style={{ width: '100%', height: '4rem'}}>Leave Workshop</Button>
-                </Col>
-            </Row>
+            <Container fluid className='mt-5'>
+                {(showConfirm && <Alert variant="success" onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your {cardType} card has been received by the Host</Alert.Heading></Alert>)}
+                <Row>
+                    <Col>
+                        <Button data-testid='greenCard' className='btn-success' onClick={() => sendCard('green')} style={{ width: '100%', height: '8rem'}}>Send Green Card</Button>
+                    </Col>
+                    <Col>
+                        <Button data-testid='yellowCard' className='btn-warning' onClick={() => sendCard('yellow')} style={{ width: '100%', height: '8rem' }}>Send Yellow Card</Button>
+                    </Col>
+                    <Col>
+                        <Button data-testid='redCard' className='btn-danger' onClick={() => sendCard('red')} style={{ width: '100%', height: '8rem' }}>Send Red Card</Button>
+                    </Col>
+                </Row>
+                <Row className='mt-4'>
+                    <Col>
+                        <Button className='btn-secondary' onClick={() => leaveWorkshop()} style={{ width: '100%', height: '4rem'}}>Leave Workshop</Button>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     );
 }

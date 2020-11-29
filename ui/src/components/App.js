@@ -1,4 +1,3 @@
-import Container from 'react-bootstrap/Container';
 import Welcome from './Welcome';
 import Host from './Host';
 import Attendee from './Attendee';
@@ -8,7 +7,6 @@ function App() {
 
   return (
     <div className="App">
-      <Container fluid className="text-center mt-5">
         <HashRouter>
           <Switch>
             <Route exact path='/' component={Welcome} />
@@ -16,7 +14,6 @@ function App() {
             <Route exact path='/attendee' component={Attendee} />
           </Switch>
         </HashRouter>
-      </Container>
     </div>
   );
 }

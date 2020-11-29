@@ -22,7 +22,7 @@ test('send a delete request for Card', async () => {
 
     mock.onDelete('/workshop/empty-workshop-code/card/abc').reply(202);
 
-    const cardComponent = render(<Card type={'red'} name={'Mark'} code={'abc'} refresh={refreshMock}/>);
+    render(<Card type={'red'} name={'Mark'} code={'abc'} refresh={refreshMock}/>);
 
     await waitFor(() => screen.getAllByText(/Mark/i)); 
     fireEvent.click(screen.getByText(/Delete/i));
