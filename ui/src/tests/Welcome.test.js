@@ -23,7 +23,7 @@ test('creating a new workshop takes you to a new page', async () => {
   fireEvent.change(screen.getByTestId(/workshopName/i), {
     target: {value: 'BREWT'}
   })
-  fireEvent.click(screen.getByTestId(/startWorkshop/i));
+  fireEvent.submit(screen.getByTestId(/startWorkshop/i));
 
   await waitFor(() => expect(history.location.pathname).toBe('/host'));
 });
@@ -42,4 +42,12 @@ test('joining a new workshop takes you to a new page', async () => {
   fireEvent.click(screen.getByTestId(/joinWorkshop/i));
 
   await waitFor(() => expect(history.location.pathname).toBe('/attendee'));
+});
+
+test('submitting a blank workshop name returns an error', async () => {
+  render(<Welcome />);
+
+  fireEvent.submit(screen.getByTestId(/startWorkshop/i));
+
+  expect(screen.getByTestId('hostError')).toHaveTextContent('Please enter a name for your workshop');
 });

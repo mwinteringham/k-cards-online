@@ -16,21 +16,28 @@ function Welcome() {
     const [workshopCode, setWorkshopCode] = useState('');
     const [workshopValue, updateWorkshop] = useGlobalState('workshopCode');
     const [attendeeValue, updateAttendeeCode] = useGlobalState('attendeeCode');
+    const [workshopValidated, setValidated] = useState(false);
 
     const history = useHistory();
 
-    async function createWorkshop(){
-        const res = await API.createWorkshop({
-            name : workshop
-        });
-
-        if(res.status === 201){
-            updateWorkshop(res.data.code);
-            history.push('host');
+    const createWorkshop = async (event) => {
+        if(workshop.length > 0){
+            const res = await API.createWorkshop({
+                name : workshop
+            });
+    
+            if(res.status === 201){
+                updateWorkshop(res.data.code);
+                history.push('host');
+            }
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            setValidated(true);
         }
     }
 
-    async function joinWorkshop(){
+    const joinWorkshop = async () => {
         const res = await API.joinWorkshop(workshopCode, {
             name : attendeeName
         });
@@ -64,9 +71,12 @@ function Welcome() {
                     <Col>
                         <h2>Host a Workshop</h2>
                         <p>Enter the name of the workshop and click Start Workshop</p>
-                        <Form>
-                        <Form.Control data-testid='workshopName' placeholder='Workshop name' className='mb-3' onChange={e => setWorkshopName(e.target.value)}/>
-                        <Button data-testid='startWorkshop' className='mt-5' onClick={createWorkshop}>Start Workshop</Button>
+                        <Form noValidate validated={workshopValidated} onSubmit={createWorkshop} data-testid='startWorkshop'>
+                            <Form.Control required type='text' data-testid='workshopName' placeholder='Workshop name' className='mb-3' onChange={e => setWorkshopName(e.target.value)}/>
+                            <Form.Control.Feedback type='invalid' data-testid='hostError'>
+                                Please enter a name for your workshop
+                            </Form.Control.Feedback>
+                            <Button className='mt-5' type='submit'>Start Workshop</Button>
                         </Form>
                     </Col>
                     <Col />

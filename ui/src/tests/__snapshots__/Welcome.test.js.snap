@@ -66,16 +66,25 @@ exports[`renders the Welcome component 1`] = `
             </p>
             <form
               class=""
+              data-testid="startWorkshop"
+              novalidate=""
             >
               <input
                 class="mb-3 form-control"
                 data-testid="workshopName"
                 placeholder="Workshop name"
+                required=""
+                type="text"
               />
+              <div
+                class="invalid-feedback"
+                data-testid="hostError"
+              >
+                Please enter a name for your workshop
+              </div>
               <button
                 class="mt-5 btn btn-primary"
-                data-testid="startWorkshop"
-                type="button"
+                type="submit"
               >
                 Start Workshop
               </button>
