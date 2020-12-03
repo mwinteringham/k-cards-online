@@ -34,6 +34,7 @@ exports[`renders green cards 1`] = `
           >
             <button
               class="btn btn-primary"
+              data-testid="leaveWorkshop"
               type="button"
             >
               Close Workshop
@@ -196,6 +197,7 @@ exports[`renders red cards 1`] = `
           >
             <button
               class="btn btn-primary"
+              data-testid="leaveWorkshop"
               type="button"
             >
               Close Workshop
@@ -376,6 +378,7 @@ exports[`renders the Host component 1`] = `
           >
             <button
               class="btn btn-primary"
+              data-testid="leaveWorkshop"
               type="button"
             >
               Close Workshop
@@ -451,6 +454,7 @@ exports[`renders yellow cards 1`] = `
           >
             <button
               class="btn btn-primary"
+              data-testid="leaveWorkshop"
               type="button"
             >
               Close Workshop

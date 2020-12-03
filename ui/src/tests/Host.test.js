@@ -1,10 +1,13 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import Host from '../components/Host';
 import axios from 'axios';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 let MockAdapter = require('axios-mock-adapter');
 
 const mock = new MockAdapter(axios);
+const history = createMemoryHistory();
 
 test('renders the Host component', async () => {
     mock.onGet('/workshop/empty-workshop-code/activity').reply(200, {
@@ -107,4 +110,15 @@ test('renders yellow cards', async () => {
     await waitFor(() => screen.getAllByText(/Green Jeff/)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
+});
+
+test('Delete workshop when leaving', async () => {
+    mock.onDelete('/workshop/empty-workshop-code').reply(202);
+
+    history.push('/host');
+    render(<Router history={history}><Host /></Router>);
+
+    fireEvent.click(screen.getByTestId(/leaveWorkshop/i));
+
+    await waitFor(() => expect(history.location.pathname).toBe('/'));
 });

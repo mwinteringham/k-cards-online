@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Card from './Card';
+import { useHistory } from 'react-router-dom';
 import { useGlobalState } from '../state/state';
 import React, { useState, useEffect, useRef } from 'react';
 import API from '../api/api';
@@ -33,6 +34,16 @@ function Host(){
     const [greenCards, setGreenCards] = useState([]);
     const [yellowCards, setYellowCards] = useState([]);
 
+    const history = useHistory();
+
+    const leaveWorkshop = async () => {
+        const res = await API.deleteWorkshop(workshopCode);
+
+        if(res.status === 202){
+            history.push('/');
+        }
+    }
+
     const pollForActivities = async () => {
         const res = await API.getActivity(workshopCode);
 
@@ -54,7 +65,6 @@ function Host(){
     useInterval(async () => {
         await pollForActivities();
     }, 2000);
-
 
     let redCardRender;
     let greenCardRender;
@@ -109,7 +119,7 @@ function Host(){
                 <Navbar.Toggle />
                 <Navbar.Collapse className='justify-content-end'>
                     <Navbar.Text>
-                        <Button>Close Workshop</Button>
+                        <Button data-testid='leaveWorkshop' onClick={() => leaveWorkshop()}>Close Workshop</Button>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>

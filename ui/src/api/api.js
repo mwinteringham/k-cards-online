@@ -58,6 +58,15 @@ const API = {
         });
 
         return res;
+    },
+
+    deleteWorkshop : async (workshopCode) => {
+        const res = await axios({
+            method: 'delete',
+            url: '/workshop/' + workshopCode
+        });
+
+        return res;
     }
 
 }
