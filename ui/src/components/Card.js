@@ -12,6 +12,8 @@ const Card = ({type, name, code, refresh}) => {
 
         if(res.status === 202){
             refresh()
+        } else {
+            console.error('Attempted to delete card: ' + code + ' but received the error: ' + res);
         }
     }
 

@@ -43,11 +43,12 @@ function Attendee(){
 
         const res = await API.leaveWorkshopAsAttendee(workshopCode, payload);
 
-        if(res.status === 202){
-            updateWorkshopCode('');
-            updateAttendeeCode('');
-            history.push('/');
+        if(res.status !== 202){
+            console.error('Attempted to leave the workshop cleanly but failed. Received error: ' + res);
         }
+        updateWorkshopCode('');
+        updateAttendeeCode('');
+        history.push('/');
     }
 
     return(

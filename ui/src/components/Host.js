@@ -30,7 +30,7 @@ function useInterval(callback, delay) {
 
 function Host(){
 
-    const [workshopCode] = useGlobalState('workshopCode');
+    const [workshopCode, updateWorkshopCode] = useGlobalState('workshopCode');
     const [redCards, setRedCards] = useState([]);
     const [greenCards, setGreenCards] = useState([]);
     const [yellowCards, setYellowCards] = useState([]);
@@ -42,9 +42,11 @@ function Host(){
     const leaveWorkshop = async () => {
         const res = await API.deleteWorkshop(workshopCode);
 
-        if(res.status === 202){
-            history.push('/');
+        if(res.status !== 202){
+            console.error('Attempted to delete workshop but failed. Received error: ' + res);
         }
+        
+        history.push('/');
     }
 
     const pollForActivities = async () => {

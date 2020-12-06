@@ -45,13 +45,17 @@ const API = {
     },
 
     leaveWorkshopAsAttendee : async (workshopCode, payload) => {
-        const res = await axios({
-            method: 'delete',
-            url: '/workshop/' + workshopCode + '/leave',
-            data: payload
-        });
-
-        return res;
+        try {
+            const res = await axios({
+                method: 'delete',
+                url: '/workshop/' + workshopCode + '/leave',
+                data: payload
+            });
+    
+            return res;
+        } catch(err) {
+            return err.response;
+        }
     },
 
     getActivity : async (workshopCode) => {
@@ -68,21 +72,29 @@ const API = {
     },
 
     deleteCard : async (workshopCode, cardCode) => {
-        const res = await axios({
-            method: 'delete',
-            url: '/workshop/' + workshopCode + '/card/' + cardCode
-        });
+        try {
+            const res = await axios({
+                method: 'delete',
+                url: '/workshop/' + workshopCode + '/card/' + cardCode
+            });
 
-        return res;
+            return res;
+        } catch (err) {
+            return err.response;
+        }
     },
 
     deleteWorkshop : async (workshopCode) => {
-        const res = await axios({
-            method: 'delete',
-            url: '/workshop/' + workshopCode
-        });
-
-        return res;
+        try {
+            const res = await axios({
+                method: 'delete',
+                url: '/workshop/' + workshopCode
+            });
+    
+            return res;
+        } catch (err) {
+            return res.response
+        }
     }
 
 }
