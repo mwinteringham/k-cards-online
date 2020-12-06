@@ -93,7 +93,7 @@ const API = {
     
             return res;
         } catch (err) {
-            return res.response
+            return err.response;
         }
     }
 
