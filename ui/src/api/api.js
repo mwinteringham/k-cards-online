@@ -55,12 +55,16 @@ const API = {
     },
 
     getActivity : async (workshopCode) => {
-        const res = await axios({
-            method: 'get',
-            url: '/workshop/' + workshopCode + '/activity'
-        });
-
-        return res;
+        try{
+            const res = await axios({
+                method: 'get',
+                url: '/workshop/' + workshopCode + '/activity'
+            });
+    
+            return res;
+        } catch(err) {
+            return err.response;
+        }
     },
 
     deleteCard : async (workshopCode, cardCode) => {

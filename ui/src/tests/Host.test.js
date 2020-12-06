@@ -122,3 +122,11 @@ test('Delete workshop when leaving', async () => {
 
     await waitFor(() => expect(history.location.pathname).toBe('/'));
 });
+
+test('An error is shown when activity request fails', async () => {
+    mock.onGet('/workshop/empty-workshop-code/activity').reply(500);
+
+    render(<Host />);
+
+    await waitFor(() => expect(expect(screen.getByTestId('hostError')).toHaveTextContent('An error has occurred. The server responded with a 500')));
+});

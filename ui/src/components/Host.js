@@ -3,6 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import Card from './Card';
 import { useHistory } from 'react-router-dom';
 import { useGlobalState } from '../state/state';
@@ -33,6 +34,8 @@ function Host(){
     const [redCards, setRedCards] = useState([]);
     const [greenCards, setGreenCards] = useState([]);
     const [yellowCards, setYellowCards] = useState([]);
+    const [showError, setShowError] = useState(false);
+    const [errorCode, setErrorCode] = useState('');
 
     const history = useHistory();
 
@@ -55,6 +58,9 @@ function Host(){
             if(res.data.activity.threads.length > 0){
                 setYellowCards(res.data.activity.threads[0].subThread);
             }
+        } else {
+            setErrorCode(res.status);
+            setShowError(true);
         }
     }
 
@@ -123,6 +129,7 @@ function Host(){
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>
+            {(showError && <Alert variant='danger' onClose={() => setShowError(false)} dismissible><Alert.Heading data-testid='hostError'>An error has occurred. The server responded with a {errorCode}</Alert.Heading></Alert>)}
             <Container fluid>
                 <Row>
                     {redCardRender}

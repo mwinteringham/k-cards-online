@@ -89,3 +89,4 @@ test('an error message is shown when a workshop cannot be created', async () =>{
 
   await waitFor(() => expect(screen.getByTestId('hostError')).toHaveTextContent('An error occurred when creating your workshop'));
 });
+
