@@ -13,13 +13,17 @@ const API = {
     },
 
     joinWorkshop : async (workshopCode, payload) => {
-        const res = await axios({
-            method: 'post',
-            url: '/workshop/' + workshopCode + '/join',
-            data: payload
-        });
-
-        return res;
+        try{
+            const res = await axios({
+                method: 'post',
+                url: '/workshop/' + workshopCode + '/join',
+                data: payload
+            });
+    
+            return res;
+        } catch (err) {
+            return err.response;
+        }
     },
     
     sendCard : async (workshopCode, payload) => {

@@ -35,21 +35,40 @@ exports[`renders the Welcome component 1`] = `
             </p>
             <form
               class=""
+              data-testid="joinWorkshop"
+              novalidate=""
             >
               <input
                 class="mb-3 form-control"
                 data-testid="attendeeName"
                 placeholder="Your name"
+                required=""
+                type="text"
+                value=""
               />
+              <div
+                class="invalid-feedback"
+                data-testid="usernameError"
+              >
+                Please enter a name that has at least two characters
+              </div>
               <input
                 class="mb-3 form-control"
                 data-testid="workshopCode"
                 placeholder="Workshop code"
+                required=""
+                type="text"
+                value=""
               />
+              <div
+                class="invalid-feedback"
+                data-testid="workshopCodeError"
+              >
+                Please enter a valid workshop code
+              </div>
               <button
                 class="btn btn-primary"
-                data-testid="joinWorkshop"
-                type="button"
+                type="submit"
               >
                 Join Workshop
               </button>

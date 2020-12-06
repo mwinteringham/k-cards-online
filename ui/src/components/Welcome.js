@@ -17,6 +17,7 @@ function Welcome() {
     const [workshopValue, updateWorkshop] = useGlobalState('workshopCode');
     const [attendeeValue, updateAttendeeCode] = useGlobalState('attendeeCode');
     const [workshopValidated, setValidated] = useState(false);
+    const [joinValidated, setJoinValidated] = useState(false);
 
     const history = useHistory();
 
@@ -37,15 +38,26 @@ function Welcome() {
         }
     }
 
-    const joinWorkshop = async () => {
-        const res = await API.joinWorkshop(workshopCode, {
-            name : attendeeName
-        });
-
-        if(res.status === 201){
-            updateWorkshop(workshopCode);
-            updateAttendeeCode(res.data.code);
-            history.push('attendee');
+    const joinWorkshop = async (event) => {
+        if(attendeeName.length > 2 && workshopCode.length > 0){
+            const res = await API.joinWorkshop(workshopCode, {
+                name : attendeeName
+            });
+    
+            if(res.status === 201){
+                updateWorkshop(workshopCode);
+                updateAttendeeCode(res.data.code);
+                history.push('attendee');
+            } else if (res.status === 404){
+                setWorkshopCode('');
+                event.preventDefault();
+                event.stopPropagation();
+                setJoinValidated(true);    
+            }
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+            setJoinValidated(true);
         }
     }
 
@@ -62,10 +74,16 @@ function Welcome() {
                     <Col>
                         <h2>Join a Workshop</h2>
                         <p>Enter your name and the workshop code to Join Workshop</p>
-                        <Form>
-                        <Form.Control data-testid='attendeeName' className='mb-3' placeholder='Your name' onChange={e => setAttendeeName(e.target.value) } />
-                        <Form.Control data-testid='workshopCode' className='mb-3' placeholder='Workshop code' onChange={e => setWorkshopCode(e.target.value) }/>
-                        <Button data-testid='joinWorkshop' onClick={joinWorkshop}>Join Workshop</Button>
+                        <Form noValidate validated={joinValidated} onSubmit={joinWorkshop} data-testid='joinWorkshop'>
+                            <Form.Control required value={attendeeName} type='text' data-testid='attendeeName' className='mb-3' placeholder='Your name' onChange={e => setAttendeeName(e.target.value) } />
+                            <Form.Control.Feedback type='invalid' data-testid='usernameError'>
+                                Please enter a name that has at least two characters
+                            </Form.Control.Feedback>
+                            <Form.Control required value={workshopCode} type='text' data-testid='workshopCode' className='mb-3' placeholder='Workshop code' onChange={e => setWorkshopCode(e.target.value) }/>
+                            <Form.Control.Feedback type='invalid' data-testid='workshopCodeError'>
+                                Please enter a valid workshop code
+                            </Form.Control.Feedback>
+                            <Button type='submit'>Join Workshop</Button>
                         </Form>
                     </Col>
                     <Col>
