@@ -27,13 +27,17 @@ const API = {
     },
     
     sendCard : async (workshopCode, payload) => {
-        const res = await axios({
-            method: 'post',
-            url: '/workshop/' + workshopCode + '/card',
-            data: payload
-        });
-
-        return res;
+        try {
+            const res = await axios({
+                method: 'post',
+                url: '/workshop/' + workshopCode + '/card',
+                data: payload
+            });
+    
+            return res;
+        } catch(err){
+            return err.response;
+        }
     },
 
     leaveWorkshopAsAttendee : async (workshopCode, payload) => {

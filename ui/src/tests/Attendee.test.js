@@ -35,5 +35,12 @@ test('joining a new workshop takes you to a new page', async () => {
     fireEvent.click(screen.getByText(/Leave Workshop/i));
   
     await waitFor(() => expect(history.location.pathname).toBe('/'));
-  });
-  
+});
+
+test('an error message is shown when card not send', async () => {
+    render(<Attendee />);
+
+    fireEvent.click(screen.getByTestId(/greenCard/i));
+
+    await waitFor(() => expect(screen.getByTestId('cardError')).toHaveTextContent('An error occurred. The server responded with a 404'));
+});

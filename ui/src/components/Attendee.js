@@ -14,6 +14,8 @@ function Attendee(){
     const [workshopCode, updateWorkshopCode] = useGlobalState('workshopCode');
     const [attendee, updateAttendeeCode] = useGlobalState('attendeeCode');
     const [cardType, setCardType] = useState('');
+    const [error, setErrorType] = useState('');
+    const [showError, setShowError] = useState(false);
 
     const history = useHistory();
 
@@ -28,6 +30,9 @@ function Attendee(){
         if(res.status === 201){
             setCardType(card);
             setConfirm(true);
+        } else {
+            setErrorType(res.status);
+            setShowError(true);
         }
     }
 
@@ -48,7 +53,8 @@ function Attendee(){
     return(
         <div>
             <Container fluid className='mt-5'>
-                {(showConfirm && <Alert variant="success" onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your {cardType} card has been received by the Host</Alert.Heading></Alert>)}
+                {(showConfirm && <Alert variant='success' onClose={() => setConfirm(false)} dismissible><Alert.Heading>Your {cardType} card has been received by the Host</Alert.Heading></Alert>)}
+                {(showError && <Alert variant='danger'  onClose={() => setShowError(false)} dismissible><Alert.Heading data-testid='cardError'>An error occurred. The server responded with a {error}</Alert.Heading></Alert>)}
                 <Row>
                     <Col>
                         <Button data-testid='greenCard' className='btn-success' onClick={() => sendCard('green')} style={{ width: '100%', height: '8rem'}}>Send Green Card</Button>
