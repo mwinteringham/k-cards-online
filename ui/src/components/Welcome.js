@@ -14,12 +14,20 @@ function Welcome() {
     const [workshop, setWorkshopName] = useState('');
     const [attendeeName, setAttendeeName] = useState('');
     const [workshopCode, setWorkshopCode] = useState('');
+    const [workshopErrorMessage, setWorkshopErrorMessage] = useState('');
     const [workshopValue, updateWorkshop] = useGlobalState('workshopCode');
     const [attendeeValue, updateAttendeeCode] = useGlobalState('attendeeCode');
     const [workshopValidated, setValidated] = useState(false);
     const [joinValidated, setJoinValidated] = useState(false);
 
     const history = useHistory();
+
+    const triggerWorkshopCreationError = (event, msg) => {
+        setWorkshopErrorMessage(msg);
+        event.preventDefault();
+        event.stopPropagation();
+        setValidated(true);
+    }
 
     const createWorkshop = async (event) => {
         if(workshop.length > 0){
@@ -30,11 +38,11 @@ function Welcome() {
             if(res.status === 201){
                 updateWorkshop(res.data.code);
                 history.push('host');
+            } else {
+                triggerWorkshopCreationError(event, 'An error occurred when creating your workshop');
             }
         } else {
-            event.preventDefault();
-            event.stopPropagation();
-            setValidated(true);
+            triggerWorkshopCreationError(event, 'Please enter a name for your workshop');
         }
     }
 
@@ -92,7 +100,7 @@ function Welcome() {
                         <Form noValidate validated={workshopValidated} onSubmit={createWorkshop} data-testid='startWorkshop'>
                             <Form.Control required type='text' data-testid='workshopName' placeholder='Workshop name' className='mb-3' onChange={e => setWorkshopName(e.target.value)}/>
                             <Form.Control.Feedback type='invalid' data-testid='hostError'>
-                                Please enter a name for your workshop
+                                {workshopErrorMessage}
                             </Form.Control.Feedback>
                             <Button className='mt-5' type='submit'>Start Workshop</Button>
                         </Form>

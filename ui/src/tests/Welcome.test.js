@@ -76,3 +76,16 @@ test('submitting an invalid workshop code returns an error', async () => {
 
   await waitFor(() => expect(screen.getByTestId('workshopCodeError')).toHaveTextContent('Please enter a valid workshop code'));
 });
+
+test('an error message is shown when a workshop cannot be created', async () =>{
+  mock.onPost('/workshop').reply(500);
+
+  render(<Welcome />);
+
+  fireEvent.change(screen.getByTestId(/workshopName/i), {
+    target: {value: 'DEWT'}
+  })
+  fireEvent.submit(screen.getByTestId(/startWorkshop/i));
+
+  await waitFor(() => expect(screen.getByTestId('hostError')).toHaveTextContent('An error occurred when creating your workshop'));
+});

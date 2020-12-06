@@ -98,9 +98,7 @@ exports[`renders the Welcome component 1`] = `
               <div
                 class="invalid-feedback"
                 data-testid="hostError"
-              >
-                Please enter a name for your workshop
-              </div>
+              />
               <button
                 class="mt-5 btn btn-primary"
                 type="submit"
