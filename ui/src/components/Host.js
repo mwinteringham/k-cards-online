@@ -67,6 +67,10 @@ function Host(){
     }
 
     useEffect(() => {
+        if(workshopCode === 'empty-workshop-code'){
+            history.push('/');
+        }
+
         pollForActivities();
     }, [])
 

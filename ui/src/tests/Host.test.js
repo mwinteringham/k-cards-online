@@ -17,7 +17,7 @@ test('renders the Host component', async () => {
         }
     });
 
-    const hostComponent = render(<Host />);
+    const hostComponent = render(<Router history={history}><Host /></Router>);
 
     await waitFor(() => screen.getAllByText(/No red cards found/i)); 
 
@@ -44,7 +44,7 @@ test('renders red cards', async () => {
         }
     });
 
-    const hostComponent = render(<Host />);
+    const hostComponent = render(<Router history={history}><Host /></Router>);
     
     await waitFor(() => screen.getAllByText(/Jane/)); 
 
@@ -73,7 +73,7 @@ test('renders green cards', async () => {
         }
     });
 
-    const hostComponent = render(<Host />);
+    const hostComponent = render(<Router history={history}><Host /></Router>);
     
     await waitFor(() => screen.getAllByText(/Green Jeff/)); 
 
@@ -105,7 +105,7 @@ test('renders yellow cards', async () => {
         }
     });
 
-    const hostComponent = render(<Host />);
+    const hostComponent = render(<Router history={history}><Host /></Router>);
     
     await waitFor(() => screen.getAllByText(/Green Jeff/)); 
 
@@ -126,7 +126,13 @@ test('Delete workshop when leaving', async () => {
 test('An error is shown when activity request fails', async () => {
     mock.onGet('/workshop/empty-workshop-code/activity').reply(500);
 
-    render(<Host />);
+    render(<Router history={history}><Host /></Router>);
 
     await waitFor(() => expect(expect(screen.getByTestId('hostError')).toHaveTextContent('An error has occurred. The server responded with a 500')));
+});
+
+test('Empty workshop code causes a redirect back to welcome', async () => {
+    render(<Router history={history}><Host /></Router>);
+
+    await waitFor(() => expect(history.location.pathname).toBe('/'));
 });

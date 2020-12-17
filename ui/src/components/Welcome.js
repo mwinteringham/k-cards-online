@@ -35,7 +35,7 @@ function Welcome() {
                 name : workshop
             });
     
-            if(res.status === 201){
+            if(res.status === 201 || res.status === 200){
                 updateWorkshop(res.data.code);
                 history.push('host');
             } else {
