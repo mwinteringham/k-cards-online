@@ -16,7 +16,7 @@ test('renders the Welcome component', () => {
 });
 
 test('creating a new workshop takes you to a new page', async () => {
-  mock.onPost('/workshop', { name: 'BREWT' }).reply(201, { code : 'abc'});
+  mock.onPut('/workshop', { name: 'BREWT' }).reply(201, { code : 'abc'});
 
   render(<Router history={history}><Welcome /></Router>)
 
@@ -78,7 +78,7 @@ test('submitting an invalid workshop code returns an error', async () => {
 });
 
 test('an error message is shown when a workshop cannot be created', async () =>{
-  mock.onPost('/workshop').reply(500);
+  mock.onPut('/workshop').reply(500);
 
   render(<Welcome />);
 

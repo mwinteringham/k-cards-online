@@ -5,7 +5,7 @@ const API = {
     createWorkshop : async (payload) => {
         try {
             const res = await axios({
-                method: 'post',
+                method: 'put',
                 url: '/workshop',
                 data: payload
             });
