@@ -7,6 +7,12 @@ Feature: Workshop administration
     Then a workshop should be created with a code to share with guests
 
   @auto
+  Scenario: Host rejoins a workshop
+    Given I have created a new workshop
+    When I request to rejoin my workshop
+    Then I should be able to get my workshop details
+
+  @auto
   Scenario: Host is alerted of new attendee
     Given I have created a new workshop
     When an attendee joins my workshop

@@ -48,11 +48,23 @@ public class WorkshopServiceTest {
 
     @Test
     public void createWorkshopTest() throws SQLException {
+        when(kCardDB.queryWorkshop("LEWT")).thenReturn(false);
         when(kCardDB.addWorkshop(anyString(), eq("LEWT"))).thenReturn(true);
 
         WorkshopResult workshopResult = workshopService.createWorkshop("LEWT");
 
         assertThat(workshopResult.getHttpStatus(), equalTo(HttpStatus.CREATED));
+        assertThat(workshopResult.getCode(), instanceOf(Workshop.class));
+    }
+
+    @Test
+    public void createExistingWorkshopTest() throws SQLException {
+        when(kCardDB.queryWorkshop("LEWT")).thenReturn(true);
+        when(kCardDB.getWorkshopCode("LEWT")).thenReturn("ABCDEF");
+
+        WorkshopResult workshopResult = workshopService.createWorkshop("LEWT");
+
+        assertThat(workshopResult.getHttpStatus(), equalTo(HttpStatus.OK));
         assertThat(workshopResult.getCode(), instanceOf(Workshop.class));
     }
 

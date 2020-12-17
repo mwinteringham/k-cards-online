@@ -34,6 +34,8 @@ public class KCardDB {
     private final String SELECT_WORKSHOP_COUNTS = "SELECT COUNT(*) AS total FROM WORKSHOPS WHERE code = ?";
     private final String SELECT_WORKSHOP_ATTENDEE = "SELECT COUNT(*) AS total FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
     private final String SELECT_ATTENDEE_COUNT_BY_WORKSHOP = "SELECT COUNT(*) AS total FROM ATTENDEES WHERE workshopcode = ?";
+    private final String SELECT_WORKSHOP_COUNT = "SELECT COUNT(*) AS total FROM WORKSHOPS where workshopName = ?";
+    private final String SELECT_WORKSHOP_CODE = "SELECT * FROM WORKSHOPS where workshopName = ?";
 
     private final String DELETE_ATTENDEE = "DELETE FROM ATTENDEES WHERE attendeecode = ? AND workshopcode = ?";
     private final String DELETE_ATTENDEE_CARDS = "DELETE FROM CARDS WHERE attendeecode = ? AND workshopcode = ?";
@@ -217,6 +219,22 @@ public class KCardDB {
         } else {
             return false;
         }
+    }
+
+    public Boolean queryWorkshop(String workshopName) throws SQLException {
+        int total = getCount(SELECT_WORKSHOP_COUNT, workshopName);
+
+        return total > 0;
+    }
+
+    public String getWorkshopCode(String workshopCode) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(SELECT_WORKSHOP_CODE);
+        ps.setString(1, workshopCode);
+
+        ResultSet resultSet = ps.executeQuery();
+        resultSet.next();
+
+        return resultSet.getString("code");
     }
 
     private int getCount(String sql, String workshopCode) throws SQLException {

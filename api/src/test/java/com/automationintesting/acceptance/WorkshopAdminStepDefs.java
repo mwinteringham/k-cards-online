@@ -12,9 +12,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -26,6 +23,8 @@ public class WorkshopAdminStepDefs {
 
     private Workshop workshopRequestPayload;
     private Workshop workshopResponse;
+    private Workshop workshopRejoinResponse;
+    private Workshop defaultWorkshopRequestPayload;
 
     @Given("I have picked a name for a workshop")
     public void setAHostName() {
@@ -46,9 +45,23 @@ public class WorkshopAdminStepDefs {
         assertThat(workshopName, equalTo("LEWT"));
     }
 
+    @When("I request to rejoin my workshop")
+    public void rejoinWorkshop() {
+        workshopRejoinResponse = workshopRequests.createWorkshop(defaultWorkshopRequestPayload);
+    }
+
+    @Then("I should be able to get my workshop details")
+    public void checkWorkshopDetails() {
+        String workshopCode = workshopRejoinResponse.getCode();
+        String workshopName = workshopRejoinResponse.getName();
+
+        assertThat(workshopCode, equalTo(workshopResponse.getCode()));
+        assertThat(workshopName, equalTo("DEWT"));
+    }
+
     @Given("I have created a new workshop")
     public void createANewWorkshop() {
-        Workshop defaultWorkshopRequestPayload = new Workshop("DEWT");
+        defaultWorkshopRequestPayload = new Workshop("DEWT");
         workshopResponse = workshopRequests.createWorkshop(defaultWorkshopRequestPayload);
     }
 
@@ -146,13 +159,11 @@ public class WorkshopAdminStepDefs {
         workshopRequests.sendCard(yellowCard, workshopResponse.getCode());
     }
 
-
     @When("I delete the workshop")
     public void deleteTheWorkshop() {
         given()
             .delete("http://localhost:8080/workshop/" + workshopResponse.getCode());
     }
-
 
     @Then("the workshop should be removed as well as all related cards")
     public void confirmEmptyActivityAndCannotRejoin() {
@@ -169,4 +180,5 @@ public class WorkshopAdminStepDefs {
 
         assertThat(response.statusCode(), equalTo(404));
     }
+
 }

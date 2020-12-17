@@ -30,12 +30,18 @@ public class WorkshopService {
     }
 
     public WorkshopResult createWorkshop(String workshopName) throws SQLException {
-        UUID uuid = UUID.randomUUID();
+        if(kCardDB.queryWorkshop(workshopName)){
+            String workshopCode = kCardDB.getWorkshopCode(workshopName);
 
-        if(kCardDB.addWorkshop(uuid.toString(), workshopName)){
-            return new WorkshopResult(HttpStatus.CREATED, new Workshop(uuid.toString(), workshopName));
+            return new WorkshopResult(HttpStatus.OK, new Workshop(workshopCode, workshopName));
         } else {
-            return new WorkshopResult(HttpStatus.NOT_ACCEPTABLE);
+            UUID uuid = UUID.randomUUID();
+
+            if(kCardDB.addWorkshop(uuid.toString(), workshopName)){
+                return new WorkshopResult(HttpStatus.CREATED, new Workshop(uuid.toString(), workshopName));
+            } else {
+                return new WorkshopResult(HttpStatus.NOT_ACCEPTABLE);
+            }
         }
     }
 

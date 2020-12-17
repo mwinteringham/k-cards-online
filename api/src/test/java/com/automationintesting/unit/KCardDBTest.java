@@ -68,7 +68,7 @@ public class KCardDBTest {
 
     @Test
     public void returnWorkshopActivity() throws SQLException {
-        List<Attendee> attendees = new ArrayList<Attendee>(){{
+        List<Attendee> attendees = new ArrayList<>(){{
             this.add(new Attendee("Amy Lee","zxcvbn"));
             this.add(new Attendee("Stuart Jones","nbvcxz"));
             this.add(new Attendee("Sam Jones","qwerty"));
@@ -198,4 +198,23 @@ public class KCardDBTest {
 
         assertThat(canCreateCard, equalTo(true));
     }
+
+    @Test
+    public void queryWorkshopName() throws SQLException {
+        kCardDB.addWorkshop("paiskd", "LAWT");
+
+        Boolean workshopExists = kCardDB.queryWorkshop("LAWT");
+
+        assertThat(workshopExists, equalTo(true));
+    }
+
+    @Test
+    public void getWorkshopCode() throws SQLException {
+        kCardDB.addWorkshop("123456", "JAWT");
+
+        String workshopCode = kCardDB.getWorkshopCode("JAWT");
+
+        assertThat(workshopCode, equalTo("123456"));
+    }
+
 }

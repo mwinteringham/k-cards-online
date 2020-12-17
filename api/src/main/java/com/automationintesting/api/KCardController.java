@@ -22,7 +22,7 @@ public class KCardController {
     @Autowired
     private WorkshopService workshopService;
 
-    @RequestMapping(value = "/workshop", method = RequestMethod.POST)
+    @RequestMapping(value = "/workshop", method = RequestMethod.PUT)
     public ResponseEntity createWorkshop(@RequestBody Workshop workshop) throws SQLException {
         WorkshopResult workshopResult = workshopService.createWorkshop(workshop.getName());
 

@@ -18,7 +18,7 @@ public class WorkshopRequests {
         return given()
                 .contentType(ContentType.JSON)
                 .body(workshopRequestPayload)
-                .post("http://localhost:8080/workshop")
+                .put("http://localhost:8080/workshop")
                 .as(Workshop.class);
     }
 
