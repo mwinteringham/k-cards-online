@@ -19,7 +19,7 @@ test('renders the Host component', async () => {
 
     const hostComponent = render(<Router history={history}><Host /></Router>);
 
-    await waitFor(() => screen.getAllByText(/No red cards found/i)); 
+    await waitFor(() => screen.getAllByText(/Waiting for Red cards/i)); 
 
     expect(hostComponent.baseElement).toMatchSnapshot();
 });

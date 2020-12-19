@@ -83,8 +83,11 @@ function Host(){
     let yellowCardRender;
 
     if(redCards.length === 0){
-        redCardRender = <Col>
-            <h2>No red cards found</h2>
+        redCardRender = <Col className="text-center mb-5 mt-5">
+            <div className="spinner-border text-danger" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+            <p>Waiting for Red cards</p>
         </Col>
     } else {
         redCardRender = redCards.map((item, i) => {
@@ -97,8 +100,11 @@ function Host(){
     if(greenCards.length === 0){
         greenCardRender = 
         <Row>
-            <Col>
-                <h2>No green cards found</h2>
+            <Col className="mt-3 text-center mt-5">
+                <div className="spinner-border text-success" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+                <p>Waiting for Green cards</p>
             </Col>
         </Row>
     } else {
