@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Package from '../../package.json';
 
 function Footer() {
 
@@ -9,7 +10,7 @@ function Footer() {
             <Container>
                 <Row>
                     <Col className="text-center mt-4">
-                        <p class="text-muted"><a href="/">K-Card-Online</a> v0.4 - Created by <a href="http://www.mwtestconsultancy.co.uk">Mark Winteringham</a> - © 2019-20 <a href="/#/cookie">Cookie-Policy</a> - <a href="/#/privacy">Privacy-Policy</a></p>
+                        <p class="text-muted"><a href="/">K-Card-Online</a> v{Package.version} - Created by <a href="http://www.mwtestconsultancy.co.uk">Mark Winteringham</a> - © 2019-20 <a href="/#/cookie">Cookie-Policy</a> - <a href="/#/privacy">Privacy-Policy</a></p>
                     </Col>
                 </Row>
             </Container>
