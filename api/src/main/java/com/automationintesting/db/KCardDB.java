@@ -9,10 +9,8 @@ import com.automationintesting.model.activity.CardDetail;
 import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +19,9 @@ public class KCardDB {
 
     private final Connection connection;
 
-    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (id))";
-    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (attendee_id))";
-    private final String CREATE_CARD_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(36), relatedcardcode varchar(36), cardtype varchar(6), attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP AS CURRENT_TIMESTAMP(), primary key (id))";
+    private final String CREATE_WORKSHOPS_TABLE = "CREATE TABLE IF NOT EXISTS WORKSHOPS ( id int NOT NULL AUTO_INCREMENT, code varchar(36), workshopName varchar(255), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), primary key (id))";
+    private final String CREATE_ATTENDEE_TABLE = "CREATE TABLE IF NOT EXISTS ATTENDEES ( attendee_id int NOT NULL AUTO_INCREMENT, attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), primary key (attendee_id))";
+    private final String CREATE_CARD_TABLE = "CREATE TABLE IF NOT EXISTS CARDS (id int NOT NULL AUTO_INCREMENT, cardcode varchar(36), relatedcardcode varchar(36), cardtype varchar(6), attendeecode varchar(36), name varchar(255), workshopcode varchar(36), created TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), primary key (id))";
 
     private final String SELECT_ATTENDEE = "SELECT name FROM ATTENDEES WHERE attendeecode = ?";
     private final String SELECT_ATTENDEES = "SELECT * FROM ATTENDEES WHERE workshopcode = ?";
@@ -45,13 +43,8 @@ public class KCardDB {
     private final String DELETE_ATTENDEES_BY_WORKSHOP = "DELETE FROM ATTENDEES WHERE workshopcode = ?";
 
     public KCardDB() throws SQLException {
-        JdbcDataSource ds = new JdbcDataSource();
-        ds.setURL("jdbc:h2:mem:kcard;MODE=MySQL");
-        ds.setUser("user");
-        ds.setPassword("password");
-        connection = ds.getConnection();
-
-//        Server.createTcpServer("-tcpPort", "9091", "-tcpAllowOthers").start();
+        KCardConnectionBuilder kCardConnectionBuilder = new KCardConnectionBuilder();
+        connection = kCardConnectionBuilder.getConnection();
 
         connection.prepareStatement(CREATE_WORKSHOPS_TABLE).executeUpdate();
         connection.prepareStatement(CREATE_ATTENDEE_TABLE).executeUpdate();
